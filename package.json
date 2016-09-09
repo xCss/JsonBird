@@ -1,6 +1,7 @@
 {
-    "name": "JsonProxy",
+    "name": "JsonBird",
     "version": "1.0.0",
+    "description": "A Remote Json Agent Service",
     "private": true,
     "scripts": {
         "start": "node ./bin/www",
@@ -8,18 +9,19 @@
     },
     "repository": {
         "type": "git",
-        "url": "git+https://github.com/xCss/JsonProxy.git"
+        "url": "git+https://github.com/xCss/JsonBird.git"
     },
     "keywords": [
+        "JsonBird",
         "JsonProxy"
     ],
     "author": "xCss",
     "license": "ISC",
     "bugs": {
-        "url": "https://github.com/xCss/JsonProxy/issues"
+        "url": "https://github.com/xCss/JsonBird/issues"
     },
     "readme": "./readme.md",
-    "homepage": "https://github.com/xCss/JsonProxy#readme",
+    "homepage": "https://github.com/xCss/JsonBird#readme",
     "dependencies": {
         "body-parser": "~1.15.1",
         "cookie-parser": "~1.4.3",
