@@ -14,6 +14,7 @@ var index = require('./routes/index');
 var v1 = require('./routes/v1');
 
 var app = express();
+app.listen(5000);
 
 /***
  * 获取引用网站
@@ -74,6 +75,5 @@ app.use(function(err, req, res, next) {
         error: {}
     });
 });
-
 
 module.exports = app;
