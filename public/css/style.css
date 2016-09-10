@@ -1,5 +1,6 @@
 @import 'reset.css';
-html,body{height:100%;overflow: hidden;}
+html,body{height:100%;overflow: hidden;background: -webkit-linear-gradient(300deg,#23213d,#2e383f);
+    background: linear-gradient(150deg,#23213d,#2e383f);}
 .section-center{
    display: -webkit-box;   /* OLD: Safari,  iOS, Android browser, older WebKit browsers.  */
    display: -moz-box;      /* OLD: Firefox (buggy) */
