@@ -17,20 +17,25 @@ router.get('/', function(req, res, next) {
     var protocol = req.protocol;
     var host = req.host;
     var ip = req.ip;
+    var ref = req.get('reference');
+    var originalUrl = req.originalUrl;
 
-    if (req.originalUrl == /v1/) {
+    if (originalUrl == /v1/) {
         return res.send({
             code:200,
             ip:ip,
             info: 'Please Set URL Like This: ' + protocol + '://' + host + '/v1/?url=http[s]://YourWantProxyUrl.com'
         });
     }
-    var url = req.originalUrl.replace('/v1/?url=', '');
+    var url = originalUrl.replace('/v1/?url=', '');
     url = url.indexOf('?') === -1 ? url.replace('&', '?') : url;
-    console.log('ref:' + req.get('reference'));
+    console.log('------------------log start---------------');
+    console.log('date:'+new Date());
+    console.log('ip:' + ip);
+    console.log('ref:' + ref);
     console.log('path:' + req.path);
-    console.log(req.subdomains);
-    console.log(url);
+    console.log('req:' + url);
+    console.log('------------------log end---------------');
     getJSON(url, function(data) {
         if (req.query.callback) {
             return res.jsonp(data);
