@@ -9,8 +9,8 @@ Temp link : http://bird.daoapp.io
 > 1.0
 
 ## How to use
-> https://api.ioliu.cn/v1/?url=http[s]://YouWantProxyJSONUrls.com&[?]params1=val1&params2=val2
+> https://api.ioliu.cn/v1/?url=http[s]://YouWantProxyJSONUrls.com&[?]params1=val1&params2=val2[&callback=fn]
 
 ## You can got
 1. Source station data based on cross domain 
-2. Lets not support JSONP source station data support JSONP (In the final surface of the link plus `&callback=fn`)
+2. Lets not support JSONP source station data support JSONP (Add `&callback=fn` to the last face of the link)
