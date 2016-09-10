@@ -21,6 +21,7 @@ router.get('/', function(req, res, next) {
     if (req.originalUrl == /v1/) {
         return res.send({
             code:200,
+            ip:ip,
             info: 'Please Set URL Like This: ' + protocol + '://' + host + '/v1/?url=http[s]://YourWantProxyUrl.com'
         });
     }
