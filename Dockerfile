@@ -11,4 +11,4 @@ COPY . /usr/src/app
 ENV PORT 80
 EXPOSE 80
 
-ENTRYPOINT ["forever", "./bin/www"]
+ENTRYPOINT ["forever", "bin/www"]
