@@ -1,3 +1,7 @@
+
+## :warning:
+Temp link : http://bird.daoapp.io
+
 ## JsonBird
 > A JSON Remote Agent Service | 一个远程JSON代理服务
 
@@ -9,4 +13,4 @@
 
 ## You can got
 1. Source station data based on cross domain 
-2. Lets not support JSONP source station data support JSONP
+2. Lets not support JSONP source station data support JSONP (In the final surface of the link plus `&callback=fn`)
