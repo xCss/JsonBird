@@ -11,5 +11,5 @@
 > https://api.ioliu.cn/v1/?url=http[s]://YouWantProxyJSONUrls.com&[?]params1=val1&params2=val2[&callback=fn]
 
 ## You can got
-1. Source station data based on cross domain 
-2. Lets not support JSONP source station data support JSONP (Add `&callback=fn` to the last face of the link)
+1. Enables cross-domain requests to any JSON API
+2. Enables JSONP requests to any JSON API (Add `&callback=fn` to the last face of the link)
