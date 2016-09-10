@@ -13,9 +13,14 @@ router.all('/v1/*', function(req, res, next) {
 });
 
 router.get('/', function(req, res, next) {
+    
+    var protocol = req.protocol;
+    var host = req.host;
+    var ip = req.ip;
+
     if (req.originalUrl == /v1/) {
         return res.send({
-            info: 'Please Set URL Like This: https://api.ioliu.cn/v1?url=http[s]://YourWantProxyUrl.com'
+            info: 'Please Set URL Like This: ' + protocol + '://' + host + '/v1?url=http[s]://YourWantProxyUrl.com'
         });
     }
     var url = req.originalUrl.replace('/v1/?url=', '');
@@ -26,9 +31,9 @@ router.get('/', function(req, res, next) {
     console.log(url);
     getJSON(url, function(data) {
         if (req.query.callback) {
-            return res.jsonp(data)
+            return res.jsonp(data);
         } else {
-            return res.json(data)
+            return res.json(data);
         }
     });
 });

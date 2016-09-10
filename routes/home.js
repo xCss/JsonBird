@@ -9,11 +9,18 @@ router.get('/', function(req, res, next) {
     res.header("X-Powered-By",'3.2.1');
     res.header("Vary","Origin");
     res.header("Content-Type", "application/json;charset=utf-8");  
+    var protocol = req.protocol;
+    var host = req.host;
+    var ip = req.ip;
     return res.send({
         code:200,
-        home:'https://ioliu.cn',
-        versions:{
-            v1:'https://api.ioliu.cn/v1/'
+        info:'Welcome, This is a wonderful site',
+        ip:ip,
+        links:{
+            v1: protocol + '://' + host + '/v1/',
+            home:'https://github.com/xCss/JsonBird',
+            HowToUse:'https://github.com/xCss/JsonBird#how-to-use',
+            issue:'https://github.com/xCss/JsonBird/issues'
         }
     });
 });
