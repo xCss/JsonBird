@@ -14,7 +14,7 @@ var index = require('./routes/index');
 var v1 = require('./routes/v1');
 
 var app = express();
-app.listen(5000);
+app.listen(process.env.PORT || 5000);
 
 /***
  * 获取引用网站
