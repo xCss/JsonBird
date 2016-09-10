@@ -20,7 +20,7 @@ router.get('/', function(req, res, next) {
 
     if (req.originalUrl == /v1/) {
         return res.send({
-            info: 'Please Set URL Like This: ' + protocol + '://' + host + '/v1?url=http[s]://YourWantProxyUrl.com'
+            info: 'Please Set URL Like This: ' + protocol + '://' + host + '/v1/?url=http[s]://YourWantProxyUrl.com'
         });
     }
     var url = req.originalUrl.replace('/v1/?url=', '');
