@@ -33,7 +33,7 @@ router.get('/', function(req, res, next) {
         if (req.query.callback) {
             return res.jsonp(data);
         } else {
-            return res.json(data);
+            return res.send(data);
         }
     });
 });
