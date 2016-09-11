@@ -23,7 +23,21 @@ router.get('/', function(req, res, next) {
     //         issue:'https://github.com/xCss/JsonBird/issues'
     //     }
     // });
-    res.render('welcome',{title:'Welcome'});
+    var ip = req.ip;
+    ip2address(ip,function(data){
+        res.render('welcome',{title:'Welcome | JsonBird - 业界领先的远程 JSON 代理服务',address:data.area+data.location});
+    });
+    
 });
+
+function ip2address(ip,callback){
+    request('http://apis.juhe.cn/ip/ip2addr?ip='+ip+'&key=28c0a6a5eb9cca3f38bc5877a83c9868', function(err, res, body) {
+        if (!err && res.statusCode == 200 && body.resultCode==200) {
+            callback && callback(body.result);
+        } else {
+            console.log(err);
+        }
+    }
+};
 
 module.exports = router;

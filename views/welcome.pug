@@ -3,9 +3,10 @@ extends layout
 block content
 	div.section-center
 		div.container
-			div.cover-heading JsonBird
-			div.cover-description 业界领先的远程 JSON 代理服务
-			div.cover-action
+			div.cover.heading JsonBird
+			div.cover.description 业界领先的远程 JSON 代理服务
+			div.cover.address 欢迎来自#{address}的朋友
+			div.cover.action
 				a.btn.btn-ghost-light(href="/v1/?url=http://www.bing.com/HPImageArchive.aspx?format=js&idx=16&n=1") Quick Start
 
 	script(src="/libs/three/three.min.js")
@@ -27,7 +28,7 @@ block content
 		window.onload = function(){
 			init();
 			animate();
-			//- baidu Ans
+			//- baidu Analytics
 			var _hmt = _hmt || [];
 			var hm = document.createElement("script");
 			hm.src = "//hm.baidu.com/hm.js?99d1e1ee6b085485bc6ec3e23b821b49";

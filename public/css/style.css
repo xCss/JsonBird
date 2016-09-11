@@ -29,18 +29,17 @@ html,body{height:100%;overflow: hidden;background: -webkit-linear-gradient(300de
   width:100%;
   color:#fff;
 }
-.section-center .container .cover-heading{
+.section-center .container .cover{
+    font-size:18px;  
+    margin-bottom: 30px;
+    font-weight: 400;
+}
+.section-center .container .heading{
     margin-bottom:10px;
     text-shadow: 1px 1px 1px rgba(0,0,0,.3);
     font-weight: 100;
     font-size: 4.5rem;
 }
-.section-center .container .cover-description{    
-    margin-bottom: 30px;
-    font-weight: 400;
-    font-size: 18px;
-}
-
 .btn {
     display: inline-block;
     margin-bottom: 0;
