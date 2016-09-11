@@ -37,7 +37,8 @@ function ip2address(ip,callback){
         } else {
             console.log(err);
         }
-    }
-};
+    });
+}
+
 
 module.exports = router;
