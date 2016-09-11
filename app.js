@@ -8,6 +8,8 @@ var bodyParser = require('body-parser');
 //Welcome Page
 var welcome = require('./routes/welcome');
 var index = require('./routes/index');
+//网易云音乐
+var netease = require('./routes/netease');
 //JsonBird version 1.0
 var v1 = require('./routes/v1');
 
@@ -21,7 +23,7 @@ app.all('*', function(req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept,Access-Control-Allow-Origin");
     res.header("Access-Control-Allow-Methods", "PUT,POST,GET,DELETE,OPTIONS");
-    res.header("X-Powered-By", '3.2.1');
+    res.header("X-Powered-By", '1.0.0');
     res.header("Vary", "Origin");
     // res.header("Content-Type", "application/json;charset=utf-8");
     console.log('ref:' + req.header('referer'));
@@ -41,6 +43,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', welcome);
 app.use('/v1', v1);
+app.use('/netease', netease);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -68,6 +71,7 @@ if (app.get('env') === 'development') {
 app.use(function(err, req, res, next) {
     res.status(err.status || 500);
     res.send({
+        status:err.status,
         message: err.message,
         error: {}
     });
