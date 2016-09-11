@@ -30,7 +30,7 @@ router.get('/', function(req, res, next) {
             title:'Welcome | JsonBird - 业界领先的远程 JSON 代理服务'
         };
         if(data){
-            params['address']='\n欢迎来自'+data.area+data.location+'的朋友';
+            params['address']='\n\r欢迎来自'+data.area+data.location+'的朋友';
         }
         res.render('welcome',params);
     });
