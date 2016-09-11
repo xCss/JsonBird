@@ -21,11 +21,18 @@ router.get('/', function(req, res, next) {
     var originalUrl = req.originalUrl;
 
     if (originalUrl == /v1/) {
-        return res.send({
-            code:200,
-            ip:ip,
-            info: 'Please Set URL Like This: ' + protocol + '://' + host + '/v1/?url=http[s]://YourWantProxyUrl.com'
+        ip2address(ip,function(data){
+            var json = {
+                code:200,
+                ip:ip,
+                info: 'Please Set URL Like This: ' + protocol + '://' + host + '/v1/?url=http[s]://YourWantProxyUrl.com'
+            };
+            if(data){
+                json['location']='来自'+data.area+data.location;
+            }
+            return res.send(json);
         });
+        
     }
     var url = originalUrl.replace('/v1/?url=', '');
     url = url.indexOf('?') === -1 ? url.replace('&', '?') : url;
@@ -51,6 +58,17 @@ function getJSON(url, callback, next) {
             callback && callback(body);
         } else {
             console.log(err);
+        }
+    });
+}
+
+function ip2address(ip,callback){
+    request('http://apis.juhe.cn/ip/ip2addr?ip='+ip+'&key=28c0a6a5eb9cca3f38bc5877a83c9868', function(err, res, body) {
+        if (!err && res.statusCode == 200) {
+            callback && callback(body.result);
+        } else {
+            console.log(' / request info:'+err);
+            callback && callback(null);
         }
     });
 }
