@@ -40,7 +40,7 @@ router.get('/', function(req, res, next) {
 
 function ip2address(ip,callback){
     request('http://apis.juhe.cn/ip/ip2addr?ip='+ip+'&key=28c0a6a5eb9cca3f38bc5877a83c9868', function(err, res, body) {
-        if (!err && res.statusCode == 200 && body.resultCode==200) {
+        if (!err && res.statusCode == 200) {
             callback && callback(body.result);
         } else {
             console.log(' / request info:'+err);
