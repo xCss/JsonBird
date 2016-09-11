@@ -15,6 +15,6 @@
 2. Enables JSONP requests to any JSON API (Append `&callback=fn` to the end of the link)
 
 ## What's New
-#### `2016-09-11`  新增网易云音乐接口 (`id` or `playlist_id`二选一)  
+#### `2016-09-11`  新增网易云音乐接口 (`id[歌曲id]` or `playlist_id[歌单id]`二选一)  
 1. 歌曲信息：https://api.ioliu.cn/netease/?id=308353   
 2. 歌单信息：https://api.ioliu.cn/netease/?playlist_id=10998986   
