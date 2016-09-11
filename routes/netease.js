@@ -7,7 +7,12 @@ router.get('/', function(req, res, next) {
     res.header("Content-Type", "application/json;charset=utf-8");
     //console.log('ref:' + req.header('referer'));
     var id = req.query.id;
+    var playlist_id = req.query.playlist_id;
+
     var url = 'http://music.163.com/api/song/detail/?id='+id+'&ids=%5B'+id+'%5D';
+    if(playlist_id){
+        url = 'http://music.163.com/api/playlist/detail/?id='+id+'&ids=%5B'+id+'%5D';
+    }
     netease_http(url,function(data){
         return res.send(data);
     });
