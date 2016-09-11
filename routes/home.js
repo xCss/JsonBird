@@ -34,7 +34,7 @@ router.get('/', function(req, res, next) {
         }
         res.render('welcome',params);
     });
-    res.render('welcome',{title:'Welcome | JsonBird - 业界领先的远程 JSON 代理服务'});
+    //res.render('welcome',{title:'Welcome | JsonBird - 业界领先的远程 JSON 代理服务'});
     
 });
 
