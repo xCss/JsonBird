@@ -25,9 +25,15 @@ router.get('/', function(req, res, next) {
     //     }
     // });
     var ip = req.ip;
-    ip2address(ip,function(data){
-        res.render('welcome',{title:'Welcome | JsonBird - 业界领先的远程 JSON 代理服务',address:data.area+data.location});
-    });
+    if(ip!==null && ip !== '::1'){
+        console.log(1);
+        ip2address(ip,function(data){
+            res.render('welcome',{title:'Welcome | JsonBird - 业界领先的远程 JSON 代理服务',address:'<br>欢迎来自'+data.area+data.location+'的朋友'});
+        });
+    }else{
+        console.log(2);
+        res.render('welcome',{title:'Welcome | JsonBird - 业界领先的远程 JSON 代理服务'});
+    }
     
 });
 
