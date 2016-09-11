@@ -11,7 +11,7 @@ router.get('/', function(req, res, next) {
 
     var url = 'http://music.163.com/api/song/detail/?id='+id+'&ids=%5B'+id+'%5D';
     if(playlist_id){
-        url = 'http://music.163.com/api/playlist/detail/?id='+playlist_id+'&ids=%5B'+playlist_id+'%5D';
+        url = 'http://music.163.com/api/playlist/detail/?id='+playlist_id;
     }
     netease_http(url,function(data){
         return res.send(data);
