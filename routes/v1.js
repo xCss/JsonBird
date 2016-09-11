@@ -33,23 +33,24 @@ router.get('/', function(req, res, next) {
             return res.send(json);
         });
         
+    }else{
+        var url = originalUrl.replace('/v1/?url=', '');
+        url = url.indexOf('?') === -1 ? url.replace('&', '?') : url;
+        console.log('------------------log start---------------');
+        console.log('date:'+new Date());
+        console.log('ip:' + ip);
+        console.log('ref:' + ref);
+        console.log('path:' + req.path);
+        console.log('req:' + url);
+        console.log('------------------log end---------------');
+        getJSON(url, function(data) {
+            if (req.query.callback) {
+                return res.jsonp(data);
+            } else {
+                return res.send(data);
+            }
+        });
     }
-    var url = originalUrl.replace('/v1/?url=', '');
-    url = url.indexOf('?') === -1 ? url.replace('&', '?') : url;
-    console.log('------------------log start---------------');
-    console.log('date:'+new Date());
-    console.log('ip:' + ip);
-    console.log('ref:' + ref);
-    console.log('path:' + req.path);
-    console.log('req:' + url);
-    console.log('------------------log end---------------');
-    getJSON(url, function(data) {
-        if (req.query.callback) {
-            return res.jsonp(data);
-        } else {
-            return res.send(data);
-        }
-    });
 });
 
 function getJSON(url, callback, next) {
