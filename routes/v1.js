@@ -22,15 +22,15 @@ router.get('/', function(req, res, next) {
 
     if (originalUrl == /v1/) {
         ip2address(ip,function(data){
-            var json = {
+            var params = {
                 code:200,
                 ip:ip,
                 info: 'Please Set URL Like This: ' + protocol + '://' + host + '/v1/?url=http[s]://YourWantProxyUrl.com'
             };
             if(data){
-                json['location']='来自'+data.area+data.location;
+                params['location']='来自'+data.area+data.location;
             }
-            return res.send(json);
+            return res.send(params);
         });
         
     }else{
@@ -66,8 +66,8 @@ function getJSON(url, callback, next) {
 function ip2address(ip,callback){
     request('http://apis.juhe.cn/ip/ip2addr?ip='+ip+'&key=28c0a6a5eb9cca3f38bc5877a83c9868', function(err, res, body) {
         if (!err && res.statusCode == 200) {
-            console.log(body);
-            callback && callback(body.result);
+            console.log(body['result']);
+            callback && callback(body['result']);
         } else {
             console.log(' / request info:'+err);
             callback && callback(null);
