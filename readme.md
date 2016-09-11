@@ -12,7 +12,7 @@
 
 ## You can got
 1. Enables cross-domain requests to any JSON API
-2. Enables JSONP requests to any JSON API (Add `&callback=fn` to the last face of the link)
+2. Enables JSONP requests to any JSON API (Add `&callback=fn` to the end of the link)
 
 ## What's New
 #### `2016-09-11`  新增网易云音乐接口 (`id` or `playlist_id`二选一)  
