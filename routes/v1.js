@@ -15,7 +15,7 @@ router.all('/v1/*', function(req, res, next) {
 router.get('/', function(req, res, next) {
     
     var protocol = req.protocol;
-    var host = req.host;
+    var host = req.hostname;
     var ip = req.ip;
     var ref = req.get('reference');
     var originalUrl = req.originalUrl;
@@ -66,6 +66,7 @@ function getJSON(url, callback, next) {
 function ip2address(ip,callback){
     request('http://apis.juhe.cn/ip/ip2addr?ip='+ip+'&key=28c0a6a5eb9cca3f38bc5877a83c9868', function(err, res, body) {
         if (!err && res.statusCode == 200) {
+            console.log(body);
             callback && callback(body.result);
         } else {
             console.log(' / request info:'+err);
