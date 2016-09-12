@@ -8,7 +8,7 @@ router.all('*', function(req, res, next) {
 });
 
 router.get('/', function(req, res, next) {
-    var host = req.host;
+    var host = req.hostname;
     var protocol = req.protocol;
     var originalUrl = req.originalUrl;
     var ip = req.ip;
