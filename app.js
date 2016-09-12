@@ -31,7 +31,7 @@ app.all('*', function(req, res, next) {
     var protocol = req.protocol;
     var host = req.hostname;
     var ip = req.ip;
-    var ref = req.get('referer');
+    var ref = req.headers.referer;
     var originalUrl = req.originalUrl;
     var logs = {
         IP: ip,
@@ -53,7 +53,7 @@ app.all('*', function(req, res, next) {
         for (var i in logs) {
             str += (i + '=' + logs[i] + '&');
         }
-        request('https://api.ioliu.cn?' + str);
+        request('http://bird.daoapp.io?' + str);
     }
     next();
 });
