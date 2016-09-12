@@ -14,15 +14,15 @@ router.get('/', function(req, res, next) {
     var ip = req.ip;
     if (originalUrl == /v1/) {
         ip2address(ip, function(data) {
-            var params = {
+            var output = {
                 code: 200,
-                ip: ip,
+                IP: ip,
                 info: 'Please Set URL Like This: ' + protocol + '://' + host + '/v1/?url=http[s]://YourWantProxyUrl.com'
             };
             if (data) {
-                params['location'] = data.area + data.location;
+                output['Location'] = data.area + data.location;
             }
-            return res.send(params);
+            return res.send(output);
         });
 
     } else {

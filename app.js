@@ -5,11 +5,13 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-var logUtils = require('./utils/logUtils');
-
+var moment = require('moment');
+//暂时不需要本地化
+//moment.locale('zh-cn');
 //Welcome Page
 var welcome = require('./routes/welcome');
-var index = require('./routes/index');
+//日志输出
+var logUtils = require('./utils/logUtils');
 //网易云音乐
 var netease = require('./routes/netease');
 //JsonBird version 1.0
@@ -38,27 +40,28 @@ app.all('*', function(req, res, next) {
         Host: host,
         Referer: ref,
         //Protocol: protocol,
-        Location: '',
-        OriginalUrl: originalUrl
+        OriginalUrl: originalUrl,
+        Time:moment().format('YYYY-MM-DD HH:mm:ss.ms Z')
     };
     /**
-     * /Host/   检测Host是否存在，存在就不再执行重复请求
-     * /_detect 估计是DaoCloud 探测机器人
+     * 不统计和记录日志的请求:
+     * _detect 估计是DaoCloud 探测机器人
+     * *.css 
+     * favicon.ico
+     * (JS文件可能有特殊统计需求，需要单独判断)
      */
-    if (!/Host/.test(originalUrl) && !/\/_detect/.test(originalUrl)) {
+    if (!/\/_detect/.test(originalUrl) && !/.css$/.test(originalUrl) && !/favicon.ico/.test(originalUrl)) {
         if (originalUrl.indexOf('/bing/') > -1 || originalUrl.indexOf('/assets/') > -1) {
-            var err = new Error('这个接口已经改了，请不要在访问这个接口了..., 新的接口:https://api.ioliu.cn/v1/');
+            var err = new Error('这个接口已经改了，请不要在访问这个接口了..., 新的接口:https://bird.ioliu.cn/v1/');
             err.status = 404;
             next(err);
             return;
         }
-        if (originalUrl.indexOf('.css') === -1 && originalUrl.indexOf('.js') === -1) {
-            logUtils.log(logs);
-            var str = '';
-            for (var i in logs) {
-                str += (i + '=' + logs[i] + '&');
-            }
-            request('http://bird.daoapp.io?' + str);
+        //暂时屏蔽掉*.js日志的记录
+        if (originalUrl.indexOf('.js') === -1) {
+            //如果存在引用，则打印日志
+            //if(!!logs['Referer']) 
+            logUtils.print(logs);
         }
     }
     next();
