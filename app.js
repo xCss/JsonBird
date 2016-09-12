@@ -1,9 +1,11 @@
 var express = require('express');
+var request = require('request');
 var path = require('path');
 var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var logUtils = require('./utils/logUtils');
 
 //Welcome Page
 var welcome = require('./routes/welcome');
@@ -25,8 +27,28 @@ app.all('*', function(req, res, next) {
     res.header("Access-Control-Allow-Methods", "PUT,POST,GET,DELETE,OPTIONS");
     res.header("X-Powered-By", '1.0.0');
     res.header("Vary", "Origin");
-    // res.header("Content-Type", "application/json;charset=utf-8");
-    console.log('ref:' + req.header('referer'));
+
+    var protocol = req.protocol;
+    var host = req.hostname;
+    var ip = req.ip;
+    var ref = req.get('referer');
+    var originalUrl = req.originalUrl;
+    var logs = {
+        IP: ip,
+        Host: host,
+        Referer: ref,
+        //Protocol: protocol,
+        Location: '',
+        OriginalUrl: originalUrl
+    };
+    if (originalUrl.indexOf('.css') === -1 && originalUrl.indexOf('.js') === -1) {
+        logUtils.log(logs);
+    }
+    var str = '';
+    for (var i in logs) {
+        str += (i + '=' + logs[i] + '&');
+    }
+    request('https://api.ioliu.cn?' + str);
     next();
 });
 // view engine setup
@@ -39,7 +61,7 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
+app.use('/static/', express.static(path.join(__dirname, 'public')));
 
 app.use('/', welcome);
 app.use('/v1', v1);
@@ -60,6 +82,7 @@ if (app.get('env') === 'development') {
     app.use(function(err, req, res, next) {
         res.status(err.status || 500);
         res.send({
+            code: err.status,
             message: err.message,
             error: err
         });
@@ -71,7 +94,7 @@ if (app.get('env') === 'development') {
 app.use(function(err, req, res, next) {
     res.status(err.status || 500);
     res.send({
-        status:err.status,
+        code: err.status,
         message: err.message,
         error: {}
     });
