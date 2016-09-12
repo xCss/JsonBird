@@ -41,8 +41,8 @@ app.all('*', function(req, res, next) {
         Location: '',
         OriginalUrl: originalUrl
     };
-    if (originalUrl.indexOf('/bing/') > -1) {
-        var err = new Error('这个接口已经改了，请不要在访问这个接口了...');
+    if (originalUrl.indexOf('/bing/') > -1 || originalUrl.indexOf('/assets/') > -1) {
+        var err = new Error('这个接口已经改了，请不要在访问这个接口了..., 新的接口:https://api.ioliu.cn/v1/');
         err.status = 404;
         next(err);
         return;
