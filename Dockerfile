@@ -12,4 +12,4 @@ COPY . /usr/src/app
 EXPOSE 3000
 
 #ENTRYPOINT ["node", "app.js"]
-CMD forever start bin/www
+CMD forever start ./bin/www
