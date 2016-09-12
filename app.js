@@ -39,8 +39,8 @@ app.all('*', function(req, res, next) {
         IP: ip,
         Host: host,
         Referer: ref,
-        //Protocol: protocol,
-        OriginalUrl: originalUrl,
+        //Protocol: protocol, 
+        OriginalUrl: originalUrl, 
         Time:moment().format('YYYY-MM-DD HH:mm:ss.ms Z')
     };
     /**
