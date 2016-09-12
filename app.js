@@ -41,9 +41,11 @@ app.all('*', function(req, res, next) {
         Location: '',
         OriginalUrl: originalUrl
     };
-    if (/Host/.test(originalUrl)) {
-        next();
-    } else {
+    /**
+     * /Host/   检测Host是否存在，存在就不再执行重复请求
+     * /_detect 估计是DaoCloud 探测机器人
+     */
+    if (!/Host/.test(originalUrl) && !/\/_detect/.test(originalUrl)) {
         if (originalUrl.indexOf('/bing/') > -1 || originalUrl.indexOf('/assets/') > -1) {
             var err = new Error('这个接口已经改了，请不要在访问这个接口了..., 新的接口:https://api.ioliu.cn/v1/');
             err.status = 404;
@@ -58,8 +60,8 @@ app.all('*', function(req, res, next) {
             }
             request('http://bird.daoapp.io?' + str);
         }
-        next();
     }
+    next();
 
 });
 // view engine setup
