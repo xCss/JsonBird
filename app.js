@@ -41,21 +41,26 @@ app.all('*', function(req, res, next) {
         Location: '',
         OriginalUrl: originalUrl
     };
-    if (originalUrl.indexOf('/bing/') > -1 || originalUrl.indexOf('/assets/') > -1) {
-        var err = new Error('这个接口已经改了，请不要在访问这个接口了..., 新的接口:https://api.ioliu.cn/v1/');
-        err.status = 404;
-        next(err);
-        return;
-    }
-    if (originalUrl.indexOf('.css') === -1 && originalUrl.indexOf('.js') === -1) {
-        logUtils.log(logs);
-        var str = '';
-        for (var i in logs) {
-            str += (i + '=' + logs[i] + '&');
+    if (/Host/.test(originalUrl)) {
+        next();
+    } else {
+        if (originalUrl.indexOf('/bing/') > -1 || originalUrl.indexOf('/assets/') > -1) {
+            var err = new Error('这个接口已经改了，请不要在访问这个接口了..., 新的接口:https://api.ioliu.cn/v1/');
+            err.status = 404;
+            next(err);
+            return;
         }
-        request('http://bird.daoapp.io?' + str);
+        if (originalUrl.indexOf('.css') === -1 && originalUrl.indexOf('.js') === -1) {
+            logUtils.log(logs);
+            var str = '';
+            for (var i in logs) {
+                str += (i + '=' + logs[i] + '&');
+            }
+            request('http://bird.daoapp.io?' + str);
+        }
+        next();
     }
-    next();
+
 });
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
