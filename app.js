@@ -18,7 +18,7 @@ var netease = require('./routes/netease');
 var v1 = require('./routes/v1');
 
 var app = express();
-app.listen(process.env.PORT || 5000);
+//app.listen(process.env.PORT || 5000);
 
 /***
  * 获取引用网站
@@ -41,7 +41,7 @@ app.all('*', function(req, res, next) {
         Referer: ref,
         //Protocol: protocol, 
         OriginalUrl: originalUrl, 
-        Time:moment().format('YYYY-MM-DD HH:mm:ss.ms Z')
+        Time:moment().format('YYYY-MM-DD HH:mm:ss.ms')
     };
     /**
      * 不统计和记录日志的请求:

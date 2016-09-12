@@ -1,4 +1,4 @@
-var dog = require('./storageUtils');
+var storage = require('./storageUtils');
 module.exports = {
     print : function(params) {
         var arr = ['-------------------------------------'];
