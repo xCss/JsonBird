@@ -12,5 +12,5 @@ COPY . /usr/src/app
 ENV PORT 80
 EXPOSE 80
 
-ENTRYPOINT ["npm", "./bin/www"]
+ENTRYPOINT ["node", "app.js"]
 # CMD forever start --minUptime 1000 --spinSleepTime 1000 ./bin/www
