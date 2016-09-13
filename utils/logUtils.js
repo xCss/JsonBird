@@ -1,6 +1,6 @@
-var storage = require('./storageUtils');
+var storage = require('./dbUtils');
 module.exports = {
-    print : function(params) {
+    print: function(params) {
         var arr = ['-------------------------------------'];
         // var date = new Date();
         // var month = date.getMonth() + 1;

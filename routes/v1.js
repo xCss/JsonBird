@@ -35,7 +35,7 @@ router.get('/', function(req, res, next) {
             } else {
                 return res.send(data);
             }
-        });
+        }, next);
     }
 });
 
@@ -45,8 +45,8 @@ function getJSON(url, callback, next) {
             callback && callback(body);
         } else {
             var error = new Error(err);
-            err.status = 404;
-            next(err);
+            error.status = 404;
+            next(error);
         }
     });
 }
