@@ -9,7 +9,8 @@ router.get('/', function(req, res, next) {
     ip2addr(ip, function(data) {
         var params = {
             head: config.title,
-            title: 'Welcome | ' + config.title + ' - ' + config.description
+            title: 'Welcome | ' + config.title + ' - ' + config.description,
+            description: config.description
         };
         if (data) {
             params['address'] = '欢迎来自' + data.area + data.location + '的朋友';
