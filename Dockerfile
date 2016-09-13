@@ -6,7 +6,6 @@ COPY package.json /usr/src/app/
 
 # RUN npm i -g forever
 RUN npm i
-RUN sudo npm update -g npm
 
 COPY . /usr/src/app
 
