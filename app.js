@@ -40,17 +40,18 @@ app.all('*', function(req, res, next) {
         Host: host,
         Referer: ref,
         //Protocol: protocol, 
-        OriginalUrl: originalUrl, 
-        Time:moment().format('YYYY-MM-DD HH:mm:ss.ms')
+        OriginalUrl: originalUrl,
+        Time: moment().format('YYYY-MM-DD HH:mm:ss.ms')
     };
     /**
      * 不统计和记录日志的请求:
      * _detect 估计是DaoCloud 探测机器人
      * *.css 
      * favicon.ico
+     * robots.txt
      * (JS文件可能有特殊统计需求，需要单独判断)
      */
-    if (!/\/_detect/.test(originalUrl) && !/.css$/.test(originalUrl) && !/favicon.ico/.test(originalUrl)) {
+    if (!/\/_detect/.test(originalUrl) && !/.css$/.test(originalUrl) && !/favicon.ico/.test(originalUrl) && !/.robots.txt&/.test(originalUrl)) {
         if (originalUrl.indexOf('/bing/') > -1 || originalUrl.indexOf('/assets/') > -1) {
             var err = new Error('这个接口已经改了，请不要在访问这个接口了..., 新的接口:https://bird.ioliu.cn/v1/');
             err.status = 404;
