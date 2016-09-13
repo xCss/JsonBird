@@ -5,7 +5,9 @@ WORKDIR /usr/src/app
 COPY package.json /usr/src/app/
 
 # RUN npm i -g forever
-RUN npm install
+RUN npm i
+RUN npm update -g npm
+
 COPY . /usr/src/app
 
 ENV PORT 80
