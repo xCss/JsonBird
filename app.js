@@ -6,7 +6,8 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var moment = require('moment');
-//暂时不需要本地化
+var timezone = require('moment-timezone');
+//本地化
 moment.locale('zh-cn');
 //Welcome Page
 var welcome = require('./routes/welcome');
@@ -41,7 +42,7 @@ app.all('*', function(req, res, next) {
         Referer: ref,
         //Protocol: protocol, 
         OriginalUrl: originalUrl,
-        Time: moment().format('YYYY-MM-DD HH:mm:ss.ms')
+        Time: moment().tz('Asia/ShangHai').format('YYYY-MM-DD HH:mm:ss.ms')
     };
     /**
      * 不记录日志和统计的请求:

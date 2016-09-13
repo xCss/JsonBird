@@ -28,6 +28,7 @@
     "express": "~4.13.4",
     "express-generator": "^4.13.4",
     "moment": "^2.15.0",
+    "moment-timezone": "^0.5.5",
     "morgan": "~1.7.0",
     "mysql": "^2.11.1",
     "pug": "^2.0.0-beta6",

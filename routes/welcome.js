@@ -1,6 +1,6 @@
 var express = require('express');
 var request = require('request');
-var config = require('../configs/config');
+var config = require('../configs/config').site;
 var router = express.Router();
 
 /* GET home page. */
@@ -8,7 +8,8 @@ router.get('/', function(req, res, next) {
     var ip = req.ip;
     ip2addr(ip, function(data) {
         var params = {
-            title: 'Welcome | ' + config.welcome
+            head: config.title,
+            title: 'Welcome | ' + config.title + ' - ' + config.description
         };
         if (data) {
             params['address'] = '欢迎来自' + data.area + data.location + '的朋友';
