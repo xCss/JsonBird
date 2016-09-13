@@ -44,11 +44,16 @@ function getJSON(url, callback, next) {
         if (!err && res.statusCode == 200) {
             callback && callback(body);
         } else {
-            console.log(err);
+            var error = new Error(err);
+            err.status = 404;
+            next(err);
         }
     });
 }
 
+/**
+ * 获取IP地址所对应的地区
+ */
 function ip2address(ip, callback) {
     request('http://apis.juhe.cn/ip/ip2addr?ip=' + ip + '&key=28c0a6a5eb9cca3f38bc5877a83c9868', function(err, res, body) {
         body = JSON.parse(body);
