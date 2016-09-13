@@ -2,6 +2,8 @@ module.exports = {
     //site config
     site: {
         title: 'JsonBird',
+        author: 'xCss',
+        concat: 'xioveliu@gmail.com',
         description: '业界领先的远程 JSON 代理服务'
     },
     //mysql config

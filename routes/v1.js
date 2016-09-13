@@ -29,17 +29,17 @@ router.get('/', function(req, res, next) {
         var url = originalUrl.replace('/v1/?url=', '');
         url = url.indexOf('?') === -1 ? url.replace('&', '?') : url;
         url = url.indexOf('http://') === -1 ? 'http://' + url : url;
-        getJSON(url, function(data) {
+        getJSON(url, next, function(data) {
             if (req.query.callback) {
                 return res.jsonp(data);
             } else {
                 return res.send(data);
             }
-        }, next);
+        });
     }
 });
 
-function getJSON(url, callback, next) {
+function getJSON(url, next, callback) {
     request(url, function(err, res, body) {
         if (!err && res.statusCode == 200) {
             callback && callback(body);
