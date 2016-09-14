@@ -6,6 +6,7 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var moment = require('moment');
+//设置时区
 var timezone = require('moment-timezone');
 //本地化
 moment.locale('zh-cn');
@@ -34,6 +35,9 @@ app.all('*', function(req, res, next) {
     var protocol = req.protocol;
     var host = req.hostname;
     var ip = req.ip;
+    var ips = req.ips;
+    console.log(ips);
+    console.log(req.get('X-Forwarded-For'));
     var ref = req.headers.referer;
     var originalUrl = req.originalUrl;
     var logs = {
