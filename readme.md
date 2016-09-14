@@ -1,13 +1,21 @@
-## JsonBird
-A JSON Remote Agent Service | 一个远程JSON代理服务
+# JsonBird
+A JSON Remote Agent Service | 一个远程JSON代理服务 **[HOMEPAGE](https://bird.ioliu.cn)**
 
 ![npm:v3.10.3](https://img.shields.io/badge/npm-v3.10.3-blue.svg)
 ![express:v4.13.4](https://img.shields.io/badge/express-v4.13.4-blue.svg)
-![node:v6.3.1](https://img.shields.io/badge/node-v6.3.1-blue.svg)
+![node.js support:v0.10.0+](https://img.shields.io/badge/node.js%20supports-v0.10.0+-green.svg)
 ![build:passing](https://img.shields.io/badge/build-passing-green.svg)
-[![license:MIT](https://img.shields.io/badge/license-MIT-green.svg)](/License)
+[![license:MIT](https://img.shields.io/badge/license-MIT-blue.svg)](/License)
 [![releases:v1.0.0](https://img.shields.io/badge/releases-v1.0.0-blue.svg)](https://github.com/xCss/JsonBird/releases)
 
+## Table Of Contents
+- [Requirements](#requirements)
+- [Usage](#usage)
+
+## Requirements
+Paddington requires the following to run:
+- [Node.js](https://nodejs.org) 0.10+
+- [npm](https://www.npmjs.com/) (normally comes with Node.js)
 
 ## Usage
 > https://bird.ioliu.cn/v1/?url=http[s]://YouWantProxyJSONUrls.com&[?]params1=val1&params2=val2[&callback=fn]
