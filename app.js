@@ -34,10 +34,7 @@ app.all('*', function(req, res, next) {
 
     var protocol = req.protocol;
     var host = req.hostname;
-    var ip = req.ip;
-    var ips = req.ips;
-    console.log(ips);
-    console.log(req.get('X-Forwarded-For'));
+    var ip = req.ip.replace(/::ffff:/, '');
     var ref = req.headers.referer;
     var originalUrl = req.originalUrl;
     var logs = {

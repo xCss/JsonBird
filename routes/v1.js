@@ -11,7 +11,7 @@ router.get('/', function(req, res, next) {
     var host = req.hostname;
     var protocol = req.protocol;
     var originalUrl = req.originalUrl;
-    var ip = req.ip;
+    var ip = req.ip.replace(/::ffff:/, '');
     if (originalUrl == /v1/) {
         ip2address(ip, function(data) {
             var output = {
