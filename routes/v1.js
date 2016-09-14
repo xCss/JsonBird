@@ -30,6 +30,7 @@ router.get('/', function(req, res, next) {
         url = url.indexOf('?') === -1 ? url.replace('&', '?') : url;
         url = url.indexOf('http://') === -1 ? 'http://' + url : url;
         getJSON(url, next, function(data) {
+            data['status'] = 200;
             if (req.query.callback) {
                 return res.jsonp(data);
             } else {
