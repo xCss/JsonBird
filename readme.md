@@ -23,4 +23,4 @@ A JSON Remote Agent Service | 一个远程JSON代理服务
 
 ## License
 
-[MIT License](/license)
+[MIT License](/License)
