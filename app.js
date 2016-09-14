@@ -23,7 +23,7 @@ var app = express();
 //app.listen(process.env.PORT || 5000);
 
 /***
- * 统一过滤，打印日志
+ * 全局过滤，统计和日志
  */
 app.all('*', function(req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
@@ -54,7 +54,7 @@ app.all('*', function(req, res, next) {
      *      图片文件
      *      (JS文件可能有特殊统计需求，需要单独判断)
      */
-    var filter = /_detect|.css|favicon.ico|robots.txt|.png|.jpg|.gif/i.test(originalUrl);
+    var filter = /_detect|\.css|favicon\.ico|robots\.txt|\.png|\.jpg|\.gif/i.test(originalUrl);
     if (!filter) {
         /**
          * console.log(req.query):

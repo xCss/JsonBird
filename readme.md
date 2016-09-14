@@ -1,5 +1,7 @@
 # JsonBird
-A JSON Remote Agent Service | 一个远程JSON代理服务 **[HOMEPAGE](https://bird.ioliu.cn)**
+A JSON Remote Agent Service | 一个远程JSON代理服务 
+
+**[HOMEPAGE](https://bird.ioliu.cn)** | [Demo](https://jsfiddle.net/LNing/duL5Lby7/)
 
 ![npm:v3.10.3](https://img.shields.io/badge/npm-v3.10.3-blue.svg)
 ![express:v4.13.4](https://img.shields.io/badge/express-v4.13.4-blue.svg)
