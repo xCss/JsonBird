@@ -1,11 +1,12 @@
 ## JsonBird
 A JSON Remote Agent Service | 一个远程JSON代理服务
+
 ![npm:v3.10.3](https://img.shields.io/badge/npm-v3.10.3-blue.svg)
 ![express:v4.13.4](https://img.shields.io/badge/express-v4.13.4-blue.svg)
 ![node:v6.3.1](https://img.shields.io/badge/node-v6.3.1-blue.svg)
 ![build:passing](https://img.shields.io/badge/build-passing-green.svg)
 ![license:MIT](https://img.shields.io/badge/license-MIT-green.svg)
-[![releases:v1.0.0](https://img.shields.io/badge/releases-v1.0.0-blue.svg)][https://github.com/xCss/JsonBird/releases]
+[![releases:v1.0.0](https://img.shields.io/badge/releases-v1.0.0-blue.svg)](https://github.com/xCss/JsonBird/releases)
 
 
 ## How to use
