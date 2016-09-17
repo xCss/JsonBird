@@ -13,12 +13,12 @@ router.get('/', function(req, res, next) {
     if (playlist_id) {
         url = 'http://music.163.com/api/playlist/detail/?id=' + playlist_id;
     }
-    netease_http(url, nex, function(data) {
+    netease_http(url, next, function(data) {
         return res.send(data);
     });
 });
 
-function netease_http(url, next, callbackt) {
+function netease_http(url, next, callback) {
     var options = {
         url: url,
         headers: {
