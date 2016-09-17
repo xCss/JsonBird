@@ -1,19 +1,21 @@
 # JsonBird
 A JSON Remote Agent Service | 一个远程JSON代理服务 
 
-**[HOMEPAGE](https://bird.ioliu.cn)** | [Demo](https://jsfiddle.net/LNing/duL5Lby7/)
+**[HomePage](https://bird.ioliu.cn)** | [Demo](https://jsfiddle.net/LNing/duL5Lby7/)
 
 ![npm:v3.10.3](https://img.shields.io/badge/npm-v3.10.3-blue.svg)
 ![express:v4.13.4](https://img.shields.io/badge/express-v4.13.4-blue.svg)
 ![node.js support:v0.10.0+](https://img.shields.io/badge/node.js%20supports-v0.10.0+-green.svg)
 ![build:passing](https://img.shields.io/badge/build-passing-green.svg)
 [![license:MIT](https://img.shields.io/badge/license-MIT-blue.svg)](/License)
-[![releases:v1.0.0](https://img.shields.io/badge/releases-v1.0.0-blue.svg)](https://github.com/xCss/JsonBird/releases)
+[![releases:v1.0.1](https://img.shields.io/badge/releases-v1.0.1-blue.svg)](https://github.com/xCss/JsonBird/releases)
 
 ## Table Of Contents
 - [Requirements](#requirements)
 - [Usage](#usage)
-
+- [You can got](#you-can-got)
+- [What's New](#whats-new)
+- [License](#license)
 ## Requirements
 Paddington requires the following to run:
 - [Node.js](https://nodejs.org) 0.10+
