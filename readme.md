@@ -8,7 +8,7 @@ A JSON Remote Agent Service | 一个远程JSON代理服务
 ![node.js support:v0.10.0+](https://img.shields.io/badge/node.js%20supports-v0.10.0+-green.svg)
 ![build:passing](https://img.shields.io/badge/build-passing-green.svg)
 [![license:MIT](https://img.shields.io/badge/license-MIT-blue.svg)](/License)
-[![releases:v1.0.1](https://img.shields.io/badge/releases-v1.0.1-blue.svg)](https://github.com/xCss/JsonBird/releases)
+[![releases:v1.0.2](https://img.shields.io/badge/releases-v1.0.2-blue.svg)](https://github.com/xCss/JsonBird/releases)
 
 ## Table Of Contents
 - [Requirements](#requirements)
