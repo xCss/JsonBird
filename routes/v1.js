@@ -12,15 +12,20 @@ router.get('/', function(req, res, next) {
     var protocol = req.protocol;
     var originalUrl = req.originalUrl;
     var ip = req.ip.replace(/::ffff:/, '');
-    if (originalUrl == /v1/) {
+    if (originalUrl === /v1/) {
         ip2address(ip, function(data) {
             var output = {
-                status: 200,
-                IP: ip,
-                info: 'Please Set URL Like This: ' + protocol + '://' + host + '/v1/?url=http[s]://YourWantProxyUrl.com'
+                data: {
+                    IP: ip,
+                    info: 'Please Set URL Like This: ' + protocol + '://' + host + '/v1/?url=http[s]://YourWantProxyUrl.com'
+                },
+                status: {
+                    code: 200,
+                    message: ''
+                }
             };
             if (data) {
-                output['Location'] = data.area + data.location;
+                output['data']['Location'] = data.area + data.location;
             }
             return res.send(output);
         });
@@ -30,11 +35,17 @@ router.get('/', function(req, res, next) {
         url = url.indexOf('?') === -1 ? url.replace('&', '?') : url;
         url = url.indexOf('http://') === -1 ? 'http://' + url : url;
         getJSON(url, next, function(data) {
-            data['status'] = 200;
+            var output = {
+                data: JSON.parse(data),
+                status: {
+                    code: 200,
+                    message: ''
+                }
+            };
             if (req.query.callback) {
-                return res.jsonp(data);
+                return res.jsonp(output);
             } else {
-                return res.send(data);
+                return res.send(output);
             }
         });
     }
