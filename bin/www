@@ -15,8 +15,6 @@ var http = require('http');
 var port = normalizePort(process.env.PORT || '3000');
 app.set('port', port);
 
-console.log("SESSION_SECRET:" + process.env.SESSION_SECRET);
-
 /**
  * Create HTTP server.
  */

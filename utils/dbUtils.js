@@ -1,9 +1,13 @@
 //https://github.com/mysqljs/mysql#readme
 var mysql = require('mysql');
+var bcrypt = require('bcryptjs');
 //获取数据库配置
 var config = require('../configs/config').mysql_dev;
 //使用连接池
 var pool = mysql.createPool(config);
+//SESSION_SECRET
+var sessionSECRET = process.env.SESSION_SECRET || "faFJDSLNFFJLsEknnqWSDlweifsNIW";
+console.log(sessionSECRET);
 //公共连接设置
 var commonFormat = function(callback) {
     pool.getConnection(function(err, connection) {
@@ -26,6 +30,11 @@ var commonFormat = function(callback) {
 module.exports = {
     //添加/修改数据
     set: function(params) {
+        var password = '12345' + sessionSECRET;
+        var salt = bcrypt.genSaltSync(10);
+        var hash = bcrypt.hashSync(password, salt);
+        console.log(hash);
+        console.log(bcrypt.compareSync(password + 'x', hash));
         // var sql = 'select 1+1 as test';
         // pool.query(sql, function(err, rows, fields) {
         //     console.log(err);
@@ -33,13 +42,13 @@ module.exports = {
         //     console.log(fields);
         // });
         var sql = 'select MD5("123456") as calc';
-        commonFormat(function(err, connection) {
-            connection.query(sql, { id: 1 + 1 }, function(err, rows) {
-                //console.log(err);
-                console.log(rows);
-                console.log(rows.length)
-            });
-        });
+        // commonFormat(function(err, connection) {
+        //     connection.query(sql, { id: 1 + 1 }, function(err, rows) {
+        //         //console.log(err);
+        //         console.log(rows);
+        //         console.log(rows.length)
+        //     });
+        // });
     },
     //获取数据
     get: function(key) {

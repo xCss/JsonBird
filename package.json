@@ -1,38 +1,41 @@
 {
-    "name": "JsonBird",
-    "version": "1.0.0",
-    "description": "A Remote Json Agent Service",
-    "author": "xCss",
-    "license": "MIT",
-    "private": true,
-    "scripts": {
-        "start": "node ./bin/www"
-    },
-    "repository": {
-        "type": "git",
-        "url": "git+https://github.com/xCss/JsonBird.git"
-    },
-    "keywords": [
-        "JsonBird",
-        "JsonProxy"
-    ],
-    "bugs": {
-        "url": "https://github.com/xCss/JsonBird/issues"
-    },
-    "readme": "./readme.md",
-    "homepage": "https://github.com/xCss/JsonBird#readme",
-    "dependencies": {
-        "body-parser": "~1.15.1",
-        "cookie-parser": "~1.4.3",
-        "debug": "~2.2.0",
-        "express": "~4.13.4",
-        "express-generator": "^4.13.4",
-        "moment": "^2.15.0",
-        "moment-timezone": "^0.5.5",
-        "morgan": "~1.7.0",
-        "mysql": "^2.11.1",
-        "pug": "^2.0.0-beta6",
-        "request": "^2.74.0",
-        "serve-favicon": "~2.3.0"
-    }
+  "name": "JsonBird",
+  "version": "1.0.0",
+  "description": "A Remote Json Agent Service",
+  "author": "xCss",
+  "license": "MIT",
+  "private": true,
+  "scripts": {
+    "start": "node ./bin/www"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/xCss/JsonBird.git"
+  },
+  "keywords": [
+    "JsonBird",
+    "JsonProxy"
+  ],
+  "bugs": {
+    "url": "https://github.com/xCss/JsonBird/issues"
+  },
+  "readme": "./readme.md",
+  "homepage": "https://github.com/xCss/JsonBird#readme",
+  "dependencies": {
+    "bcryptjs": "^2.3.0",
+    "body-parser": "~1.15.1",
+    "cookie-parser": "~1.4.3",
+    "debug": "~2.2.0",
+    "express": "~4.13.4",
+    "express-generator": "^4.13.4",
+    "moment": "^2.15.0",
+    "moment-timezone": "^0.5.5",
+    "morgan": "~1.7.0",
+    "mysql": "^2.11.1",
+    "node-sass": "^3.10.0",
+    "node-sass-middleware": "^0.9.8",
+    "pug": "^2.0.0-beta6",
+    "request": "^2.74.0",
+    "serve-favicon": "~2.3.0"
+  }
 }
