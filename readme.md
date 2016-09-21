@@ -8,7 +8,7 @@ A JSON Remote Agent Service | 一个远程JSON代理服务
 ![node.js support:v0.10.0+](https://img.shields.io/badge/node.js%20supports-v0.10.0+-green.svg)
 ![build:passing](https://img.shields.io/badge/build-passing-green.svg)
 [![license:MIT](https://img.shields.io/badge/license-MIT-blue.svg)](/License)
-[![releases:v1.0.2](https://img.shields.io/badge/releases-v1.0.2-blue.svg)](https://github.com/xCss/JsonBird/releases)
+[![releases:v1.1.2](https://img.shields.io/badge/releases-v1.1.2-blue.svg)](https://github.com/xCss/JsonBird/releases)
 
 ## Table Of Contents
 - [Requirements](#requirements)
@@ -30,9 +30,7 @@ Paddington requires the following to run:
 2. Enables JSONP requests to any JSON API (Append `&callback=fn` to the end of the link)
 
 ## What's New
-#### `2016-09-11`  新增网易云音乐接口 (`id[歌曲id]` or `playlist_id[歌单id]`二选一)  
-1. 歌曲信息：https://bird.ioliu.cn/netease/?id=308353   
-2. 歌单信息：https://bird.ioliu.cn/netease/?playlist_id=10998986   
+[Please see Release](https://github.com/xCss/JsonBird/releases) 
 
 ## License
 
