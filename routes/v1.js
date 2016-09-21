@@ -36,7 +36,7 @@ router.get('/', function(req, res, next) {
         url = url.indexOf('http://') === -1 ? 'http://' + url : url;
         getJSON(url, next, function(data) {
             var output = {
-                data: JSON.parse(data),
+                data: data,
                 status: {
                     code: 200,
                     message: ''
@@ -54,6 +54,7 @@ router.get('/', function(req, res, next) {
 function getJSON(url, next, callback) {
     request(url, function(err, res, body) {
         if (!err && res.statusCode == 200) {
+            body = JSON.parse(body);
             callback && callback(body);
         } else {
             var error = new Error(err);

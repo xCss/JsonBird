@@ -19,12 +19,14 @@ var logUtils = require('./utils/logUtils');
 var netease = require('./routes/netease');
 //JsonBird version 1.0
 var v1 = require('./routes/v1');
+//joke
+var joke = require('./routes/joke');
 //test
 var test = require('./routes/test');
 
 var app = express();
-// view engine setup
 app.set('views', path.join(__dirname, 'views'));
+// view engine setup
 app.set('view engine', 'pug');
 app.enable('trust proxy');
 // uncomment after placing your favicon in /public
@@ -44,7 +46,7 @@ app.use(sass({
 app.use('/static/', express.static(path.join(__dirname, 'static')));
 
 /***
- * 全局过滤，统计和日志
+ * 全局过滤:统计和日志
  */
 app.all('*', function(req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
@@ -64,7 +66,7 @@ app.all('*', function(req, res, next) {
         Referer: ref,
         //Protocol: protocol, 
         OriginalUrl: originalUrl,
-        Time: moment().tz('Asia/ShangHai').format('YYYY-MM-DD HH:mm:ss.ms')
+        Time: moment().tz('Asia/ShangHai').format('YYYY-MM-DD HH:mm:ss.SSS')
     };
     /**
      * 不记录日志和统计的请求:
@@ -93,13 +95,13 @@ app.all('*', function(req, res, next) {
         }
     }
     next();
-
 });
 
 app.use('/', welcome);
 app.use('/test', test);
 app.use('/v1', v1);
 app.use('/netease', netease);
+app.use('/joke', joke);
 
 
 
