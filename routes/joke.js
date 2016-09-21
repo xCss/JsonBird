@@ -68,9 +68,9 @@ router.post('/', urlencodedParser, function(req, res, next) {
     getJOKE(req, res, next, url);
 });
 /**
- * 随机获取
+ * 随机获取 
  */
-router.post('/rand', function(req, res, next) {
+router.post('/rand', urlencodedParser, function(req, res, next) {
     var type = req.body.type || 'pic';
     if (type !== 'pic') {
         type = null;
