@@ -7,7 +7,7 @@ var config = require('../configs/config').mysql_dev;
 var pool = mysql.createPool(config);
 //SESSION_SECRET
 var sessionSECRET = process.env.SESSION_SECRET || "faFJDSLNFFJLsEknnqWSDlweifsNIW";
-console.log(sessionSECRET);
+//console.log(sessionSECRET);
 //公共连接设置
 var commonFormat = function(callback) {
     pool.getConnection(function(err, connection) {
@@ -33,8 +33,8 @@ module.exports = {
         var password = '12345' + sessionSECRET;
         var salt = bcrypt.genSaltSync(10);
         var hash = bcrypt.hashSync(password, salt);
-        console.log(hash);
-        console.log(bcrypt.compareSync(password + 'x', hash));
+        //console.log(hash);
+        //console.log(bcrypt.compareSync(password + 'x', hash));
         // var sql = 'select 1+1 as test';
         // pool.query(sql, function(err, rows, fields) {
         //     console.log(err);
