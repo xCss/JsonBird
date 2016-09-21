@@ -54,7 +54,6 @@ app.all('*', function(req, res, next) {
     res.header("Access-Control-Allow-Methods", "PUT,POST,GET,DELETE,OPTIONS");
     res.header("X-Powered-By", '1.0.0');
     res.header("Vary", "Origin");
-
     var protocol = req.protocol;
     var host = req.hostname;
     var ip = req.ip.replace(/::ffff:/, '');

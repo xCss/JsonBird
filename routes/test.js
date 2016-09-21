@@ -25,7 +25,7 @@ router.get('/', function(req, res, next) {
     };
 
     request.post('http://localhost:3000/joke/', { form: mydata }, function(err, resp, body) {
-        console.log(body);
+        res.send(body);
     });
 });
 module.exports = router;

@@ -13,10 +13,34 @@ router.get('/', function(req, res, next) {
     var pagesize = req.query.pagesize || 1;
     var sort = req.query.sort || '';
     var time = req.query.time || '';
-    var url = "http://japi.juhe.cn/joke/img/text.from?key=" + key + "&page=" + page + "&pagesize=" + pagesize;
-    if (!!sort && !!time) {
-        url = "http://japi.juhe.cn/joke/img/list.from?key=" + key + "&page=" + page + "&pagesize=" + pagesize + "&sort=" + sort + "&time=" + time;
+    var type = req.query.type;
+    var url = "http://japi.juhe.cn/joke/";
+    if (!!type && type === 'text') {
+        url += "content/text.from?key=";
+    } else {
+        url += "img/text.from?key=";
     }
+    url += key + "&page=" + page + "&pagesize=" + pagesize;
+    if (!!sort && !!time) {
+        url += "&sort=" + sort + "&time=" + time;
+        url = url.replace(/text/, 'list');
+    }
+    if (!!sort && !!time) {
+        url += "&sort=" + sort + "&time=" + time;
+    }
+
+    getJOKE(req, res, next, url);
+});
+/**
+ * 随机获取
+ */
+router.get('/rand', function(req, res, next) {
+    var type = req.query.type || '';
+    var url = "http://v.juhe.cn/joke/randJoke.php?key=" + key;
+    if (!!type) {
+        url += "&type=" + type;
+    }
+    console.log(url);
     getJOKE(req, res, next, url);
 });
 
@@ -24,20 +48,42 @@ router.get('/', function(req, res, next) {
  * Post 请求
  */
 router.post('/', urlencodedParser, function(req, res, next) {
-    var params = {
-        page: req.body.page || 1,
-        pagesize: req.body.pagesize || 1,
-        sort:req.body.sort || '',
-        time:req.body.time || '' 
-    };
+    var page = req.body.page || 1;
+    var pagesize = req.body.pagesize || 1;
+    var sort = req.body.sort || '';
+    var time = req.body.time || '';
+    var type = req.body.type;
+    var url = "http://japi.juhe.cn/joke/";
+    if (!!type && type === 'text') {
+        url += "content/text.from?key=";
+    } else {
+        url += "img/text.from?key=";
+    }
+    url += key + "&page=" + page + "&pagesize=" + pagesize;
+    if (!!sort && !!time) {
+        url += "&sort=" + sort + "&time=" + time;
+        url = url.replace(/text/, 'list');
+    }
+    getJOKE(req, res, next, url);
+});
+/**
+ * 随机获取
+ */
+router.post('/rand', function(req, res, next) {
+    var type = req.body.type || '';
+    var url = "http://v.juhe.cn/joke/randJoke.php?key=" + key;
+    if (!!type) {
+        url += "&type=" + type;
+    }
+    getJOKE(req, res, next, url);
 });
 
 function getJOKE(req, res, next, url) {
-    request(url, function(err, res, body) {
-        if (!err && res.statusCode == 200) {
-            body = JSON.parse(body);
+    request(url, function(err, response, body) {
+        body = JSON.parse(body);
+        if (!err && response.statusCode === 200 && body.error_code === 0) {
             var output = {
-                data: body,
+                data: body.result.data || body.result,
                 status: {
                     code: 200,
                     message: ''
@@ -49,7 +95,7 @@ function getJOKE(req, res, next, url) {
                 return res.send(output);
             }
         } else {
-            var error = new Error(err);
+            var error = new Error(body.reason);
             error.status = 404;
             next(error);
         }
