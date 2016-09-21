@@ -35,12 +35,13 @@ router.get('/', function(req, res, next) {
  * 随机获取
  */
 router.get('/rand', function(req, res, next) {
-    var type = req.query.type || '';
+    var type = req.query.type || 'pic';
+    if (type !== 'pic')
+        type = null;
     var url = "http://v.juhe.cn/joke/randJoke.php?key=" + key;
     if (!!type) {
         url += "&type=" + type;
     }
-    console.log(url);
     getJOKE(req, res, next, url);
 });
 
@@ -70,7 +71,10 @@ router.post('/', urlencodedParser, function(req, res, next) {
  * 随机获取
  */
 router.post('/rand', function(req, res, next) {
-    var type = req.body.type || '';
+    var type = req.body.type || 'pic';
+    if (type !== 'pic') {
+        type = null;
+    }
     var url = "http://v.juhe.cn/joke/randJoke.php?key=" + key;
     if (!!type) {
         url += "&type=" + type;
