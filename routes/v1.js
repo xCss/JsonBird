@@ -2,17 +2,18 @@ var express = require('express');
 var request = require('request');
 var router = express.Router();
 
-router.all('*', function(req, res, next) {
-    res.header("Content-Type", "application/json;charset=utf-8");
-    next();
-});
+// router.all('*', function(req, res, next) {
+//     res.header("Content-Type", "application/json;charset=utf-8");
+//     next();
+// });
 
-router.get('/', function(req, res, next) {
+router.get('/*', function(req, res, next) {
     var host = req.hostname;
     var protocol = req.protocol;
     var originalUrl = req.originalUrl;
-    var ip = req.ip.replace(/::ffff:/, '');
-    if (originalUrl === /v1/) {
+    var ip = req.ip.replace(/\:\:ffff\:/, '');
+    var ip = req.ip.replace(/\:\:1/, '127.0.0.1');
+    if (!req.query.url) {
         ip2address(ip, function(data) {
             var output = {
                 data: {
@@ -27,9 +28,8 @@ router.get('/', function(req, res, next) {
             if (data) {
                 output['data']['Location'] = data.area + data.location;
             }
-            return res.send(output);
+            return res.json(output);
         });
-
     } else {
         var url = originalUrl.replace('/v1/?url=', '');
         url = url.indexOf('?') === -1 ? url.replace('&', '?') : url;
@@ -45,7 +45,7 @@ router.get('/', function(req, res, next) {
             if (req.query.callback) {
                 return res.jsonp(output);
             } else {
-                return res.send(output);
+                return res.json(output);
             }
         });
     }
@@ -58,7 +58,7 @@ function getJSON(url, next, callback) {
             callback && callback(body);
         } else {
             var error = new Error(err);
-            error.status = 404;
+            error.status = -1;
             next(error);
         }
     });

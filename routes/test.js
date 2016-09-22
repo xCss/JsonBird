@@ -20,11 +20,11 @@ router.get('/', function(req, res, next) {
     //     pagebase: 'https://m.csair.com'
     // };
     var mydata = {
-        name: 'zhangsan',
-        pass: 'lisi'
+        page: 1,
+        pagesize: 3
     };
 
-    request.post('http://localhost:3000/joke/', { form: mydata }, function(err, resp, body) {
+    request.post('https://bird.ioliu.cn/joke/', { form: mydata }, function(err, resp, body) {
         res.send(body);
     });
 });
