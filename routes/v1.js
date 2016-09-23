@@ -18,7 +18,7 @@ router.get('/*', function(req, res, next) {
             var output = {
                 data: {
                     IP: ip,
-                    info: 'Please Set URL Like This: ' + protocol + '://' + host + '/v1/?url=http[s]://YourWantProxyUrl.com'
+                    Info: 'Please Set URL Like This: ' + protocol + '://' + host + '/v1/?url=http[s]://YourWantProxyUrl.com'
                 },
                 status: {
                     code: 200,
@@ -31,7 +31,7 @@ router.get('/*', function(req, res, next) {
             return res.json(output);
         });
     } else {
-        var url = originalUrl.replace('/v1/?url=', '');
+        var url = originalUrl.split('url=')[1];
         url = url.indexOf('?') === -1 ? url.replace('&', '?') : url;
         url = url.indexOf('http://') === -1 ? 'http://' + url : url;
         getJSON(url, next, function(data) {
@@ -49,6 +49,10 @@ router.get('/*', function(req, res, next) {
             }
         });
     }
+});
+
+router.post('/*', function(req, res, next) {
+    res.json(req.body);
 });
 
 function getJSON(url, next, callback) {
