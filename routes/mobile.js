@@ -22,9 +22,7 @@ router.post('/', urlencodedParser, function(req, res, next) {
 });
 
 function getMobile(req, res, next) {
-    if (!!type) {
-        url += '&dtype=' + type;
-    }
+    url += !!type ? '&dtype=' + type : '';
     request(url, function(err, response, body) {
         if (!type) {
             body = JSON.parse(body);
