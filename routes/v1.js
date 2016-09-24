@@ -57,13 +57,15 @@ router.post('/*', function(req, res, next) {
 
 function getJSON(url, next, callback) {
     request(url, function(err, res, body) {
+        body = JSON.parse(body);
         if (!err && res.statusCode == 200) {
-            body = JSON.parse(body);
             callback && callback(body);
         } else {
-            var error = new Error(err);
-            error.status = -1;
-            next(error);
+            var error = {
+                code: -1,
+                message: body.reason
+            };
+            res.json(error);
         }
     });
 }

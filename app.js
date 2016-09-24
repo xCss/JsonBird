@@ -21,6 +21,8 @@ var netease = require('./routes/netease');
 var v1 = require('./routes/v1');
 //joke
 var joke = require('./routes/joke');
+//mobile
+var mobile = require('./routes/mobile');
 //test
 var test = require('./routes/test');
 
@@ -101,6 +103,7 @@ app.use('/test', test);
 app.use('/v1', v1);
 app.use('/netease', netease);
 app.use('/joke', joke);
+app.use('/mobile', mobile);
 
 
 

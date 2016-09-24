@@ -98,9 +98,11 @@ function getJOKE(req, res, next, op) {
                 return res.json(output);
             }
         } else {
-            var error = new Error(body.reason);
-            error.status = -1;
-            next(error);
+            var error = {
+                code: -1,
+                message: body.reason
+            };
+            res.json(error);
         }
     });
 }
