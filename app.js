@@ -19,10 +19,12 @@ var logUtils = require('./utils/logUtils');
 var netease = require('./routes/netease');
 //JsonBird version 1.0
 var v1 = require('./routes/v1');
-//joke
+//笑话接口
 var joke = require('./routes/joke');
-//mobile
+//手机号码归属地接口
 var mobile = require('./routes/mobile');
+//天气
+var weather = require('./routes/weather');
 //test
 var test = require('./routes/test');
 
@@ -104,7 +106,7 @@ app.use('/v1', v1);
 app.use('/netease', netease);
 app.use('/joke', joke);
 app.use('/mobile', mobile);
-
+app.use('/weather', weather);
 
 
 // catch 404 and forward to error handler
