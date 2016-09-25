@@ -9,22 +9,16 @@ router.get('/*', function(req, res, next) {
     var ip = req.ip.replace(/\:\:ffff\:/, '');
     var ip = req.ip.replace(/\:\:1/, '127.0.0.1');
     if (!req.query.url) {
-        ip2address(ip, function(data) {
-            var output = {
-                data: {
-                    IP: ip,
-                    Info: 'Please Set URL Like This: ' + protocol + '://' + host + '/v1/?url=http[s]://YourWantProxyUrl.com'
-                },
-                status: {
-                    code: 200,
-                    message: ''
-                }
-            };
-            if (data) {
-                output['data']['Location'] = data.area + data.location;
+        var output = {
+            data: {
+                IP: ip,
+                Info: 'Please Set URL Like This: ' + protocol + '://' + host + '/v1/?url=http[s]://YourWantProxyUrl.com'
+            },
+            status: {
+                code: 200,
+                message: ''
             }
-            return res.json(output);
-        });
+        };
     } else {
         var url = originalUrl.split('url=')[1];
         url = url.indexOf('?') === -1 ? url.replace('&', '?') : url;
