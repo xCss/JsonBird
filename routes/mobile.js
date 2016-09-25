@@ -5,24 +5,26 @@ var router = express.Router();
 var bodyParser = require('body-parser');
 var urlencodedParser = bodyParser.urlencoded({ extended: false });
 var key = "9f719ab7014f2cbdc7b394edf70d0f76";
-var url = 'http://apis.juhe.cn/mobile/get?key=' + key;
+var base = 'http://apis.juhe.cn/mobile/get?key=' + key;
 var type = '';
 var callback = '';
+var phone = '';
 router.get('/', function(req, res, next) {
-    url += '&phone=' + req.query.phone;
+    phone = req.query.phone;
     type = req.query.type === 'xml' ? 'xml' : '';
     callback = req.query.callback;
     getMobile(req, res, next);
 });
 router.post('/', urlencodedParser, function(req, res, next) {
-    url += '&phone=' + req.body.phone;
+    phone = req.body.phone;
     type = req.body.type === 'xml' ? 'xml' : '';
     callback = req.body.callback;
     getMobile(req, res, next);
 });
 
 function getMobile(req, res, next) {
-    url += !!type ? '&dtype=' + type : '';
+    var url = !!type ? base + '&dtype=' + type : base;
+    url += '&phone=' + phone;
     request(url, function(err, response, body) {
         if (!type) {
             body = JSON.parse(body);
@@ -41,12 +43,16 @@ function getMobile(req, res, next) {
                 }
             } else {
                 var error = {
-                    code: -1,
-                    message: body.reason
+                    data: {},
+                    status: {
+                        code: -1,
+                        message: body.reason
+                    }
                 };
                 res.json(error);
             }
         } else {
+            res.header('content-type', 'text/xml');
             res.send(body);
         }
     });

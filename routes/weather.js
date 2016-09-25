@@ -6,7 +6,7 @@ var router = express.Router();
 var bodyParser = require('body-parser');
 var urlencodedParser = bodyParser.urlencoded({ extended: false });
 var key = "e0540a109f5a73e9df2981cdeb9d106f";
-var url = 'http://op.juhe.cn/onebox/weather/query?key=' + key;
+var base = 'http://op.juhe.cn/onebox/weather/query?key=' + key;
 var type = '';
 var callback = '';
 var city = '';
@@ -24,8 +24,7 @@ router.post('/', urlencodedParser, function(req, res, next) {
 
 function getMobile(req, res, next) {
     city = !!city ? qs.escape(city) : '';
-    console.log(city);
-    url += type === 'xml' ? '&dtype=xml' : '';
+    var url = type === 'xml' ? base + '&dtype=xml' : base;
     url += '&cityname=' + city;
     request(url, function(err, response, body) {
         if (!type) {
@@ -45,12 +44,16 @@ function getMobile(req, res, next) {
                 }
             } else {
                 var error = {
-                    code: -1,
-                    message: body.reason
+                    data: {},
+                    status: {
+                        code: -1,
+                        message: body.reason
+                    }
                 };
                 res.json(error);
             }
         } else {
+            res.header('content-type', 'text/xml');
             res.send(body);
         }
     });

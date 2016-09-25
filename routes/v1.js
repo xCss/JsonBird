@@ -33,7 +33,7 @@ router.get('/*', function(req, res, next) {
     } else {
         var url = originalUrl.split('url=')[1];
         url = url.indexOf('?') === -1 ? url.replace('&', '?') : url;
-        url = url.indexOf('http://') === -1 ? 'http://' + url : url;
+        url = /^(http|https)\:\/\//.test(url) ? url : 'http://' + url;
         getJSON(url, next, function(data) {
             var output = {
                 data: data,
@@ -62,8 +62,11 @@ function getJSON(url, next, callback) {
             callback && callback(body);
         } else {
             var error = {
-                code: -1,
-                message: body.reason
+                data: {},
+                status: {
+                    code: -1,
+                    message: body.reason
+                }
             };
             res.json(error);
         }

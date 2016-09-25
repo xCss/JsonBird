@@ -99,8 +99,11 @@ function getJOKE(req, res, next, op) {
             }
         } else {
             var error = {
-                code: -1,
-                message: body.reason
+                data: {},
+                status: {
+                    code: -1,
+                    message: body.reason
+                }
             };
             res.json(error);
         }
