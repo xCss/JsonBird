@@ -1,60 +1,47 @@
-var express = require('express');
-var request = require('request');
-var qs = require('querystring');
-var router = express.Router();
-// 创建 application/x-www-form-urlencoded 编码解析
-var bodyParser = require('body-parser');
-var urlencodedParser = bodyParser.urlencoded({ extended: false });
-var key = "e0540a109f5a73e9df2981cdeb9d106f";
-var base = 'http://op.juhe.cn/onebox/weather/query?key=' + key;
-var type = '';
-var callback = '';
-var city = '';
-router.get('/', function(req, res, next) {
-    city = req.query.city;
-    type = req.query.type === 'xml' ? 'xml' : '';
-    callback = req.query.callback;
+let express = require('express');
+let request = require('request');
+let qs = require('querystring');
+let router = express.Router();
+const base = 'http://op.juhe.cn/onebox/weather/query?key=e0540a109f5a73e9df2981cdeb9d106f';
+router.get('/*', function(req, res, next) {
     getMobile(req, res, next);
 });
-router.post('/', urlencodedParser, function(req, res, next) {
-    city = req.body.city;
-    type = req.body.type === 'xml' ? 'xml' : '';
+router.post('/*', function(req, res, next) {
     getMobile(req, res, next);
 });
 
 function getMobile(req, res, next) {
+    let city = req.query.city || req.body.city;
     city = !!city ? qs.escape(city) : '';
-    var url = type === 'xml' ? base + '&dtype=xml' : base;
-    url += '&cityname=' + city;
+    let type = (req.query.type || req.body.type) === 'xml' ? 'xml' : '';
+    let callback = req.query.callback || req.body.callback;
+    let url = base + '&cityname=' + city + '&dtype=' + type;
     request(url, function(err, response, body) {
-        if (!type) {
+        if (type !== 'xml') {
             body = JSON.parse(body);
-            if (!err && response.statusCode === 200 && body.error_code === 0) {
-                var output = {
-                    data: body.result.data || body.result,
-                    status: {
-                        code: 200,
-                        message: ''
-                    }
-                };
-                if (callback) {
-                    return res.jsonp(output);
-                } else {
-                    return res.json(output);
+            let output = {
+                data: (body.result && body.result.data ? body.result.data : body.result) || {},
+                status: {
+                    code: 200,
+                    message: ''
                 }
+            };
+            if (!err && response.statusCode === 200 && body.error_code === 0) {
+                //
             } else {
-                var error = {
-                    data: {},
-                    status: {
-                        code: -1,
-                        message: body.reason
-                    }
+                output.status = {
+                    code: -1,
+                    message: err || body.reason || 'Something bad happend.'
                 };
-                res.json(error);
+            }
+            if (callback) {
+                return res.jsonp(output);
+            } else {
+                return res.json(output);
             }
         } else {
-            res.header('content-type', 'text/xml');
-            res.send(body);
+            res.header('content-type', 'text/xml; charset=utf-8');
+            return res.send(body);
         }
     });
 }

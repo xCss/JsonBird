@@ -1,13 +1,13 @@
-var express = require('express');
-var request = require('request');
-var config = require('../configs/config').site;
-var router = express.Router();
+let express = require('express');
+let request = require('request');
+let config = require('../configs/config').site;
+let router = express.Router();
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-    var ip = req.ip;
+    let ip = req.ip;
     ip2addr(ip, function(data) {
-        var params = {
+        let params = {
             head: config.title,
             title: 'Welcome | ' + config.title + ' - ' + config.description,
             description: config.description

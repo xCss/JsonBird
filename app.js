@@ -15,6 +15,8 @@ moment.locale('zh-cn');
 var welcome = require('./routes/welcome');
 //日志输出
 var logUtils = require('./utils/logUtils');
+//查询ip
+var ip = require('./routes/ip');
 //网易云音乐
 var netease = require('./routes/netease');
 //JsonBird version 1.0
@@ -32,7 +34,7 @@ var app = express();
 app.set('views', path.join(__dirname, 'views'));
 // view engine setup
 app.set('view engine', 'pug');
-app.enable('trust proxy');
+//app.enable('trust proxy');
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(logger('dev'));
@@ -102,6 +104,7 @@ app.all('*', function(req, res, next) {
 
 app.use('/', welcome);
 app.use('/test', test);
+app.use('/ip', ip);
 app.use('/v1', v1);
 app.use('/netease', netease);
 app.use('/joke', joke);

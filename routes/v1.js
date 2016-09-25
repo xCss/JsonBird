@@ -2,11 +2,6 @@ var express = require('express');
 var request = require('request');
 var router = express.Router();
 
-// router.all('*', function(req, res, next) {
-//     res.header("Content-Type", "application/json;charset=utf-8");
-//     next();
-// });
-
 router.get('/*', function(req, res, next) {
     var host = req.hostname;
     var protocol = req.protocol;
@@ -58,34 +53,22 @@ router.post('/*', function(req, res, next) {
 function getJSON(url, next, callback) {
     request(url, function(err, res, body) {
         body = JSON.parse(body);
+        console.log(err);
         if (!err && res.statusCode == 200) {
             callback && callback(body);
         } else {
             var error = {
-                data: {},
+                data: body,
                 status: {
                     code: -1,
-                    message: body.reason
+                    message: err || body.reason || 'Something bad happened.'
                 }
             };
-            res.json(error);
+            next(error);
         }
     });
 }
 
-/**
- * 获取IP地址所对应的地区
- */
-function ip2address(ip, callback) {
-    request('http://apis.juhe.cn/ip/ip2addr?ip=' + ip + '&key=28c0a6a5eb9cca3f38bc5877a83c9868', function(err, res, body) {
-        body = JSON.parse(body);
-        if (!err && res.statusCode == 200 && body['error_code'] !== 200102) {
-            callback && callback(body['result']);
-        } else {
-            console.log(' / request info:' + err);
-            callback && callback();
-        }
-    });
-}
+
 
 module.exports = router;
