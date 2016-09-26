@@ -34,6 +34,7 @@ function ip2address(req, res, next) {
                 };
             }
             output.data = (body.result && body.result.data ? body.result.data : body.result) || {};
+            output.data['ip'] = ip;
             if (!err && response.statusCode === 200 && body.error_code === 0) {
                 //
             } else {
