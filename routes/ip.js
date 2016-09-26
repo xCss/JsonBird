@@ -1,6 +1,5 @@
 let express = require('express');
 let request = require('request');
-let qs = require('querystring');
 let router = express.Router();
 const base = 'http://apis.juhe.cn/ip/ip2addr?key=28c0a6a5eb9cca3f38bc5877a83c9868';
 router.get('/*', function(req, res, next) {
