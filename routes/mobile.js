@@ -14,16 +14,23 @@ function getMobile(req, res, next) {
     let phone = req.query.phone || req.body.phone;
     let callback = req.query.callback || req.body.callback;
     let url = base + '&phone=' + phone + '&dtype=' + type;
+    let output = {
+        data: {},
+        status: {
+            code: 200,
+            message: ''
+        }
+    };
     request(url, function(err, response, body) {
         if (type !== 'xml') {
-            body = JSON.parse(body);
-            let output = {
-                data: (body.result && body.result.data ? body.result.data : body.result) || {},
-                status: {
-                    code: 200,
-                    message: ''
-                }
-            };
+            try {
+                body = JSON.parse(body);
+            } catch (e) {
+                output.status = {
+                    code: -1
+                };
+            }
+            output.data = (body.result && body.result.data ? body.result.data : body.result) || {};
             if (!err && response.statusCode === 200 && body.error_code === 0) {
                 //
             } else {
