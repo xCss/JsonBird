@@ -7,11 +7,11 @@ module.exports = {
     },
     //mysql config
     mysql_dev: {
-        host: 'qdm16395144.my3w.com',
-        user: 'qdm16395144',
-        password: 'abc123456',
+        host: 'q*******.my3w.com',
+        user: '***********',
+        password: '**********',
         port: '3306',
-        database: 'qdm16395144_db',
+        database: '**************_db',
         connectionLimit: 10,
         supportBigNumbers: true,
         multipleStatements: true,
