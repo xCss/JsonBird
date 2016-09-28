@@ -17,6 +17,7 @@ function getJSON(req, res, next) {
     let originalUrl = req.originalUrl;
     let url = req.query.url || req.body.url;
     let callback = req.query.callback || req.body.callback;
+    let params = req.body;
     let output = {
         data: {
             IP: ip,
@@ -31,6 +32,13 @@ function getJSON(req, res, next) {
         if (/\?url\=/.test(originalUrl)) {
             url = originalUrl.split('url=')[1];
         }
+        if (params) {
+            let temp = [];
+            for (let i in params) {
+                temp.push('&' + i + '=' + params[i]);
+            }
+            url += temp.join('');
+        }
         url = url.indexOf('?') === -1 ? url.replace(/\&/, '?') : url;
         url = /^(http|https)\:\/\//.test(url) ? url : 'http://' + url;
         url = url.replace(/\&callback\=(\w+)/, '');
@@ -43,7 +51,7 @@ function getJSON(req, res, next) {
                 };
             }
             if (!err && response.statusCode == 200) {
-                output.data = body;
+                output = body;
             } else {
                 output = {
                     data: {},
