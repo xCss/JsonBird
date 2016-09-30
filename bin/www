@@ -99,10 +99,6 @@ if (cluster.isMaster) {
      */
 
     function onListening() {
-
-        if (cluster.isWorker) {
-            console.log('worker' + cluster.worker.id);
-        }
         let addr = server.address();
         let bind = typeof addr === 'string' ?
             'pipe ' + addr :
