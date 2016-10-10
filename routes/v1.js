@@ -32,10 +32,11 @@ function getJSON(req, res, next) {
         if (/\?url\=/.test(originalUrl)) {
             url = originalUrl.split('url=')[1];
         }
+
         if (params) {
             let temp = [];
             for (let i in params) {
-                temp.push('&' + i + '=' + params[i]);
+                temp.push('&' + i + '=' + encodeURI(params[i]));
             }
             url += temp.join('');
         }
