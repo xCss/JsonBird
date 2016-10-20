@@ -12,7 +12,7 @@ router.post('/*', function(req, res, next) {
  * 获取IP地址所对应的地区
  */
 function ip2address(req, res, next) {
-    let ip = req.query.ip || req.body.ip || req.ip.replace(/\:\:1/, '127.0.0.1');
+    let ip = req.query.ip || req.body.ip || req.headers['x-real-ip'] || req.ip.replace(/\:\:1/, '127.0.0.1');
     let callback = req.query.callback || req.body.callback;
     let type = req.query.type || req.body.type;
     let url = base + '&ip=' + ip + '&dtype=' + type;

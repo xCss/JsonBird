@@ -5,7 +5,7 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-var sass = require('node-sass-middleware');
+//var sass = require('node-sass-middleware');
 var moment = require('moment');
 //设置时区
 var timezone = require('moment-timezone');
@@ -31,6 +31,14 @@ var weather = require('./routes/weather');
 var test = require('./routes/test');
 
 var app = express();
+//引入LeanCloud
+//var AV = require('leanengine');
+// AV.init({
+//     appId: process.env.LEANCLOUD_APP_ID,
+//     appKey: process.env.LEANCLOUD_APP_KEY,
+//     masterKey: process.env.LEANCLOUD_APP_MASTER_KEY
+// });
+//app.use(AV.express());
 app.set('views', path.join(__dirname, 'views'));
 // view engine setup
 app.set('view engine', 'pug');
@@ -42,19 +50,27 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 //配置 sass
-app.use(sass({
-    src: __dirname + '/static/sass',
-    dest: __dirname + '/static/css',
-    indentedSyntax: true,
-    sourceMap: true
-}));
+// app.use(sass({
+//     src: __dirname + '/static/sass',
+//     dest: __dirname + '/static/css',
+//     indentedSyntax: true,
+//     sourceMap: true
+// }));
 //静态文件访问路径
 app.use('/static/', express.static(path.join(__dirname, 'static')));
+var i = 0;
+//每隔3分钟自动请求一次
+setInterval(function() {
+    request('https://bird.ioliu.cn/joke?_detect=' + i++, function(err, response, body) {
+
+    });
+}, 3 * 60 * 1000);
 
 /***
  * 全局过滤:统计和日志
  */
-app.all('*', function(req, res, next) {
+app.use(function(req, res, next) {
+
     res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept,Access-Control-Allow-Origin");
     res.header("Access-Control-Allow-Methods", "PUT,POST,GET,DELETE,OPTIONS");
@@ -62,7 +78,7 @@ app.all('*', function(req, res, next) {
     res.header("Vary", "Origin");
     var protocol = req.protocol;
     var host = req.hostname;
-    var ip = req.ip.replace(/::ffff:/, '');
+    var ip = req.headers['x-real-ip'] ? req.headers['x-real-ip'] : req.ip.replace(/::ffff:/, '');
     var ref = req.headers.referer;
     var originalUrl = req.originalUrl;
     var logs = {
@@ -116,6 +132,7 @@ app.use('/weather', weather);
 app.use(function(req, res, next) {
     var err = new Error('Not Found');
     err.status = 404;
+
     next(err);
 });
 

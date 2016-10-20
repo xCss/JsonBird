@@ -5,7 +5,8 @@ let router = express.Router();
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-    let ip = req.ip;
+    //let ip = req.ip;
+    let ip = req.headers['x-real-ip'];
     ip2addr(ip, function(data) {
         let params = {
             head: config.title,

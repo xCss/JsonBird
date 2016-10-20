@@ -1,45 +1,61 @@
 @import 'reset.css';
-html,body{height:100%;overflow: hidden;background: -webkit-linear-gradient(300deg,#23213d,#2e383f);
-    background: linear-gradient(150deg,#23213d,#2e383f);}
-.section-center{
-   display: -webkit-box;   /* OLD: Safari,  iOS, Android browser, older WebKit browsers.  */
-   display: -moz-box;      /* OLD: Firefox (buggy) */
-   display: -ms-flexbox;   /* MID: IE 10 */
-   display: -webkit-flex;  /* NEW, Chrome 21–28, Safari 6.1+ */
-   display: flex;          /* NEW: IE11, Chrome 29+, Opera 12.1+, Firefox 22+ */
-
-   -webkit-box-align: center; -moz-box-align: center; /* OLD… */
-   -ms-flex-align: center; /* You know the drill now… */
-   -webkit-align-items: center;
-   align-items: center;
-
-   -webkit-box-pack: center; -moz-box-pack: center;
-   -ms-flex-pack: center;
-   -webkit-justify-content: center;
-   justify-content: center;
-
-   margin: 0;
-   height: 100%;
-   width: 100%; /* needed for Firefox */
-   position:absolute;
-   text-align: center;
+html,
+body {
+    height: 100%;
+    overflow: hidden;
+    background: -webkit-linear-gradient(300deg, #23213d, #2e383f);
+    background: linear-gradient(150deg, #23213d, #2e383f);
 }
 
-.section-center .container{
-  width:100%;
-  color:#fff;
+.section-center {
+    display: -webkit-box;
+    /* OLD: Safari,  iOS, Android browser, older WebKit browsers.  */
+    display: -moz-box;
+    /* OLD: Firefox (buggy) */
+    display: -ms-flexbox;
+    /* MID: IE 10 */
+    display: -webkit-flex;
+    /* NEW, Chrome 21–28, Safari 6.1+ */
+    display: flex;
+    /* NEW: IE11, Chrome 29+, Opera 12.1+, Firefox 22+ */
+    -webkit-box-align: center;
+    -moz-box-align: center;
+    /* OLD… */
+    -ms-flex-align: center;
+    /* You know the drill now… */
+    -webkit-align-items: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    -moz-box-pack: center;
+    -ms-flex-pack: center;
+    -webkit-justify-content: center;
+    justify-content: center;
+    margin: 0;
+    height: 100%;
+    width: 100%;
+    /* needed for Firefox */
+    position: absolute;
+    text-align: center;
 }
-.section-center .container .cover{
-    font-size:18px;  
+
+.section-center .container {
+    width: 100%;
+    color: #fff;
+}
+
+.section-center .container .cover {
+    font-size: 18px;
     margin-bottom: 30px;
     font-weight: 400;
 }
-.section-center .container .heading{
-    margin-bottom:10px;
-    text-shadow: 1px 1px 1px rgba(0,0,0,.3);
+
+.section-center .container .heading {
+    margin-bottom: 10px;
+    text-shadow: 1px 1px 1px rgba(0, 0, 0, .3);
     font-weight: 100;
     font-size: 4.5rem;
 }
+
 .btn {
     display: inline-block;
     margin-bottom: 0;
@@ -61,19 +77,30 @@ html,body{height:100%;overflow: hidden;background: -webkit-linear-gradient(300de
     -ms-user-select: none;
     user-select: none;
 }
-.btn.focus, .btn:focus, .btn:hover {
+
+.btn+.btn {
+    margin-left: 15px;
+}
+
+.btn.focus,
+.btn:focus,
+.btn:hover {
     color: #333;
     text-decoration: none;
 }
+
 .btn-ghost-light {
     padding: 8px 32px;
 }
-.btn-ghost-light, .btn-ghost-light:focus{
+
+.btn-ghost-light,
+.btn-ghost-light:focus {
     border: 1px solid #fff;
-    background-color: rgba(155,163,175,0);
+    background-color: rgba(155, 163, 175, 0);
     color: #fff;
 }
+
 .btn-ghost-light:hover {
-    background-color: rgba(155,163,175,.1);
+    background-color: rgba(155, 163, 175, .1);
     color: #fff;
 }
