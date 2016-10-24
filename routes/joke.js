@@ -67,7 +67,6 @@ function getJOKE(req, res, next, op) {
             message: ''
         }
     };
-    console.log(url);
     request.get(url).end(function(err, response) {
         let body = response.text || response.body;
         if (typeof body === 'string') {
