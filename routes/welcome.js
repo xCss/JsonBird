@@ -1,5 +1,5 @@
 let express = require('express');
-let request = require('request');
+let request = require('superagent');
 let config = require('../configs/config').site;
 let router = express.Router();
 
@@ -22,9 +22,14 @@ router.get('/', function(req, res, next) {
 });
 
 function ip2addr(ip, callback) {
-    request('http://apis.juhe.cn/ip/ip2addr?ip=' + ip + '&key=28c0a6a5eb9cca3f38bc5877a83c9868', function(err, res, body) {
+    request.get('http://apis.juhe.cn/ip/ip2addr?ip=' + ip + '&key=28c0a6a5eb9cca3f38bc5877a83c9868').end(function(err, res) {
+        let body = res.body || res.text;
         if (!err && res.statusCode == 200) {
-            body = JSON.parse(body);
+            if (typeof body === 'string') {
+                try {
+                    body = JSON.parse(body);
+                } catch (e) {}
+            }
             callback && callback(body.result);
         } else {
             console.log(' / request info:' + err);

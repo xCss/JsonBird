@@ -1,5 +1,5 @@
 let express = require('express');
-let request = require('request');
+let request = require('superagent');
 let router = express.Router();
 const base = 'http://apis.juhe.cn/ip/ip2addr?key=28c0a6a5eb9cca3f38bc5877a83c9868';
 router.get('/*', function(req, res, next) {
@@ -23,18 +23,21 @@ function ip2address(req, res, next) {
             message: ''
         }
     };
-    request(url, function(err, response, body) {
+    request.get(url).end(function(err, response) {
+        let body = response.body || response.text;
         if (type !== 'xml') {
-            try {
-                body = JSON.parse(body);
-            } catch (e) {
-                output.status = {
-                    code: -1
-                };
+            if (typeof body === 'string') {
+                try {
+                    body = JSON.parse(body);
+                } catch (e) {
+                    output.status = {
+                        code: -1
+                    };
+                }
             }
             output.data = (body.result && body.result.data ? body.result.data : body.result) || {};
             output.data['ip'] = ip;
-            if (!err && response.statusCode === 200 && body.error_code === 0) {
+            if (!err && response.statusCode === 200) {
                 //
             } else {
                 output.status = {

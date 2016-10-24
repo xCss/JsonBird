@@ -1,5 +1,5 @@
 let express = require('express');
-let request = require('request');
+let request = require('superagent');
 let qs = require('querystring');
 let router = express.Router();
 const base = 'http://op.juhe.cn/onebox/weather/query?key=e0540a109f5a73e9df2981cdeb9d106f';
@@ -23,14 +23,17 @@ function getMobile(req, res, next) {
             message: ''
         }
     };
-    request(url, function(err, response, body) {
+    request.get(url).end(function(err, response) {
+        let body = response.body || response.text;
         if (type !== 'xml') {
-            try {
-                body = JSON.parse(body);
-            } catch (e) {
-                output.status = {
-                    code: -1
-                };
+            if (typeof body === 'string') {
+                try {
+                    body = JSON.parse(body);
+                } catch (e) {
+                    output.status = {
+                        code: -1
+                    };
+                }
             }
             output.data = (body.result && body.result.data ? body.result.data : body.result) || {};
             if (!err && response.statusCode === 200 && body.error_code === 0) {

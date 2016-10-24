@@ -1,5 +1,5 @@
 var express = require('express');
-var request = require('request');
+var request = require('superagent');
 var router = express.Router();
 
 /* GET users listing. */
@@ -30,16 +30,18 @@ router.get('/', function(req, res, next) {
 });
 
 function netease_http(url, next, callback) {
-    var options = {
-        url: url,
-        headers: {
-            Cookie: 'appver=1.5.0.75771;',
-            referer: 'http://music.163.com'
+    let headers = {
+        Cookie: 'appver=1.5.0.75771;',
+        referer: 'http://music.163.com'
+    }
+    request.get(url).set(headers).end(function(err, res) {
+        let body = res.text || res.body;
+        if (typeof body === 'string') {
+            try {
+                body = JSON.parse(body);
+            } catch (e) {}
         }
-    };
-    request(options, function(err, res, body) {
         if (!err && res.statusCode == 200) {
-            body = JSON.parse(body);
             callback && callback(body);
         } else {
             var error = new Error(err);

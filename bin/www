@@ -3,6 +3,7 @@
 /**
  * Module dependencies.
  */
+process.env.TZ = 'Asia/Shanghai';
 
 let app = require('../app');
 let debug = require('debug')('API:server');

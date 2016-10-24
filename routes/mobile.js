@@ -1,5 +1,5 @@
 let express = require('express');
-let request = require('request');
+let request = require('superagent');
 let router = express.Router();
 const base = 'http://apis.juhe.cn/mobile/get?key=9f719ab7014f2cbdc7b394edf70d0f76';
 router.get('/', function(req, res, next) {
@@ -21,14 +21,17 @@ function getMobile(req, res, next) {
             message: ''
         }
     };
-    request(url, function(err, response, body) {
+    request.get(url).end(function(err, response) {
+        let body = response.text || response.body;
         if (type !== 'xml') {
-            try {
-                body = JSON.parse(body);
-            } catch (e) {
-                output.status = {
-                    code: -1
-                };
+            if (typeof body === 'string') {
+                try {
+                    body = JSON.parse(body);
+                } catch (e) {
+                    output.status = {
+                        code: -1
+                    };
+                }
             }
             output.data = (body.result && body.result.data ? body.result.data : body.result) || {};
             if (!err && response.statusCode === 200 && body.error_code === 0) {

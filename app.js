@@ -1,16 +1,12 @@
 var express = require('express');
-var request = require('request');
+var request = require('superagent');
 var path = require('path');
 var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var helmet = require('helmet');
 //var sass = require('node-sass-middleware');
-var moment = require('moment');
-//设置时区
-var timezone = require('moment-timezone');
-//本地化
-moment.locale('zh-cn');
 //Welcome Page
 var welcome = require('./routes/welcome');
 //日志输出
@@ -32,13 +28,13 @@ var test = require('./routes/test');
 
 var app = express();
 //引入LeanCloud
-//var AV = require('leanengine');
+// var AV = require('leanengine');
 // AV.init({
 //     appId: process.env.LEANCLOUD_APP_ID,
 //     appKey: process.env.LEANCLOUD_APP_KEY,
 //     masterKey: process.env.LEANCLOUD_APP_MASTER_KEY
 // });
-//app.use(AV.express());
+// app.use(AV.express());
 app.set('views', path.join(__dirname, 'views'));
 // view engine setup
 app.set('view engine', 'pug');
@@ -49,6 +45,7 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
+app.use(helmet());
 //配置 sass
 // app.use(sass({
 //     src: __dirname + '/static/sass',
@@ -59,11 +56,17 @@ app.use(cookieParser());
 //静态文件访问路径
 app.use('/static/', express.static(path.join(__dirname, 'static')));
 var i = 0;
+var prevTime = +new Date();
 //每隔3分钟自动请求一次
-setInterval(function() {
-    request('https://bird.ioliu.cn/joke?_detect=' + i++, function(err, response, body) {
-
-    });
+var t = setInterval(function() {
+    var nowTime = +new Date();
+    if (nowTime - prevTime < 3 * 60 * 1000) {
+        //
+    } else {
+        request.get('https://bird.ioliu.cn/joke?_detect=' + i++).end(function(err, response) {
+            prevTime = +new Date();
+        });
+    }
 }, 3 * 60 * 1000);
 
 /***
@@ -74,8 +77,6 @@ app.use(function(req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept,Access-Control-Allow-Origin");
     res.header("Access-Control-Allow-Methods", "PUT,POST,GET,DELETE,OPTIONS");
-    res.header("X-Powered-By", '1.0.0');
-    res.header("Vary", "Origin");
     var protocol = req.protocol;
     var host = req.hostname;
     var ip = req.headers['x-real-ip'] ? req.headers['x-real-ip'] : req.ip.replace(/::ffff:/, '');
@@ -87,7 +88,7 @@ app.use(function(req, res, next) {
         Referer: ref,
         //Protocol: protocol, 
         OriginalUrl: originalUrl,
-        Time: moment().tz('Asia/ShangHai').format('YYYY-MM-DD HH:mm:ss.SSS')
+        Time: new Date().toLocaleString()
     };
     /**
      * 不记录日志和统计的请求:
