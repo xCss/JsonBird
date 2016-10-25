@@ -26,7 +26,6 @@ function ip2addr(ip, callback) {
         .get('http://apis.juhe.cn/ip/ip2addr')
         .query({ ip: ip, key: '28c0a6a5eb9cca3f38bc5877a83c9868' })
         .end(function(err, res) {
-            console.log(res)
             var body = res.text || res.body || {};
             if (!err && res.statusCode == 200) {
                 if (typeof body === 'string') {
