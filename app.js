@@ -6,7 +6,6 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var helmet = require('helmet');
-//var sass = require('node-sass-middleware');
 //Welcome Page
 var welcome = require('./routes/welcome');
 //日志输出
@@ -34,6 +33,7 @@ var app = express();
 //     appKey: process.env.LEANCLOUD_APP_KEY,
 //     masterKey: process.env.LEANCLOUD_APP_MASTER_KEY
 // });
+
 // app.use(AV.express());
 app.set('views', path.join(__dirname, 'views'));
 // view engine setup
@@ -41,39 +41,27 @@ app.set('view engine', 'pug');
 app.enable('trust proxy');
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
-app.use(logger('dev'));
+app.use(logger('combined', {
+    skip: function(req, res) { return res.statusCode < 400 }
+}));
+//app.use(bodyParser.raw({ type: '*/*' }));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(helmet());
-//配置 sass
-// app.use(sass({
-//     src: __dirname + '/static/sass',
-//     dest: __dirname + '/static/css',
-//     indentedSyntax: true,
-//     sourceMap: true
-// }));
 //静态文件访问路径
 app.use('/static/', express.static(path.join(__dirname, 'static')));
 var i = 0;
-var prevTime = +new Date();
 //每隔3分钟自动请求一次
 var t = setInterval(function() {
-    var nowTime = +new Date();
-    if (nowTime - prevTime < 3 * 60 * 1000) {
-        //
-    } else {
-        request.get('https://bird.ioliu.cn/joke?_detect=' + i++).end(function(err, response) {
-            prevTime = +new Date();
-        });
-    }
+    request.get('https://bird.ioliu.cn/joke?_detect=' + i++).end(function(err, response) {
+        prevTime = +new Date();
+    });
 }, 3 * 60 * 1000);
-
 /***
  * 全局过滤:统计和日志
  */
 app.use(function(req, res, next) {
-
     res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept,Access-Control-Allow-Origin");
     res.header("Access-Control-Allow-Methods", "PUT,POST,GET,DELETE,OPTIONS");
@@ -88,7 +76,8 @@ app.use(function(req, res, next) {
         Referer: ref,
         //Protocol: protocol, 
         OriginalUrl: originalUrl,
-        Time: new Date().toLocaleString()
+        Time: new Date().toLocaleString(),
+        params: JSON.stringify(req.body || req.query)
     };
     /**
      * 不记录日志和统计的请求:

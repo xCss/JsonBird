@@ -1,7 +1,7 @@
-let express = require('express');
-let request = require('superagent');
-let router = express.Router();
-const key = '64a40e3c55e88cc8cd66a78d030bddce';
+var express = require('express');
+var request = require('superagent');
+var router = express.Router();
+var key = '64a40e3c55e88cc8cd66a78d030bddce';
 /**
  * Get 请求
  */
@@ -32,13 +32,13 @@ router.post('/rand', function(req, res, next) {
  * 统一的请求
  */
 function getJOKE(req, res, next, op) {
-    let page = req.query.page || req.body.page || 1;
-    let pagesize = req.query.pagesize || req.body.pagesize || 1;
-    let sort = req.query.sort || req.body.sort;
-    let time = req.query.time || req.body.time;
-    let type = req.query.type || req.body.type || 'pic';
-    let callback = req.query.callback || req.body.callback;
-    let url = '';
+    var page = req.query.page || req.body.page || 1;
+    var pagesize = req.query.pagesize || req.body.pagesize || 1;
+    var sort = req.query.sort || req.body.sort;
+    var time = req.query.time || req.body.time;
+    var type = req.query.type || req.body.type || 'pic';
+    var callback = req.query.callback || req.body.callback;
+    var url = '';
     if (!!op && op === 'rand') {
         if (type !== 'pic') {
             type = null;
@@ -60,7 +60,7 @@ function getJOKE(req, res, next, op) {
             url = url.replace(/text/, 'list');
         }
     }
-    let output = {
+    var output = {
         data: {},
         status: {
             code: 200,
@@ -68,7 +68,7 @@ function getJOKE(req, res, next, op) {
         }
     };
     request.get(url).end(function(err, response) {
-        let body = response.text || response.body;
+        var body = response.text || response.body || {};
         if (typeof body === 'string') {
             try {
                 body = JSON.parse(body);

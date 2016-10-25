@@ -1,7 +1,7 @@
-let express = require('express');
-let request = require('superagent');
-let router = express.Router();
-const base = 'http://apis.juhe.cn/mobile/get?key=9f719ab7014f2cbdc7b394edf70d0f76';
+var express = require('express');
+var request = require('superagent');
+var router = express.Router();
+var base = 'http://apis.juhe.cn/mobile/get?key=9f719ab7014f2cbdc7b394edf70d0f76';
 router.get('/', function(req, res, next) {
     getMobile(req, res, next);
 });
@@ -10,11 +10,11 @@ router.post('/', function(req, res, next) {
 });
 
 function getMobile(req, res, next) {
-    let type = req.query.type || req.body.type;
-    let phone = req.query.phone || req.body.phone;
-    let callback = req.query.callback || req.body.callback;
-    let url = base + '&phone=' + phone + '&dtype=' + type;
-    let output = {
+    var type = req.query.type || req.body.type;
+    var phone = req.query.phone || req.body.phone;
+    var callback = req.query.callback || req.body.callback;
+    var url = base + '&phone=' + phone + '&dtype=' + type;
+    var output = {
         data: {},
         status: {
             code: 200,
@@ -22,7 +22,7 @@ function getMobile(req, res, next) {
         }
     };
     request.get(url).end(function(err, response) {
-        let body = response.text || response.body;
+        var body = response.text || response.body || {};
         if (type !== 'xml') {
             if (typeof body === 'string') {
                 try {

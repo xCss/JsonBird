@@ -1,8 +1,7 @@
-let express = require('express');
-let request = require('superagent');
-let qs = require('querystring');
-let router = express.Router();
-const base = 'http://op.juhe.cn/onebox/weather/query?key=e0540a109f5a73e9df2981cdeb9d106f';
+var express = require('express');
+var request = require('superagent');
+var router = express.Router();
+var base = 'http://op.juhe.cn/onebox/weather/query?key=e0540a109f5a73e9df2981cdeb9d106f';
 router.get('/*', function(req, res, next) {
     getMobile(req, res, next);
 });
@@ -11,12 +10,12 @@ router.post('/*', function(req, res, next) {
 });
 
 function getMobile(req, res, next) {
-    let city = req.query.city || req.body.city;
-    city = !!city ? qs.escape(city) : '';
-    let type = (req.query.type || req.body.type) === 'xml' ? 'xml' : '';
-    let callback = req.query.callback || req.body.callback;
-    let url = base + '&cityname=' + city + '&dtype=' + type;
-    let output = {
+    var city = req.query.city || req.body.city;
+    city = !!city ? encodeURIComponent(city) : '';
+    var type = (req.query.type || req.body.type) === 'xml' ? 'xml' : '';
+    var callback = req.query.callback || req.body.callback;
+    var url = base + '&cityname=' + city + '&dtype=' + type;
+    var output = {
         data: {},
         status: {
             code: 200,
@@ -24,7 +23,7 @@ function getMobile(req, res, next) {
         }
     };
     request.get(url).end(function(err, response) {
-        let body = response.body || response.text;
+        var body = response.text || response.body || {};
         if (type !== 'xml') {
             if (typeof body === 'string') {
                 try {

@@ -10,7 +10,7 @@ router.get('/', function(req, res, next) {
     };
 
     request.post('https://bird.ioliu.cn/joke/').send(mydata).end(function(err, resp) {
-        let body = resp.text || resp.body;
+        var body = resp.text || resp.body || {};
         res.send(body);
     });
 });

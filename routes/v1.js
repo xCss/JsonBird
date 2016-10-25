@@ -3,22 +3,22 @@ var request = require('superagent');
 var router = express.Router();
 
 router.get('/*', function(req, res, next) {
-    getJSON(req, res, next, 'get');
+    getJSON(req, res, next);
 });
 
 router.post('/*', function(req, res, next) {
-    getJSON(req, res, next, 'post');
+    getJSON(req, res, next);
 });
 
-function getJSON(req, res, next, method) {
-    let ip = req.ip.replace(/\:\:ffff\:/, '').replace(/\:\:1/, '127.0.0.1');
-    let host = req.hostname;
-    let protocol = req.protocol;
-    let originalUrl = req.originalUrl;
-    let url = req.query.url || req.body.url;
-    let callback = req.query.callback || req.body.callback;
-    let params = req.body;
-    let output = {
+function getJSON(req, res, next) {
+    var ip = req.ip.replace(/\:\:ffff\:/, '').replace(/\:\:1/, '127.0.0.1');
+    var host = req.hostname;
+    var protocol = req.protocol;
+    var originalUrl = req.originalUrl;
+    var url = req.query.url || req.body.url;
+    var callback = req.query.callback || req.body.callback;
+    var params = req.body;
+    var output = {
         data: {
             IP: ip,
             Info: 'Please Set URL Like This: ' + protocol + '://' + host + '/v1/?url=http[s]://YourWantProxyUrl.Com'
@@ -28,9 +28,9 @@ function getJSON(req, res, next, method) {
             massage: ''
         }
     };
-    method = method.toUpperCase();
+    method = req.method.toUpperCase();
     if (url) {
-        let _temp = {};
+        var _temp = {};
         switch (method) {
             case 'GET':
                 // get request
@@ -39,7 +39,7 @@ function getJSON(req, res, next, method) {
                 }
 
                 if (params) {
-                    for (let i in params) {
+                    for (var i in params) {
                         _temp[i] = encodeURI(params[i]);
                     }
                 }
@@ -50,7 +50,7 @@ function getJSON(req, res, next, method) {
                     .get(url)
                     .query(_temp)
                     .end(function(err, response) {
-                        let body = response.body || response.text;
+                        var body = response.text || response.body || {};
                         if (typeof body === 'string') {
                             try {
                                 body = JSON.parse(body);
@@ -81,7 +81,7 @@ function getJSON(req, res, next, method) {
             default:
                 // post request
                 if (params) {
-                    for (let i in params) {
+                    for (var i in params) {
                         _temp[i] = params[i];
                     }
                 }
@@ -90,7 +90,7 @@ function getJSON(req, res, next, method) {
                     .type('form')
                     .send(_temp)
                     .end(function(err, response) {
-                        let body = response.body || response.text;
+                        var body = response.text || response.body || {};
                         if (typeof body === 'string') {
                             try {
                                 body = JSON.parse(body);

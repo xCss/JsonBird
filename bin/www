@@ -5,11 +5,11 @@
  */
 process.env.TZ = 'Asia/Shanghai';
 
-let app = require('../app');
-let debug = require('debug')('API:server');
-let http = require('http');
-const cluster = require('cluster');
-const cpus = require('os').cpus().length;
+var app = require('../app');
+var debug = require('debug')('API:server');
+var http = require('http');
+var cluster = require('cluster');
+var cpus = require('os').cpus().length;
 
 if (cluster.isMaster) {
     console.log('[master] ' + "start master...");
@@ -30,14 +30,14 @@ if (cluster.isMaster) {
      * Get port from environment and store in Express.
      */
 
-    let port = normalizePort(process.env.PORT || '3000');
+    var port = normalizePort(process.env.PORT || '3000');
     app.set('port', port);
 
     /**
      * Create HTTP server.
      */
 
-    let server = http.createServer(app);
+    var server = http.createServer(app);
 
     /**
      * Listen on provided port, on all network interfaces.
@@ -52,7 +52,7 @@ if (cluster.isMaster) {
      */
 
     function normalizePort(val) {
-        let port = parseInt(val, 10);
+        var port = parseInt(val, 10);
 
         if (isNaN(port)) {
             // named pipe
@@ -76,7 +76,7 @@ if (cluster.isMaster) {
             throw error;
         }
 
-        let bind = typeof port === 'string' ?
+        var bind = typeof port === 'string' ?
             'Pipe ' + port :
             'Port ' + port;
 
@@ -100,8 +100,8 @@ if (cluster.isMaster) {
      */
 
     function onListening() {
-        let addr = server.address();
-        let bind = typeof addr === 'string' ?
+        var addr = server.address();
+        var bind = typeof addr === 'string' ?
             'pipe ' + addr :
             'port ' + addr.port;
         debug('Listening on ' + bind);
