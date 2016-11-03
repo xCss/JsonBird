@@ -46,7 +46,7 @@ app.use(logger('combined', {
 }));
 //app.use(bodyParser.raw({ type: '*/*' }));
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(helmet());
 //静态文件访问路径
@@ -117,6 +117,13 @@ app.use('/joke', joke);
 app.use('/mobile', mobile);
 app.use('/weather', weather);
 
+/**
+ * Robots.txt
+ */
+app.use('/robots.txt', function(req, res, next) {
+    res.header('content-type', 'text/plain');
+    res.send('User-Agent: * \nAllow: /');
+});
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
