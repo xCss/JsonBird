@@ -1,7 +1,7 @@
 # JsonBird
 A JSON Remote Agent Service | 一个远程JSON代理服务 
 
-> **:warning:** 由于带宽限制，若要有频率过高的代理请求，请提前告知，以免误伤 xioveliu#gmail.com
+> **:warning:** 由于带宽限制，若有请求频率高的代理请求，请提前告知，以免误伤 xioveliu#gmail.com
 
 **[HomePage](https://bird.ioliu.cn)** | [Demo](https://jsfiddle.net/LNing/duL5Lby7/)
 
