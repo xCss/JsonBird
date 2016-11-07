@@ -58,6 +58,8 @@ var t = setInterval(function() {
         prevTime = +new Date();
     });
 }, 3 * 60 * 1000);
+
+
 /***
  * 全局过滤:统计和日志
  */
@@ -105,7 +107,10 @@ app.use(function(req, res, next) {
             logUtils.print(logs);
         }
     }
-    next();
+    // 处理OPTIONS请求
+    if (req.method === 'OPTIONS') {
+        res.send(200);
+    } else next();
 });
 
 app.use('/', welcome);

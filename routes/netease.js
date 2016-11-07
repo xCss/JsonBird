@@ -32,10 +32,16 @@ router.get('/', function(req, res, next) {
 function netease_http(url, next, callback) {
     var headers = {
         Cookie: 'appver=1.5.0.75771;',
-        referer: 'http://music.163.com'
+        referer: 'http://music.163.com',
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/54.0.2840.71 Safari/537.36'
     }
     request.get(url).set(headers).end(function(err, res) {
-        var body = res.text || res.body || {};
+        var body = {};
+        if (res && res.text) {
+            body = res.text;
+        } else if (res && res.body) {
+            body = res.body;
+        }
         if (typeof body === 'string') {
             try {
                 body = JSON.parse(body);
