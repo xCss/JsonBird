@@ -1,7 +1,6 @@
 # JsonBird
 A JSON Remote Agent Service | 一个远程JSON代理服务 
 
-> **:warning:** 由于带宽限制，若有请求频率高的代理请求，请提前告知，以免误伤 xioveliu#gmail.com
 
 **[HomePage](https://bird.ioliu.cn)** | [Demo](https://jsfiddle.net/LNing/duL5Lby7/)
 
@@ -18,7 +17,7 @@ A JSON Remote Agent Service | 一个远程JSON代理服务
 - [You can got](#you-can-got)
 - [What's New](#whats-new)
 - [License](#license)  
-- [Wiki](https://github.com/xCss/JsonBird/wiki/All-APIs)
+- [接口文档](https://github.com/xCss/JsonBird/wiki/All-APIs)
 
 ## Requirements
 Paddington requires the following to run:
