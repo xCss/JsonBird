@@ -104,3 +104,18 @@ body {
     background-color: rgba(155, 163, 175, .1);
     color: #fff;
 }
+
+.footer {
+    position: fixed;
+    display: block;
+    width: 100%;
+    left: 0;
+    bottom: 5px;
+    font-size: 12px;
+    text-align: center;
+    color: #fff;
+}
+
+.footer a {
+    color: #FFF;
+}
