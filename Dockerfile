@@ -16,4 +16,4 @@ EXPOSE 80
 # ENTRYPOINT ["node", "app.js"]
 # CMD forever start --minUptime 1000 --spinSleepTime 1000 app.js
 # CMD SESSION_SECRET='sfinaingaqingfgJLKDLIEQPSOPVCX' npm start
-CMD pm2 node ./bin/www i 0
+CMD pm2 start ./bin/www i 0
