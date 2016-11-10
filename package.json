@@ -34,7 +34,6 @@
         "helmet": "^2.3.0",
         "leanengine": "^1.2.2",
         "morgan": "~1.7.0",
-        "os": "^0.1.1",
         "pug": "^2.0.0-beta6",
         "serve-favicon": "~2.3.0",
         "superagent": "^2.3.0"

@@ -1,8 +1,8 @@
 module.exports = {
     //site config
     site: {
-        title: 'JsonBird',
+        title: 'AgentBird',
         author: 'xCss <xioveliu@gmail.com>',
-        description: '业界领先的远程 JSON 代理服务'
+        description: '业界领先的远程接口代理服务'
     }
 };
