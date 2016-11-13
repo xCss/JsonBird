@@ -26,15 +26,7 @@ var weather = require('./routes/weather');
 var test = require('./routes/test');
 
 var app = express();
-//引入LeanCloud
-// var AV = require('leanengine');
-// AV.init({
-//     appId: process.env.LEANCLOUD_APP_ID,
-//     appKey: process.env.LEANCLOUD_APP_KEY,
-//     masterKey: process.env.LEANCLOUD_APP_MASTER_KEY
-// });
 
-// app.use(AV.express());
 app.set('views', path.join(__dirname, 'views'));
 // view engine setup
 app.set('view engine', 'pug');
@@ -53,11 +45,11 @@ app.use(helmet());
 app.use('/static/', express.static(path.join(__dirname, 'static')));
 var i = 0;
 //每隔3分钟自动请求一次
-var t = setInterval(function() {
-    request.get('https://bird.ioliu.cn/joke?_detect=' + i++).end(function(err, response) {
-        prevTime = +new Date();
-    });
-}, 3 * 60 * 1000);
+// var t = setInterval(function() {
+//     request.get('https://bird.ioliu.cn/joke?_detect=' + i++).end(function(err, response) {
+//         prevTime = +new Date();
+//     });
+// }, 3 * 60 * 1000);
 
 
 /***

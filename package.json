@@ -26,19 +26,14 @@
     "homepage": "https://github.com/xCss/JsonBird#readme",
     "dependencies": {
         "body-parser": "~1.15.1",
-        "cluster": "^0.7.7",
         "cookie-parser": "~1.4.3",
         "debug": "~2.2.0",
         "express": "~4.13.4",
         "express-generator": "^4.13.4",
         "helmet": "^2.3.0",
-        "leanengine": "^1.2.2",
         "morgan": "~1.7.0",
         "pug": "^2.0.0-beta6",
         "serve-favicon": "~2.3.0",
         "superagent": "^2.3.0"
-    },
-    "engines": {
-        "node": "6.x"
     }
 }
