@@ -30,9 +30,9 @@ $ npm start
  1. https://bird.ioliu.cn/v1?url=http[s]://YouWantProxyJSONUrls.com&[?]params1=val1&params2=val2[&callback=fn]
  2. [详细食用方法请点此](https://github.com/xCss/JsonBird/wiki)
 
-## 你能得到
+## 我们能做到
 1. :sparkles: 让不支持跨域的远程数据接口支持跨域
-2. :muscle: 让不支持JSONP的远程数据接口支持JSONP (在URL后面添加`&callback=fn`)
+2. :muscle: 让不支持JSONP的远程数据接口支持JSONP (添加参数`&callback=fn`)
 
 
 ## License
