@@ -6,9 +6,9 @@ block content
             a.logo(href='/') #{head}
             nav#nav
                 a(href='/') 首页
-                a(href='https://github.com/xCss/JsonBird/wiki',target="_blank") 接口文档
-                a(href='https://jsfiddle.net/LNing/duL5Lby7/',target="_blank") 例子
+                a(href='https://jsfiddle.net/LNing/duL5Lby7/',target="_blank") 示例
                 a(href='#interface') 数据接口
+                a(href='https://github.com/xCss/JsonBird/wiki',target="_blank") 接口文档
                 a(href='https://github.com/xCss/JsonBird',target="_blank") Github
             a.navPanelToggle(href='#navPanel')
                 span.fa.fa-bars
@@ -28,11 +28,13 @@ block content
                     p 全站 HTTPS，保证数据安全
                 div
                     span.icon.fa-arrows
-                    h3 More
+                    h3 Multiple
                     p 多种接口，自由选择
-            footer
-                a.button(href='#interface') 数据接口
-                a.button(href="/v1?url=http://www.bing.com/HPImageArchive.aspx?format=js&idx=0&n=1",target="_blank",style="margin-left:15px;") 快速开始
+            footer.flex
+                div
+                    a.button(href='#interface') 数据接口
+                div
+                    a.button(href="/v1?url=http://www.bing.com/HPImageArchive.aspx?format=js&idx=0&n=1",target="_blank") 快速开始
     section#interface.wrapper
         div.inner
             h4 目前已经实现的接口:
@@ -40,7 +42,7 @@ block content
                 table.alt
                     thead
                         tr
-                            th 接口名称
+                            th(width="200") 接口名称
                             th 接口地址
                             th 请求方式
                     tbody
