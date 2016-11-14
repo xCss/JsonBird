@@ -15,22 +15,20 @@ A remote data interface proxy service | 一个远程数据接口代理服务
 - [Node.js](https://nodejs.org) 0.10+
 - [npm](https://www.npmjs.com/) (normally comes with Node.js)
  
-### 0.`克隆项目`
-> git clone https://github.com/xcss/JsonBird.git
-
-### 1.`进入目录并安装依赖`
-> cd JsonBird  
-  npm i 
-
-### 2.`运行服务`
-> npm start
-
-### 3.`食用方法`
- - 打开浏览器，输入`http://127.0.0.1:1000`
- - [详细接口请点此](https://github.com/xCss/JsonBird/wiki)
+## 安装、运行、访问，一气呵成
+``` bash
+# clone
+$ git clone https://github.com/xcss/JsonBird.git
+# install
+$ cd JsonBird && npm i
+# run service
+$ npm start
+# open your browser,input link `http://127.0.0.1:1000`
+```
 
 ## 快速开始
-> https://bird.ioliu.cn/v1?url=http[s]://YouWantProxyJSONUrls.com&[?]params1=val1&params2=val2[&callback=fn]
+ 1. https://bird.ioliu.cn/v1?url=http[s]://YouWantProxyJSONUrls.com&[?]params1=val1&params2=val2[&callback=fn]
+ 2. [详细食用方法请点此](https://github.com/xCss/JsonBird/wiki)
 
 ## 你能得到
 1. :sparkles: 让不支持跨域的远程数据接口支持跨域
