@@ -1,38 +1,85 @@
 extends layout
 
 block content
-    div.section-center
-        div.container
-            div.cover.heading #{head}
-            div.cover.description #{description}<br>#{address}
-            div.cover.action
-                a.btn.btn-ghost-light(href="https://github.com/xCss/JsonBird/wiki/All-APIs",target="_blank") Wiki
-                a.btn.btn-ghost-light(href="/v1/?url=http://www.bing.com/HPImageArchive.aspx?format=js&idx=0&n=1") Quick Start
+    header#header
+        div.inner
+            a.logo(href='/') #{head}
+            nav#nav
+                a(href='/') 首页
+                a(href='https://github.com/xCss/JsonBird/wiki',target="_blank") 接口文档
+                a(href='https://jsfiddle.net/LNing/duL5Lby7/',target="_blank") 例子
+                a(href='#interface') 数据接口
+                a(href='https://github.com/xCss/JsonBird',target="_blank") Github
+            a.navPanelToggle(href='#navPanel')
+                span.fa.fa-bars
+    section#banner
+        div.inner
+            header
+                h1 Welcome to #{head}
+                p #{description}<br>#{address}
+            div.flex
+                div
+                    span.icon.fa-bolt
+                    h3 Fast
+                    p 专业线路，极限速度
+                div
+                    span.icon.fa-lock
+                    h3 Safe
+                    p 全站 HTTPS，保证数据安全
+                div
+                    span.icon.fa-arrows
+                    h3 More
+                    p 多种接口，自由选择
+            footer
+                a.button(href='#interface') 数据接口
+                a.button(href="/v1?url=http://www.bing.com/HPImageArchive.aspx?format=js&idx=0&n=1",target="_blank",style="margin-left:15px;") 快速开始
+    section#interface.wrapper
+        div.inner
+            h4 目前已经实现的接口:
+            div.table-wrapper
+                table.alt
+                    thead
+                        tr
+                            th 接口名称
+                            th 接口地址
+                            th 请求方式
+                    tbody
+                        tr
+                            td 数据代理
+                            td https://bird.ioliu.cn/v1
+                            td GET/POST
+                        tr
+                            td 笑话
+                            td https://bird.ioliu.cn/joke
+                            td GET/POST
+                        tr
+                            td IP 地址
+                            td https://bird.ioliu.cn/ip
+                            td GET/POST
+                        tr
+                            td 天气查询
+                            td https://bird.ioliu.cn/weather
+                            td GET/POST
+                        tr
+                            td 号码归属地
+                            td https://bird.ioliu.cn/mobile
+                            td GET/POST
+                        tr
+                            td 网易云音乐<br>(歌曲/歌单)
+                            td https://bird.ioliu.cn/netease
+                            td GET/POST
+
+
     
-    div.footer
-        a(href="http://ioliu.cn",target="_blank") &copy; 2016 云淡风轻
-        br
-        a(href="https://bitmoe.com",target="_blank")  &copy; 2016 深圳比特萌信息技术有限公司
+    footer#footer
+        div.inner
+            div.copyright &copy; 2016  
+                a(href='https://ioliu.cn',target="_blank") 云淡风轻 
 
-    script(src="/static/libs/three/three.min.js")
-    script(src="/static/libs/three/Projector.js")
-    script(src="/static/libs/three/CanvasRender.js")
-    //- script(src="/libs/three/stats.min.js")
+
+
     script.
-        var SEPARATION = 200, AMOUNTX = 30, AMOUNTY = 30;
-
-        var container, stats; 
-        var camera, scene, renderer;
-
-        var particles, particle, count = 0;
-
-        var mouseX = 0, mouseY = -500;
-
-        var windowHalfX = window.innerWidth / 2;
-        var windowHalfY = window.innerHeight / 2;
         window.onload = function(){
-            init();
-            animate();
             //- baidu Analytics
             if(!/^http:\/\/localhost/.test(location.href)){
                 var _hmt = _hmt || [];
@@ -46,156 +93,3 @@ block content
                 s.parentNode.insertBefore(hm, s);
             }
         };
-
-        function init() {
-
-            container = document.createElement( 'div' );
-            document.body.appendChild( container );
-
-            camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 1, 10000 );
-            camera.position.z = 1000;
-
-            scene = new THREE.Scene();
-
-            particles = new Array();
-
-            var PI2 = Math.PI * 2;
-            var material = new THREE.SpriteCanvasMaterial( {
-
-                color: 0x558646,
-                program: function ( context ) {
-
-                    context.beginPath();
-                    context.arc( 0, 0, 0.5, 0, PI2, true );
-                    context.fill();
-
-                }
-
-            } );
-
-            var i = 0;
-
-            for ( var ix = 0; ix < AMOUNTX; ix ++ ) {
-
-                for ( var iy = 0; iy < AMOUNTY; iy ++ ) {
-                    particle = particles[ i ++ ] = new THREE.Sprite( material );
-                    particle.position.x = ix * SEPARATION - ( ( AMOUNTX * SEPARATION ) / 2 );
-                    particle.position.z = iy * SEPARATION - ( ( AMOUNTY * SEPARATION ) / 2 );
-                    
-                    scene.add( particle );
-                    //- setTimeout(lazy(particle),300);
-                }
-
-            }
-
-            renderer = new THREE.CanvasRenderer();
-            renderer.setPixelRatio( window.devicePixelRatio );
-            renderer.setSize( window.innerWidth, window.innerHeight );
-            container.appendChild( renderer.domElement );
-
-            //- stats = new Stats();
-            //- container.appendChild( stats.dom );
-
-            document.addEventListener( 'mousemove', onDocumentMouseMove, false );
-            document.addEventListener( 'touchstart', onDocumentTouchStart, false );
-            document.addEventListener( 'touchmove', onDocumentTouchMove, false );
-
-            //
-
-            window.addEventListener( 'resize', onWindowResize, false );
-
-        }
-
-        //- function lazy(particle){
-        //-     return function(){
-        //-         render();
-        //-     }
-        //- }
-
-        function onWindowResize() {
-
-            windowHalfX = window.innerWidth / 2;
-            windowHalfY = window.innerHeight / 2;
-
-            camera.aspect = window.innerWidth / window.innerHeight;
-            camera.updateProjectionMatrix();
-
-            renderer.setSize( window.innerWidth, window.innerHeight );
-
-        }
-
-        //
-
-        function onDocumentMouseMove( event ) {
-
-            mouseX = event.clientX - windowHalfX;
-            //- mouseY = event.clientY - windowHalfY;
-
-        }
-
-        function onDocumentTouchStart( event ) {
-
-            if ( event.touches.length === 1 ) {
-
-                event.preventDefault();
-
-                mouseX = event.touches[ 0 ].pageX - windowHalfX;
-                //- mouseY = event.touches[ 0 ].pageY - windowHalfY;
-
-            }
-
-        }
-
-        function onDocumentTouchMove( event ) {
-
-            if ( event.touches.length === 1 ) {
-
-                event.preventDefault();
-
-                mouseX = event.touches[ 0 ].pageX - windowHalfX;
-                //- mouseY = event.touches[ 0 ].pageY - windowHalfY;
-
-            }
-
-        }
-
-        //
-
-        function animate() {
-
-            requestAnimationFrame( animate );
-
-            render();
-            //- stats.update();
-
-        }
-
-        
-
-        function render() {
-
-            camera.position.x += ( mouseX - camera.position.x ) * .05;
-            camera.position.y += ( - mouseY - camera.position.y ) * .05;
-            camera.lookAt( scene.position );
-
-            var i = 0;
-
-            for ( var ix = 0; ix < AMOUNTX; ix ++ ) {
-
-                for ( var iy = 0; iy < AMOUNTY; iy ++ ) {
-
-                    particle = particles[ i++ ];
-                    particle.position.y = ( Math.sin( ( ix + count ) * 0.3 ) * 50 ) +
-                        ( Math.sin( ( iy + count ) * 0.5 ) * 50 );
-                    particle.scale.x = particle.scale.y = ( Math.sin( ( ix + count ) * 0.3 ) + 1 ) * 4 +
-                        ( Math.sin( ( iy + count ) * 0.5 ) + 1 ) * 4;
-
-                }
-
-            }
-
-            renderer.render( scene, camera );
-
-            count += 0.1;
-
-        }

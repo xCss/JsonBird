@@ -1,8 +1,6 @@
-# JsonBird
-A JSON Remote Agent Service | 一个远程JSON代理服务 
+# JsonBird :hatching_chick:
+A remote data interface proxy service | 一个远程数据接口代理服务
 
-
-**[HomePage](https://bird.ioliu.cn)** | [Demo](https://jsfiddle.net/LNing/duL5Lby7/)
 
 ![npm:v3.10.3](https://img.shields.io/badge/npm-v3.10.3-blue.svg)
 ![express:v4.13.4](https://img.shields.io/badge/express-v4.13.4-blue.svg)
@@ -11,29 +9,32 @@ A JSON Remote Agent Service | 一个远程JSON代理服务
 [![license:MIT](https://img.shields.io/badge/license-MIT-blue.svg)](/License)
 [![releases:v1.4.2](https://img.shields.io/badge/releases-v1.4.2-blue.svg)](https://github.com/xCss/JsonBird/releases)
 
-## Table Of Contents
-- [Requirements](#requirements)
-- [Usage](#usage)
-- [You can got](#you-can-got)
-- [What's New](#whats-new)
-- [License](#license)  
-- [接口文档](https://github.com/xCss/JsonBird/wiki/All-APIs)
+**[HomePage](https://bird.ioliu.cn)** | [Demo](https://jsfiddle.net/LNing/duL5Lby7/)
 
-## Requirements
-Paddington requires the following to run:
+## 必要条件
 - [Node.js](https://nodejs.org) 0.10+
 - [npm](https://www.npmjs.com/) (normally comes with Node.js)
+ 
+### 0.`克隆项目`
+> git clone https://github.com/xcss/JsonBird.git
 
-## Usage
+### 1.`进入目录并安装依赖`
+> cd JsonBird  
+  npm i 
+
+### 2.`运行服务`
+> npm start
+
+### 3.`食用方法`
+ - 打开浏览器，输入`http://127.0.0.1:1000`
+ - [详细接口请点此](https://github.com/xCss/JsonBird/wiki)
+
+## 快速开始
 > https://bird.ioliu.cn/v1?url=http[s]://YouWantProxyJSONUrls.com&[?]params1=val1&params2=val2[&callback=fn]
 
-## You can got
-1. Enables cross-domain requests to any JSON API
-2. Enables JSONP requests to any JSON API (Append `&callback=fn` to the end of the link)
-
-## What's New
-[Please see Release](https://github.com/xCss/JsonBird/releases) 
-
+## 你能得到
+1. :sparkles: 让不支持跨域的远程数据接口支持跨域
+2. :muscle: 让不支持JSONP的远程数据接口支持JSONP (在URL后面添加`&callback=fn`)
 
 
 ## License

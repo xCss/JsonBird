@@ -44,12 +44,6 @@ app.use(helmet());
 //静态文件访问路径
 app.use('/static/', express.static(path.join(__dirname, 'static')));
 var i = 0;
-//每隔3分钟自动请求一次
-// var t = setInterval(function() {
-//     request.get('https://bird.ioliu.cn/joke?_detect=' + i++).end(function(err, response) {
-//         prevTime = +new Date();
-//     });
-// }, 3 * 60 * 1000);
 
 
 /***
@@ -75,7 +69,6 @@ app.use(function(req, res, next) {
     };
     /**
      * 不记录日志和统计的请求:
-     *      _detect 是 VeryCloud 探测机器人
      *      *.css 
      *      favicon.ico
      *      robots.txt
@@ -84,19 +77,12 @@ app.use(function(req, res, next) {
      */
     var filter = /_detect|\.css|favicon\.ico|robots\.txt|\.png|\.jpg|\.gif/i.test(originalUrl);
     if (!filter) {
-        /**
-         * console.log(req.query):
-         * { 
-         *      url: 'http://www.bing.com/HPImageArchive.aspx?format=js',
-         *      idx: '16',
-         *      n: '1' 
-         * }
-         */
         //暂时屏蔽掉*.js日志的记录
         if (originalUrl.indexOf('.js') === -1) {
             //如果存在引用网址，则打印日志
             //if(!!logs['Referer']) 
-            logUtils.print(logs);
+            //暂时不需要打印
+            //logUtils.print(logs);
         }
     }
     // 处理OPTIONS请求
