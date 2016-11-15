@@ -1,7 +1,7 @@
 {
     "name": "JsonBird",
     "version": "1.4.0",
-    "description": "A Remote Json Agent Service",
+    "description": "A remote data interface proxy service",
     "author": {
         "name": "xCss",
         "mail": "yy.liu@foxmail.com"
@@ -17,7 +17,9 @@
     },
     "keywords": [
         "JsonBird",
-        "JsonProxy"
+        "proxy",
+        "data interface proxy",
+        "remote data interface proxy",
     ],
     "bugs": {
         "url": "https://github.com/xCss/JsonBird/issues"
