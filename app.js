@@ -91,7 +91,7 @@ app.use(function(req, res, next) {
     } else next();
 });
 
-app.use('/', welcome);
+//app.use('/', welcome);
 app.use('/test', test);
 app.use('/ip', ip);
 app.use('/v1', v1);
