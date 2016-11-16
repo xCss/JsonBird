@@ -3005,35 +3005,35 @@ button:disabled,
 
 #footer {
     padding: 3em 0;
-    background: #6cc091;
-    color: #fff;
+    border-top: 5px solid #6cc091;
+    color: #ccc;
     text-align: center;
 }
 
 #footer h3 {
-    color: #FFF;
+    color: #ccc;
     margin-bottom: 2em !important;
 }
 
 #footer label {
     text-align: left;
-    color: #FFF;
+    color: #ccc;
 }
 
 #footer .copyright {
-    color: rgba(255, 255, 255, 0.5);
+    color: #ccc;
     font-size: 0.8em;
     margin: 0 0 2em 0;
     padding: 0;
 }
 
 #footer .copyright a {
-    color: rgba(255, 255, 255, 0.5);
+    color: #ccc;
     text-decoration: none;
 }
 
 #footer .copyright a:hover {
-    color: #FFF;
+    color: #ccc;
 }
 
 @media screen and (max-width: 980px) {

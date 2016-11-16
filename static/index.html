@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Welcome | JsonBird - 业界领先的远程数据接口代理服务</title>
+    <link rel="stylesheet" href="./css/main.css">
+    <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+    <meta name="author" content="xCss xioveliu@gmail.com">
+    <meta name="keywords" content="JsonBird,数据代理服务,数据接口代理,远程数据接口代理,远程接口,代理服务,A Remote Data Interface Proxy Service,CORS,HTTPS解决方案">
+    <meta name="description" content="业界领先的远程数据接口代理服务">
+    <link rel="shortcut icon" href="./images/favicon.ico">
+    <link rel="bookmark" href="./images/favicon_72.ico">
+    <link rel="apple-touch-icon" href="./images/fav_72x72.png">
+    <link rel="apple-touch-icon" sizes="16x16" href="./images/fav-16x16.png">
+    <link rel="apple-touch-icon" sizes="36x36" href="./images/fav-36x36.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="./images/fav-72x72.png">
+    <script src="./js/jquery.min.js"></script>
+    <script src="./js/skel.min.js"></script>
+    <script src="./js/util.js"></script>
+    <script src="./js/main.js"></script>
+</head>
+
+<body>
+    <header id="header">
+        <div class="inner"><a class="logo" href="/">JsonBird</a>
+            <nav id="nav">
+                <a href="/">首页</a>
+                <a href="https://jsfiddle.net/LNing/duL5Lby7/" target="_blank">示例</a>
+                <a href="#interface">数据接口</a>
+                <a href="https://github.com/xCss/JsonBird/wiki" target="_blank">接口文档</a>
+                <a href="https://github.com/xCss/JsonBird" target="_blank">Github</a>
+            </nav>
+            <a class="navPanelToggle" href="#navPanel"><span class="fa fa-bars"></span></a>
+        </div>
+    </header>
+    <section id="banner">
+        <div class="inner">
+            <header>
+                <h1>Welcome to JsonBird</h1>
+                <p>业界领先的远程数据接口代理服务</p>
+            </header>
+            <div class="flex">
+                <div><span class="icon fa-bolt"></span>
+                    <h3>Fast</h3>
+                    <p>专业线路，极限速度</p>
+                </div>
+                <div><span class="icon fa-lock"></span>
+                    <h3>Safe</h3>
+                    <p>全站 HTTPS，保证数据安全</p>
+                </div>
+                <div><span class="icon fa-arrows"></span>
+                    <h3>Multiple</h3>
+                    <p>多种接口，自由选择</p>
+                </div>
+            </div>
+            <footer class="flex">
+                <div><a class="button" href="#interface">数据接口</a></div>
+                <div><a class="button" href="/v1?url=http://www.bing.com/HPImageArchive.aspx?format=js&amp;idx=1&amp;n=1" target="_blank">快速开始</a></div>
+            </footer>
+        </div>
+    </section>
+    <section class="wrapper" id="wecando">
+        <div class="inner">
+            <h4>我们能做到:</h4>
+            <ol>
+                <li>让<code>不支持跨域</code>的远程数据接口<code>支持跨域</code>。</li>
+                <li>让<code>不支持JSONP</code>的远程数据接口<code>支持JSONP</code>(添加参数<code>&callback=cb_name</code>)。</li>
+                <li>提供专业的<code>HTTPS</code>解决方案，让数据传输更安全(同时解决远程数据接口不支持<code>HTTPS</code>的问题)。</li>
+                <li>多种数据请求方式与返回格式。</li>
+                <li>丰富的数据接口 ...</li>
+            </ol>
+        </div>
+    </section>
+    <section class="wrapper" id="interface">
+        <div class="inner">
+            <h4>已经实现的数据接口:</h4>
+            <div class="table-wrapper">
+                <table class="alt">
+                    <thead>
+                        <tr>
+                            <th width="200">接口名称</th>
+                            <th>接口地址</th>
+                            <th>请求方式</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>远程代理</td>
+                            <td>https://bird.ioliu.cn/v1</td>
+                            <td>GET/POST</td>
+                        </tr>
+                        <tr>
+                            <td>笑话</td>
+                            <td>https://bird.ioliu.cn/joke</td>
+                            <td>GET/POST</td>
+                        </tr>
+                        <tr>
+                            <td>IP 地址</td>
+                            <td>https://bird.ioliu.cn/ip</td>
+                            <td>GET/POST</td>
+                        </tr>
+                        <tr>
+                            <td>天气查询</td>
+                            <td>https://bird.ioliu.cn/weather</td>
+                            <td>GET/POST</td>
+                        </tr>
+                        <tr>
+                            <td>号码归属地</td>
+                            <td>https://bird.ioliu.cn/mobile</td>
+                            <td>GET/POST</td>
+                        </tr>
+                        <tr>
+                            <td>网易云音乐<br>(歌曲/歌单)</td>
+                            <td>https://bird.ioliu.cn/netease</td>
+                            <td>GET/POST</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+    <footer id="footer">
+        <div class="inner">
+            <div class="copyright">
+                &copy; 2016 <a href="https://ioliu.cn" target="_blank">云淡风轻 </a>
+                <br>
+                <a href="http://t.cn/RVBGhA1">
+                    <img src="./images/qiniu.png" width=50 alt="七牛云存储">
+                </a>
+                <a href="#">
+                    <img src="./images/aliyun.png" width=50 alt="阿里云计算">
+                </a>
+            </div>
+        </div>
+    </footer>
+    <script>
+        window.onload = function() {
+            //- baidu Analytics
+            if (!/^http:\/\/localhost/.test(location.href)) {
+                var _hmt = _hmt || [];
+                var hm = document.createElement("script");
+                if (/ioliu/.test(location.href)) {
+                    hm.src = "//hm.baidu.com/hm.js?930e83393fcca01f1abff14df21cec12";
+                } else {
+                    hm.src = "//hm.baidu.com/hm.js?9b00cc8218f3159497e6207cee8dd0c6";
+                }
+                var s = document.getElementsByTagName("script")[0];
+                s.parentNode.insertBefore(hm, s);
+            }
+        };
+    </script>
+</body>
+
+</html>

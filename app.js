@@ -42,7 +42,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(helmet());
 //静态文件访问路径
-app.use('/static/', express.static(path.join(__dirname, 'static')));
+app.use('/', express.static(path.join(__dirname, 'static')));
 app.use(favicon(__dirname + '/static/images/favicon.ico'));
 
 

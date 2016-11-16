@@ -19,7 +19,7 @@
         "JsonBird",
         "proxy",
         "data interface proxy",
-        "remote data interface proxy",
+        "remote data interface proxy"
     ],
     "bugs": {
         "url": "https://github.com/xCss/JsonBird/issues"
