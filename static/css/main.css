@@ -2840,7 +2840,7 @@ button:disabled,
 /* Banner */
 
 #banner {
-    padding: 8em 0 1em 0;
+    padding: 8em 0 0 0;
     background-image: url(../images/banner.jpg);
     background-size: cover;
     background-position: bottom;
@@ -2863,7 +2863,7 @@ button:disabled,
 #banner .inner {
     position: relative;
     z-index: 10005;
-    padding-top: 2em;
+    padding: 2em 0;
 }
 
 #banner h1 {

@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="utf-8">
+    <title>接口文档 | JsonBird - 业界领先的远程数据接口代理服务</title>
+    <link rel="stylesheet" href="./css/main.css">
+    <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+    <meta name="author" content="xCss xioveliu@gmail.com">
+    <meta name="keywords" content="JsonBird,数据代理服务,数据接口代理,远程数据接口代理,远程接口,代理服务,A Remote Data Interface Proxy Service,CORS,HTTPS解决方案">
+    <meta name="description" content="业界领先的远程数据接口代理服务">
+    <link rel="shortcut icon" href="./images/favicon.ico">
+    <link rel="bookmark" href="./images/favicon_72.ico">
+    <link rel="apple-touch-icon" href="./images/fav_72x72.png">
+    <link rel="apple-touch-icon" sizes="16x16" href="./images/fav-16x16.png">
+    <link rel="apple-touch-icon" sizes="36x36" href="./images/fav-36x36.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="./images/fav-72x72.png">
+    <script src="./js/jquery.min.js"></script>
+    <script src="./js/skel.min.js"></script>
+    <script src="./js/util.js"></script>
+    <script src="./js/main.js"></script>
+    <script src="./js/marked.js"></script>
+    <script src="./js/base64.js"></script>
+    <script>
+        $(function() {
+            $.get('/docs.md', function(data, status) {
+                //var md = Base64.decode(data.content);
+                var html = status === 'success' ? marked(data) : marked('(ノへ￣、) 文档君不小心走丢了。\n\r很抱歉，由于`Github`仓库请求失败，我们暂时不能获取到相关的文档信息。\n\r 您可以直接用浏览器访问 https://github.com/xCss/JsonBird/wiki ');
+                $('#docs .inner').html(html);
+            });
+        });
+    </script>
+    <style>
+        .spinner {
+            margin: 100px auto;
+            width: 50px;
+            height: 40px;
+            text-align: center;
+            font-size: 10px;
+        }
+        
+        .spinner>div {
+            background-color: #6cc091;
+            height: 100%;
+            width: 6px;
+            display: inline-block;
+            -webkit-animation: sk-stretchdelay 1.2s infinite ease-in-out;
+            animation: sk-stretchdelay 1.2s infinite ease-in-out;
+        }
+        
+        .spinner .rect2 {
+            -webkit-animation-delay: -1.1s;
+            animation-delay: -1.1s;
+        }
+        
+        .spinner .rect3 {
+            -webkit-animation-delay: -1.0s;
+            animation-delay: -1.0s;
+        }
+        
+        .spinner .rect4 {
+            -webkit-animation-delay: -0.9s;
+            animation-delay: -0.9s;
+        }
+        
+        .spinner .rect5 {
+            -webkit-animation-delay: -0.8s;
+            animation-delay: -0.8s;
+        }
+        
+        @-webkit-keyframes sk-stretchdelay {
+            0%,
+            40%,
+            100% {
+                -webkit-transform: scaleY(0.4)
+            }
+            20% {
+                -webkit-transform: scaleY(1.0)
+            }
+        }
+        
+        @keyframes sk-stretchdelay {
+            0%,
+            40%,
+            100% {
+                transform: scaleY(0.4);
+                -webkit-transform: scaleY(0.4);
+            }
+            20% {
+                transform: scaleY(1.0);
+                -webkit-transform: scaleY(1.0);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header id="header">
+        <div class="inner"><a class="logo" href="/">JsonBird</a>
+            <nav id="nav">
+                <a href="/">首页</a>
+                <a href="https://jsfiddle.net/LNing/duL5Lby7/" target="_blank">示例</a>
+                <a href="/#interface">数据接口</a>
+                <a href="https://github.com/xCss/JsonBird/wiki" target="_blank">接口文档</a>
+                <a href="https://github.com/xCss/JsonBird" target="_blank">Github</a>
+            </nav>
+            <a class="navPanelToggle" href="#navPanel"><span class="fa fa-bars"></span></a>
+        </div>
+    </header>
+    <section id="banner">
+    </section>
+    <section class="wrapper" id="docs">
+        <div class="inner">
+            <div class="spinner">
+                <div class="rect1"></div>
+                <div class="rect2"></div>
+                <div class="rect3"></div>
+                <div class="rect4"></div>
+                <div class="rect5"></div>
+            </div>
+        </div>
+    </section>
+    <footer id="footer">
+        <div class="inner">
+            <div class="copyright">
+                &copy; 2016 <a href="https://ioliu.cn" target="_blank">云淡风轻 </a>
+            </div>
+            <div class="copyright">
+                <a href="/go/qiniu" target="_blank">
+                    <img src="./images/qiniu.png" width=50 alt="七牛云存储">
+                </a>
+                <a href="/go/aliyun" target="_blank">
+                    <img src="./images/aliyun.png" width=50 alt="阿里云计算">
+                </a>
+            </div>
+        </div>
+    </footer>
+    <script>
+        window.onload = function() {
+            //- baidu Analytics
+            if (!/^http:\/\/localhost/.test(location.href)) {
+                var _hmt = _hmt || [];
+                var hm = document.createElement("script");
+                if (/ioliu/.test(location.href)) {
+                    hm.src = "//hm.baidu.com/hm.js?930e83393fcca01f1abff14df21cec12";
+                } else {
+                    hm.src = "//hm.baidu.com/hm.js?9b00cc8218f3159497e6207cee8dd0c6";
+                }
+                var s = document.getElementsByTagName("script")[0];
+                s.parentNode.insertBefore(hm, s);
+            }
+        };
+    </script>
+</body>
+
+</html>
