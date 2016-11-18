@@ -27,6 +27,8 @@ var test = require('./routes/test');
 
 var app = express();
 
+//静态文件访问路径
+app.use('/', express.static(path.join(__dirname, 'static')));
 app.set('views', path.join(__dirname, 'views'));
 // view engine setup
 app.set('view engine', 'pug');
@@ -41,8 +43,6 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(helmet());
-//静态文件访问路径
-app.use('/', express.static(path.join(__dirname, 'static')));
 app.use(favicon(__dirname + '/static/images/favicon.ico'));
 
 
