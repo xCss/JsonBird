@@ -1,6 +1,5 @@
 @charset "UTF-8";
 @import url(font-awesome.min.css);
-@import "//fonts.proxy.ustclug.org/css?family=Source+Sans+Pro:300,400,600";
 
 /* Reset */
 
@@ -1504,9 +1503,9 @@ input,
 select,
 textarea {
     color: #9a9a9a;
-    font-family: "微软雅黑", "Microsoft YaHei", "Source Sans Pro", Arial, Helvetica, sans-serif;
+    font-family: "Open Sans", "Helvetica Neue", "Helvetica", "Hiragino Sans GB", "Microsoft YaHei", "Source Han Sans CN", "WenQuanYi Micro Hei", Arial, sans-serif;
     font-size: 14pt;
-    font-weight: 400;
+    font-weight: 300;
     line-height: 1.65;
 }
 
