@@ -14,7 +14,7 @@
 
 |名称|类型|必须|说明|  
 |----|----|----|----|
-|url|string|是|需要代理的目标接口|
+|url|string|是|需要代理的远程数据接口|
 |callback|string|否|回调函数名|
 
 ## `ip`地址查询接口
@@ -36,6 +36,9 @@
 - 随机笑话: https://bird.ioliu.cn/joke/rand?type=text
 - 返回值类型：`json/jsonp`
 
+> ⚠️ 若`sort`存在，则`time`必须同时存在  
+⚠️ 随机获取链接不需要参数`page、pagesize、sort、time`
+
 |名称|类型|必须|说明|  
 |----|----|----|----|
 |type|string|否|类型, (pic:趣图, text:笑话, 默认pic)|
@@ -44,8 +47,6 @@
 |sort*|string|否|类型，desc:指定时间之前发布的，asc:指定时间之后发布的|
 |time*|string|否|时间戳（10位），如：1418816972|
 |callback|string|否|回调函数名|
-> ⚠️ 若sort存在，则time必须同时存在  
-⚠️ 随机获取链接不需要参数page、pagesize、sort、time
 
 ## `mobile`手机号码接口
 - 请求方式：`GET/POST`
