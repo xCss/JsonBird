@@ -1504,9 +1504,10 @@ select,
 textarea {
     color: #9a9a9a;
     font-family: "Open Sans", "Helvetica Neue", "Helvetica", "Hiragino Sans GB", "Microsoft YaHei", "Source Han Sans CN", "WenQuanYi Micro Hei", Arial, sans-serif;
-    font-size: 14pt;
+    font-size: 11pt;
     font-weight: 300;
     line-height: 1.65;
+    letter-spacing: .8px;
 }
 
 @media screen and (max-width: 1680px) {
@@ -1649,11 +1650,12 @@ blockquote {
 code {
     background: rgba(144, 144, 144, 0.075);
     border: solid 1px #dbdbdb;
-    font-family: "Courier New", monospace;
+    font-family: "Courier New", '微软雅黑', 'Microsoft YaHei', monospace;
     font-size: 0.9em;
     margin: 0 0.25em;
     padding: 0.15em 0.65em;
     border-radius: 15px;
+    color: #6cc091;
 }
 
 pre {
@@ -1840,7 +1842,7 @@ header h6+p {
 @media screen and (max-width: 980px) {
     .flex.flex-2 article {
         width: 100%;
-        margin-bottom: 3em;
+        margin-bottom: 1em;
     }
     .flex.flex-2 article:last-child {
         margin-bottom: 0;
@@ -2204,6 +2206,11 @@ ol {
     list-style: decimal;
     margin: 0 0 2em 0;
     padding-left: 1.25em;
+    letter-spacing: 1.5px;
+}
+
+ol li code {
+    letter-spacing: .5px;
 }
 
 ol li {
@@ -2833,7 +2840,7 @@ button:disabled,
 /* Banner */
 
 #banner {
-    padding: 8em 0 4em 0;
+    padding: 8em 0 1em 0;
     background-image: url(../images/banner.jpg);
     background-size: cover;
     background-position: bottom;
@@ -2854,10 +2861,9 @@ button:disabled,
 }
 
 #banner .inner {
-    border-top: 2px solid rgba(255, 255, 255, 0.2);
     position: relative;
     z-index: 10005;
-    padding-top: 5em;
+    padding-top: 2em;
 }
 
 #banner h1 {
@@ -2894,7 +2900,7 @@ button:disabled,
     -ms-justify-content: center;
     justify-content: center;
     text-align: center;
-    margin: 0 auto 4em auto;
+    margin: 0 auto 2.5em auto;
 }
 
 #banner .flex div {
@@ -3003,31 +3009,45 @@ button:disabled,
 /* Footer */
 
 #footer {
-    padding: 3em 0;
-    border-top: 5px solid #6cc091;
+    padding: 1em 0;
+    border-top: 1px solid #f5f5f5;
     color: #ccc;
     text-align: center;
 }
 
+#footer img {
+    -webkit-transition: all 0.3s ease;
+    -o-transition: all 0.3s ease;
+    transition: all 0.3s ease;
+    border: none;
+    padding: 0;
+    margin: 0;
+    filter: contrast(0%);
+}
+
+#footer img:hover {
+    filter: none;
+}
+
 #footer h3 {
-    color: #ccc;
-    margin-bottom: 2em !important;
+    color: #999;
+    margin-bottom: 1em !important;
 }
 
 #footer label {
     text-align: left;
-    color: #ccc;
+    color: #999;
 }
 
 #footer .copyright {
-    color: #ccc;
+    color: #999;
     font-size: 0.8em;
-    margin: 0 0 2em 0;
+    margin: 0 0 .5em 0;
     padding: 0;
 }
 
 #footer .copyright a {
-    color: #ccc;
+    color: #999;
     text-decoration: none;
 }
 
