@@ -27,25 +27,16 @@ var test = require('./routes/test');
 
 var app = express();
 
-//静态文件访问路径
-app.use('/', express.static(path.join(__dirname, 'static')));
 app.set('views', path.join(__dirname, 'views'));
 // view engine setup
 app.set('view engine', 'pug');
 app.enable('trust proxy');
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
-app.use(logger('combined', {
-    skip: function(req, res) { return res.statusCode < 400 }
-}));
+// app.use(logger('combined', {
+//     skip: function(req, res) { return res.statusCode < 400 }
+// }));
 //app.use(bodyParser.raw({ type: '*/*' }));
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(cookieParser());
-app.use(helmet());
-app.use(favicon(__dirname + '/static/images/favicon.ico'));
-
-
 /***
  * 全局过滤:统计和日志
  */
@@ -53,6 +44,7 @@ app.use(function(req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept,Access-Control-Allow-Origin");
     res.header("Access-Control-Allow-Methods", "PUT,POST,GET,DELETE,OPTIONS");
+    res.header("Access-Control-Allow-Credentials", true);
     var protocol = req.protocol;
     var host = req.hostname;
     var ip = req.headers['x-real-ip'] ? req.headers['x-real-ip'] : req.ip.replace(/::ffff:/, '');
@@ -67,6 +59,9 @@ app.use(function(req, res, next) {
         Time: new Date().toLocaleString(),
         params: JSON.stringify(req.body || req.query)
     };
+
+    // console.log(logs);
+    // console.log(req.cookies);
     /**
      * 不记录日志和统计的请求:
      *      *.css 
@@ -90,6 +85,18 @@ app.use(function(req, res, next) {
         res.send(200);
     } else next();
 });
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+
+app.use(cookieParser());
+
+app.use(helmet());
+
+//静态文件访问路径
+app.use('/', express.static(path.join(__dirname, 'static')));
+app.use(favicon(__dirname + '/static/images/favicon.ico'));
+
+
 
 //app.use('/', welcome);
 app.use('/test', test);

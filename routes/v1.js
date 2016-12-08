@@ -40,6 +40,7 @@ function getJSON(req, res, next) {
     } else {
 
         method = req.method.toUpperCase();
+        var _cookies = req.cookies;
         if (url) {
             var _temp = {};
             switch (method) {
@@ -60,6 +61,7 @@ function getJSON(req, res, next) {
                     request
                         .get(url)
                         .set(cookie)
+                        .set(_cookies)
                         .query(_temp)
                         .end(function(err, response) {
                             var body = {};
@@ -105,6 +107,7 @@ function getJSON(req, res, next) {
                     request
                         .post(url)
                         .set(cookie)
+                        .set(_cookies)
                         .type('form')
                         .send(_temp)
                         .end(function(err, response) {

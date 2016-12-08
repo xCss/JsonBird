@@ -9,7 +9,8 @@
     "license": "MIT",
     "private": true,
     "scripts": {
-        "start": "node ./bin/www"
+        "start": "node ./bin/www",
+        "super": "supervisor ./bin/www"
     },
     "repository": {
         "type": "git",
