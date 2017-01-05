@@ -106,6 +106,10 @@ app.use('/netease', netease);
 app.use('/joke', joke);
 app.use('/mobile', mobile);
 app.use('/weather', weather);
+var i = 0;
+app.use('/for', function(req, res, next) {
+    //next();
+});
 
 /**
  * Robots.txt

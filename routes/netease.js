@@ -8,12 +8,16 @@ router.get('/', function(req, res, next) {
     //console.log('ref:' + req.header('referer'));
     var id = req.query.id;
     var playlist_id = req.query.playlist_id;
+    var headers = {};
+    headers['Cookie'] = 'appver=1.5.0.75771;';
+    headers['referer'] = 'http://music.163.com';
+    headers['User-Agent'] = req.headers['user-agent'];
 
     var url = 'http://music.163.com/api/song/detail/?id=' + id + '&ids=%5B' + id + '%5D';
     if (playlist_id) {
         url = 'http://music.163.com/api/playlist/detail/?id=' + playlist_id;
     }
-    netease_http(url, next, function(data) {
+    netease_http(headers, url, next, function(data) {
         var output = {
             data: data,
             status: {
@@ -29,12 +33,7 @@ router.get('/', function(req, res, next) {
     });
 });
 
-function netease_http(url, next, callback) {
-    var headers = {
-        Cookie: 'appver=1.5.0.75771;',
-        referer: 'http://music.163.com',
-        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/54.0.2840.71 Safari/537.36'
-    }
+function netease_http(headers, url, next, callback) {
     request.get(url).set(headers).end(function(err, res) {
         var body = {};
         if (res && res.text) {

@@ -2,7 +2,7 @@ var express = require('express');
 var request = require('superagent');
 var router = express.Router();
 var base = 'http://apis.juhe.cn/ip/ip2addr?key=28c0a6a5eb9cca3f38bc5877a83c9868';
-var cookie = { 'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/54.0.2840.71 Safari/537.36' };
+//var cookie = { 'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/54.0.2840.71 Safari/537.36' };
 router.get('/*', function(req, res, next) {
     ip2address(req, res, next);
 });
@@ -24,7 +24,7 @@ function ip2address(req, res, next) {
             message: ''
         }
     };
-    request.get(url).set(cookie).end(function(err, response) {
+    request.get(url).set(req.headers).end(function(err, response) {
         var body = {};
         if (response && response.text) {
             body = response.text;

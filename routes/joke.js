@@ -2,7 +2,7 @@ var express = require('express');
 var request = require('superagent');
 var router = express.Router();
 var key = '64a40e3c55e88cc8cd66a78d030bddce';
-var cookie = { 'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/54.0.2840.71 Safari/537.36' };
+//var cookie = { 'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/54.0.2840.71 Safari/537.36' };
 /**
  * Get 请求
  */
@@ -68,7 +68,7 @@ function getJOKE(req, res, next, op) {
             message: ''
         }
     };
-    request.get(url).set(cookie).end(function(err, response) {
+    request.get(url).set(req.headers).end(function(err, response) {
         var body = {};
         if (response && response.text) {
             body = response.text;
