@@ -28,6 +28,7 @@
   "readme": "./readme.md",
   "homepage": "https://github.com/xCss/JsonBird#readme",
   "dependencies": {
+    "big-integer": "^1.6.17",
     "blueimp-md5": "^2.7.0",
     "body-parser": "~1.15.1",
     "cookie-parser": "~1.4.3",
