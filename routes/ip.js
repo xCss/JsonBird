@@ -16,7 +16,10 @@ function ip2address(req, res, next) {
     var ip = req.query.ip || req.body.ip || req.headers['x-real-ip'] || req.ip.replace(/\:\:1/, '127.0.0.1');
     var callback = req.query.callback || req.body.callback;
     var type = req.query.type || req.body.type;
-    var url = base + '&ip=' + ip + '&dtype=' + type;
+    var url = base + '&ip=' + ip;
+    if (type) {
+        url += '&dtype=' + type;
+    }
     var output = {
         data: {},
         status: {
@@ -24,13 +27,15 @@ function ip2address(req, res, next) {
             message: ''
         }
     };
-    request.get(url).set(req.headers).end(function(err, response) {
+    request.get(url).end(function(err, response) {
+
         var body = {};
         if (response && response.text) {
             body = response.text;
         } else if (response && response.body) {
             body = response.body;
         }
+
         if (type !== 'xml') {
             if (typeof body === 'string') {
                 try {
@@ -41,9 +46,10 @@ function ip2address(req, res, next) {
                     };
                 }
             }
+
             output.data = (body.result && body.result.data ? body.result.data : body.result) || {};
             output.data['ip'] = ip;
-            if (!err && response.statusCode === 200) {
+            if (!err && response.status === 200) {
                 //
             } else {
                 output.status = {

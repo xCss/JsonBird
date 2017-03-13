@@ -68,7 +68,7 @@ function getJOKE(req, res, next, op) {
             message: ''
         }
     };
-    request.get(url).set(req.headers).end(function(err, response) {
+    request.get(url).end(function(err, response) {
         var body = {};
         if (response && response.text) {
             body = response.text;
@@ -85,7 +85,7 @@ function getJOKE(req, res, next, op) {
             }
         }
         output.data = (body.result && body.result.data ? body.result.data : body.result) || {};
-        if (!err && response.statusCode === 200 && body.error_code === 0) {
+        if (!err && response.status === 200 && body.error_code === 0) {
             //
         } else {
             output.status = {
