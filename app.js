@@ -45,41 +45,7 @@ app.use(function(req, res, next) {
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept,Access-Control-Allow-Origin");
     res.header("Access-Control-Allow-Methods", "PUT,POST,GET,DELETE,OPTIONS");
     res.header("Access-Control-Allow-Credentials", true);
-    var protocol = req.protocol;
-    var host = req.hostname;
-    var ip = req.headers['x-real-ip'] ? req.headers['x-real-ip'] : req.ip.replace(/::ffff:/, '');
-    var ref = req.headers.referer;
-    var originalUrl = req.originalUrl;
-    var logs = {
-        IP: ip,
-        Host: host,
-        Referer: ref,
-        //Protocol: protocol, 
-        OriginalUrl: originalUrl,
-        Time: new Date().toLocaleString(),
-        params: JSON.stringify(req.body || req.query)
-    };
 
-    // console.log(logs);
-    // console.log(req.cookies);
-    /**
-     * 不记录日志和统计的请求:
-     *      *.css 
-     *      favicon.ico
-     *      robots.txt
-     *      图片文件
-     *      (JS文件可能有特殊统计需求，需要单独判断)
-     */
-    var filter = /_detect|\.css|favicon\.ico|robots\.txt|\.png|\.jpg|\.gif/i.test(originalUrl);
-    if (!filter) {
-        //暂时屏蔽掉*.js日志的记录
-        if (originalUrl.indexOf('.js') === -1) {
-            //如果存在引用网址，则打印日志
-            //if(!!logs['Referer']) 
-            //暂时不需要打印
-            //logUtils.print(logs);
-        }
-    }
     // 处理OPTIONS请求
     if (req.method === 'OPTIONS') {
         res.send(200);
@@ -93,12 +59,12 @@ app.use(cookieParser());
 app.use(helmet());
 
 //静态文件访问路径
-app.use('/', express.static(path.join(__dirname, 'static')));
+app.use('/static', express.static(path.join(__dirname, 'static')));
 app.use(favicon(__dirname + '/static/images/favicon.ico'));
 
 
 
-//app.use('/', welcome);
+app.use('/', welcome);
 app.use('/test', test);
 app.use('/ip', ip);
 app.use('/v1', v1);
@@ -106,10 +72,7 @@ app.use('/netease', netease);
 app.use('/joke', joke);
 app.use('/mobile', mobile);
 app.use('/weather', weather);
-var i = 0;
-app.use('/for', function(req, res, next) {
-    //next();
-});
+
 
 /**
  * Robots.txt
