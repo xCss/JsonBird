@@ -18,6 +18,13 @@ router.get('/', function(req, res, next) {
         url = 'http://music.163.com/api/playlist/detail/?id=' + playlist_id;
     }
     netease_http(headers, url, next, function(data) {
+        var songs = data.songs;
+        songs.map(function(item) {
+            var url = item['mp3Url'];
+            item['sslUrl'] = url.replace('http://m', 'https://p');
+            return item;
+        });
+        data.songs = songs;
         res.send(data)
             // var output = {
             //     data: data,
