@@ -5,7 +5,6 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-var helmet = require('helmet');
 //Welcome Page
 var welcome = require('./routes/welcome');
 //日志输出
@@ -55,8 +54,6 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(cookieParser());
-
-app.use(helmet());
 
 //静态文件访问路径
 app.use('/static', express.static(path.join(__dirname, 'static')));
