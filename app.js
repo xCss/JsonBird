@@ -25,7 +25,7 @@ var weather = require('./routes/weather');
 var test = require('./routes/test');
 
 var app = express();
-
+app.disable('x-powered-by');
 app.set('views', path.join(__dirname, 'views'));
 // view engine setup
 app.set('view engine', 'pug');
