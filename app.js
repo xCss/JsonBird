@@ -25,11 +25,11 @@ var weather = require('./routes/weather');
 var test = require('./routes/test');
 
 var app = express();
-app.disable('x-powered-by');
 app.set('views', path.join(__dirname, 'views'));
 // view engine setup
 app.set('view engine', 'pug');
 app.enable('trust proxy');
+app.disable('x-powered-by');
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 // app.use(logger('combined', {
@@ -37,15 +37,10 @@ app.enable('trust proxy');
 // }));
 //app.use(bodyParser.raw({ type: '*/*' }));
 /***
- * 全局过滤:统计和日志
+ * 处理OPTIONS请求
  */
 app.use(function(req, res, next) {
-    res.header("Access-Control-Allow-Origin", "*");
-    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept,Access-Control-Allow-Origin");
-    res.header("Access-Control-Allow-Methods", "PUT,POST,GET,DELETE,OPTIONS");
-    res.header("Access-Control-Allow-Credentials", true);
-
-    // 处理OPTIONS请求
+    // 
     if (req.method === 'OPTIONS') {
         res.send(200);
     } else next();
