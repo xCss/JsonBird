@@ -36,11 +36,15 @@ app.disable('x-powered-by');
 //     skip: function(req, res) { return res.statusCode < 400 }
 // }));
 //app.use(bodyParser.raw({ type: '*/*' }));
-/***
- * 处理OPTIONS请求
- */
 app.use(function(req, res, next) {
-    // 
+    // 设置跨域头
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept,Access-Control-Allow-Origin");
+    res.header("Access-Control-Allow-Methods", "PUT,POST,GET,DELETE,OPTIONS");
+
+    /***
+     * 处理OPTIONS请求
+     */
     if (req.method === 'OPTIONS') {
         res.send(200);
     } else next();
