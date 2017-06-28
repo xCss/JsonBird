@@ -63,4 +63,6 @@ function Encrypt(obj) {
     }
 }
 
-module.exports = Encrypt
+module.exports = {
+    Encrypt
+}
