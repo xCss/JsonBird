@@ -52,7 +52,7 @@ function rsaEncrypt(text, pubKey, modulus) {
     return zfill(biRet.toString(16), 256)
 }
 
-function Encrypt(obj) {
+const Encrypt = (obj) => {
     const text = JSON.stringify(obj)
     const secKey = createSecretKey(16)
     const encText = aesEncrypt(aesEncrypt(text, nonce), secKey)
@@ -63,6 +63,4 @@ function Encrypt(obj) {
     }
 }
 
-module.exports = {
-    Encrypt
-}
+module.exports = Encrypt

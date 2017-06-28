@@ -22,7 +22,7 @@ var mobile = require('./routes/mobile');
 //天气
 var weather = require('./routes/weather');
 //test
-var test = require('./routes/test');
+//var test = require('./routes/test');
 
 var app = express();
 app.set('views', path.join(__dirname, 'views'));
@@ -61,7 +61,7 @@ app.use(favicon(__dirname + '/static/images/favicon.ico'));
 
 
 app.use('/', welcome);
-app.use('/test', test);
+// app.use('/test', test);
 app.use('/ip', ip);
 app.use('/v1', v1);
 app.use('/netease', netease);
