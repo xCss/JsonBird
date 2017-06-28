@@ -1,4 +1,4 @@
-const Encrypt = require('./crypto.js');
+const encrypt = require('./encrypt');
 const request = require('request');
 const qs = require('querystring');
 
@@ -17,7 +17,8 @@ let options = {
 }
 const requestServer = (config) => {
     options['uri'] = `http://music.163.com${config.path}`
-    let params = Encrypt(config.params)
+    console.log(config)
+    let params = encrypt(config.params)
     return new Promise((resolve, reject) => {
         request.post({ url: options.uri, form: params }, (err, ret, body) => {
             if (!err && ret.statusCode === 200) {
