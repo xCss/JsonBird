@@ -17,7 +17,6 @@ let options = {
 }
 const requestServer = (config) => {
     options['uri'] = `http://music.163.com${config.path}`
-    console.log(config)
     let params = encrypt(config.params)
     return new Promise((resolve, reject) => {
         request.post({ url: options.uri, form: params }, (err, ret, body) => {
