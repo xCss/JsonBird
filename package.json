@@ -1,45 +1,47 @@
 {
-  "name": "JsonBird",
-  "version": "1.4.0",
-  "description": "A remote data interface proxy service",
-  "author": {
-    "name": "xCss",
-    "mail": "yy.liu@foxmail.com"
-  },
-  "license": "MIT",
-  "private": true,
-  "scripts": {
-    "start": "node ./bin/www",
-    "super": "supervisor ./bin/www"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/xCss/JsonBird.git"
-  },
-  "keywords": [
-    "JsonBird",
-    "proxy",
-    "data interface proxy",
-    "remote data interface proxy"
-  ],
-  "bugs": {
-    "url": "https://github.com/xCss/JsonBird/issues"
-  },
-  "readme": "./readme.md",
-  "homepage": "https://github.com/xCss/JsonBird#readme",
-  "dependencies": {
-    "big-integer": "^1.6.17",
-    "blueimp-md5": "^2.7.0",
-    "body-parser": "~1.15.1",
-    "cookie-parser": "~1.4.3",
-    "debug": "~2.2.0",
-    "express": "~4.13.4",
-    "express-generator": "^4.13.4",
-    "helmet": "^2.3.0",
-    "js-base64": "^2.1.9",
-    "morgan": "~1.7.0",
-    "pug": "^2.0.0-beta6",
-    "serve-favicon": "~2.3.0",
-    "superagent": "^2.3.0"
-  }
+    "name": "JsonBird",
+    "version": "1.4.0",
+    "description": "A remote data interface proxy service",
+    "author": {
+        "name": "xCss",
+        "mail": "yy.liu@foxmail.com"
+    },
+    "license": "MIT",
+    "private": true,
+    "scripts": {
+        "start": "supervisor node ./bin/www",
+        "super": "supervisor ./bin/www"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/xCss/JsonBird.git"
+    },
+    "keywords": [
+        "JsonBird",
+        "proxy",
+        "data interface proxy",
+        "remote data interface proxy"
+    ],
+    "bugs": {
+        "url": "https://github.com/xCss/JsonBird/issues"
+    },
+    "readme": "./readme.md",
+    "homepage": "https://github.com/xCss/JsonBird#readme",
+    "dependencies": {
+        "big-integer": "^1.6.17",
+        "blueimp-md5": "^2.7.0",
+        "body-parser": "~1.15.1",
+        "cookie-parser": "~1.4.3",
+        "debug": "~2.2.0",
+        "express": "~4.13.4",
+        "express-generator": "^4.13.4",
+        "helmet": "^2.3.0",
+        "js-base64": "^2.1.9",
+        "morgan": "~1.7.0",
+        "pug": "^2.0.0-beta6",
+        "querystring": "^0.2.0",
+        "request": "^2.81.0",
+        "serve-favicon": "~2.3.0",
+        "superagent": "^2.3.0"
+    }
 }
