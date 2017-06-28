@@ -1,4 +1,4 @@
-const Encrypt = require('./crypto');
+const Encrypt = require('./crypto.js');
 const request = require('request');
 const qs = require('querystring');
 
