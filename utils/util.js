@@ -18,6 +18,7 @@ let options = {
 const requestServer = (config) => {
     options['uri'] = `http://music.163.com${config.path}`
     options['form'] = encrypt(config.params)
+    options['headers']['X-Real-IP'] = config['headers']['X-Real-IP'] || '127.0.0.1'
     return new Promise((resolve, reject) => {
         request(options, (err, ret, body) => {
             if (!err && ret.statusCode === 200) {

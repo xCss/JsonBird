@@ -11,6 +11,8 @@ const links = {
 
 /* GET users listing. */
 router.get('/:channel', function(req, res, next) {
+
+    let ip = req.ip.replace('::1', '127.0.0.1')
     const id = req.query.id
     const br = req.query.br || 999000
     const channel = req.params['channel']
@@ -20,6 +22,9 @@ router.get('/:channel', function(req, res, next) {
             "ids": [id],
             "br": 999000,
             "csrf_token": ""
+        },
+        headers: {
+            'X-Real-IP': ip
         }
     }
     switch (channel) {
