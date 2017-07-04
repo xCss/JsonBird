@@ -17,9 +17,9 @@ let options = {
 }
 const requestServer = (config) => {
     options['uri'] = `http://music.163.com${config.path}`
-    let params = encrypt(config.params)
+    options['form'] = encrypt(config.params)
     return new Promise((resolve, reject) => {
-        request.post({ url: options.uri, form: params }, (err, ret, body) => {
+        request(options, (err, ret, body) => {
             if (!err && ret.statusCode === 200) {
                 resolve(JSON.parse(body))
             } else {
