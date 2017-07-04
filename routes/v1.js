@@ -41,6 +41,7 @@ function getJSON(req, res, next) {
 
         method = req.method.toUpperCase();
         var _cookies = req.cookies;
+        var headers = { 'user-agent': req.headers['user-agent'] };
         //console.log(headers);
         if (url) {
             var _temp = {};
@@ -61,7 +62,7 @@ function getJSON(req, res, next) {
                     url = url.replace(/\&callback\=(\w+)/, '');
                     request
                         .get(url)
-                        .set(req.headers)
+                        .set(headers)
                         .set(_cookies)
                         .query(_temp)
                         .end(function(err, response) {
@@ -107,7 +108,7 @@ function getJSON(req, res, next) {
                     }
                     request
                         .post(url)
-                        .set(req.headers)
+                        .set(headers)
                         .set(_cookies)
                         .type('form')
                         .send(_temp)
