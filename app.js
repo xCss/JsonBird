@@ -46,7 +46,7 @@ app.use(function(req, res, next) {
      * 处理OPTIONS请求
      */
     if (req.method === 'OPTIONS') {
-        res.send(200);
+        res.sendStatus(200);
     } else next();
 });
 app.use(bodyParser.json());

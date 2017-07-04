@@ -1,16 +1,75 @@
 var express = require('express');
-var request = require('superagent');
+var request = require('request');
 var router = express.Router();
 var disabledIP = require('../utils/disabledIP').list;
 var cookie = { 'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/54.0.2840.71 Safari/537.36' };
 
+
 router.get('/*', function(req, res, next) {
-    getJSON(req, res, next);
+    // let link = req.query.url || '';
+    // let cb = req.query.cb || '';
+    // getJSON(req, res, next);
+    convert(req, res, next)
 });
 
 router.post('/*', function(req, res, next) {
-    getJSON(req, res, next);
+    // getJSON(req, res, next);
+    convert(req, res, next)
 });
+
+const convert = (req, res, next) => {
+    let method = req.method.toUpperCase();
+    let link = req.query.url || req.body.url;
+    let cb = req.query.callback || req.body.callback;
+    let params = req.body;
+    let config = {
+        method: method,
+        uri: link,
+        json: params,
+        headers: req.headers
+    }
+
+    var options = {
+        uri: 'https://www.googleapis.com/urlshortener/v1/url',
+        method: 'get',
+        json: { "longUrl": "http://www.google.com/" }
+    };
+    createServer(options).then(ret => {
+        console.log(ret)
+    }).catch(ex => {
+        console.log(ex)
+    })
+
+    // switch(method){
+    //     case 'GET':
+    //         let originalUrl = req.originalUrl;
+    //         originalUrl = originalUrl.replace(/\/v1\?/,'').replace('?','&');
+
+    //         break;
+    // }
+    // if (link) {
+    //     let
+    //     switch (method) {
+    //         case 'GET':
+    //             link +=
+    //     }
+
+    // }
+    //console.log(req.headers)
+
+}
+
+const createServer = (config) => {
+    return new Promise((resolve, reject) => {
+        request(config, (err, ret, body) => {
+            if (!err && ret.statusCode === 200) {
+                resolve(JSON.parse(body))
+            } else {
+                reject(err)
+            }
+        })
+    })
+}
 
 function getJSON(req, res, next) {
     var ip = req.headers['x-real-ip'] ? req.headers['x-real-ip'] : req.ip.replace(/::ffff:/, '');

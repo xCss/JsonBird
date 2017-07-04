@@ -52,36 +52,49 @@ router.get('/:channel', function(req, res, next) {
     }
     util.requestServer(config).then(ret => {
         if (channel == 'song') {
-            config['path'] = links.song_url
-            config['params'] = {
-                "ids": [id],
-                "br": br,
-                "csrf_token": ""
-            }
-            util.requestServer(config).then(rt => {
-                let song = ret.songs[0]
-                song['mp3'] = rt.data[0]
-                res.send({
-                    data: song,
-                    status: {
-                        code: 200,
-                        msg: ''
-                    }
+            let songs = ret.songs
+            if (songs.length) {
+                config['path'] = links.song_url
+                config['params'] = {
+                    "ids": [id],
+                    "br": br,
+                    "csrf_token": ""
+                }
+                util.requestServer(config).then(rt => {
+                    let song = songs[0]
+                    song['mp3'] = rt.data[0]
+                    res.send({
+                        data: song,
+                        status: {
+                            code: 200,
+                            msg: ''
+                        }
+                    })
+                }).catch(ex => {
+                    console.log(ex)
+                    res.send({
+                        data: {},
+                        status: {
+                            code: -1,
+                            msg: 'something happend. Please checked your id or url'
+                        }
+                    })
                 })
-            }).catch(ex => {
-                console.log(ex)
+            } else {
                 res.send({
                     data: {},
                     status: {
                         code: -1,
-                        msg: 'something happend. Please checked your id or url'
+                        msg: 'sorry, no result, please changed song id.'
                     }
                 })
-            })
+            }
         } else {
             res.send(ret)
         }
+
     }).catch(err => {
+        console.log(err)
         res.send({
             data: {},
             status: {
