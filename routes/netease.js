@@ -11,20 +11,17 @@ const links = {
 
 /* GET users listing. */
 router.get('/:channel', function(req, res, next) {
-
-    let ip = req.ip.replace('::1', '127.0.0.1')
     const id = req.query.id
     const br = req.query.br || 999000
     const channel = req.params['channel']
+
+    // console.log(req)
     let config = {
         path: links[channel],
         params: {
             "ids": [id],
             "br": 999000,
             "csrf_token": ""
-        },
-        headers: {
-            'X-Real-IP': ip
         }
     }
     switch (channel) {
@@ -57,6 +54,7 @@ router.get('/:channel', function(req, res, next) {
     }
     util.requestServer(config).then(ret => {
         if (channel == 'song') {
+
             let songs = ret.songs
             if (songs.length) {
                 config['path'] = links.song_url
@@ -76,9 +74,8 @@ router.get('/:channel', function(req, res, next) {
                         }
                     })
                 }).catch(ex => {
-                    console.log(ex)
                     res.send({
-                        data: {},
+                        data: ex,
                         status: {
                             code: -1,
                             msg: 'something happend. Please checked your id or url'
@@ -101,7 +98,7 @@ router.get('/:channel', function(req, res, next) {
     }).catch(err => {
         console.log(err)
         res.send({
-            data: {},
+            data: err,
             status: {
                 code: -1,
                 msg: 'something happend. Please checked your id or url'
