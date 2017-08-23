@@ -15,6 +15,7 @@ var ip = require('./routes/ip');
 var netease = require('./routes/netease');
 //JsonBird version 1.0
 var v1 = require('./routes/v1');
+var v2 = require('./routes/v2');
 //笑话接口
 var joke = require('./routes/joke');
 //手机号码归属地接口
@@ -64,6 +65,7 @@ app.use('/', welcome);
 // app.use('/test', test);
 app.use('/ip', ip);
 app.use('/v1', v1);
+app.use('/v2', v2);
 app.use('/netease', netease);
 app.use('/joke', joke);
 app.use('/mobile', mobile);

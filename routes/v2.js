@@ -1,9 +1,8 @@
-var express = require('express');
-var request = require('request');
-var router = express.Router();
-var disabledIP = require('../utils/disabledIP').list;
-var cookie = { 'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/54.0.2840.71 Safari/537.36' };
-
+const express = require('express');
+const request = require('request');
+const router = express.Router();
+const disabledIP = require('../utils/disabledIP').list;
+const qs = require('qs');
 
 router.get('/*', function(req, res, next) {
     // let link = req.query.url || '';
@@ -18,27 +17,81 @@ router.post('/*', function(req, res, next) {
 });
 
 const convert = (req, res, next) => {
+    let host = req.hostname;
+    let protocol = req.protocol;
     let method = req.method.toUpperCase();
-    let link = req.query.url || req.body.url;
-    let cb = req.query.callback || req.body.callback;
-    let params = req.body;
+    let ip = req.headers['x-real-ip'] ? req.headers['x-real-ip'] : req.ip.replace(/::ffff:/, '');
+    let _params = method === 'GET' ? req.query : req.body;
+    let cb = _params.callback;
+    let headers = req.headers;
     let config = {
         method: method,
-        uri: link,
-        json: params,
-        headers: req.headers
+        gzip: true
+    };
+    let params = {};
+    for (let i in _params) {
+        let temp = _params[i];
+        if (i === 'url') {
+            let o = temp.split('?');
+            let uri = o[0]
+            config['uri'] = uri;
+            //headers['origin'] = uri;
+            headers['host'] = uri.replace(/^(http|https):\/\//g, '').split('/')[0];
+            if (o.length > 1) {
+                o[1].split('&').forEach(item => {
+                    let k = item.split('=');
+                    params[k[0]] = encodeURI(k[1]);
+                })
+            }
+        } else {
+            params[i] = temp;
+        }
+    }
+    if (method === 'POST') config['json'] = params;
+    else config.uri = `${config.uri}?${qs.stringify(params)}`;
+    config['headers'] = headers;
+    let output = {
+        data: {
+            IP: ip,
+            Info: 'Please Set URL Like This: ' + protocol + '://' + host + '/v1/?url=http[s]://YourWantProxyUrl.Com'
+        },
+        status: {
+            code: 200,
+            message: ''
+        }
+    };
+    // res.send(config);
+    // return;
+    if (config.uri) {
+        createServer(config).then(ret => {
+            cb && res.jsonp(ret) || res.send(ret);
+        }).catch(ex => {
+            output = {
+                status: {
+                    code: -1,
+                    message: ex || 'unknow error, please checked your link'
+                }
+            }
+            cb && res.jsonp(output) || res.send(output);
+        })
+    } else {
+        cb && res.jsonp(output) || res.send(output)
     }
 
-    var options = {
-        uri: 'https://www.googleapis.com/urlshortener/v1/url',
-        method: 'get',
-        json: { "longUrl": "http://www.google.com/" }
-    };
-    createServer(options).then(ret => {
-        console.log(ret)
-    }).catch(ex => {
-        console.log(ex)
-    })
+    // res.send(config)
+    // return;
+
+    // var options = {
+    //     uri: 'https://www.googleapis.com/urlshortener/v1/url',
+    //     method: 'get',
+    //     json: { "longUrl": "http://www.google.com/" }
+    // };
+    // console.log(config)
+    // createServer(config).then(ret => {
+    //     console.log(ret)
+    // }).catch(ex => {
+    //     console.log(ex)
+    // })
 
     // switch(method){
     //     case 'GET':
@@ -61,9 +114,12 @@ const convert = (req, res, next) => {
 
 const createServer = (config) => {
     return new Promise((resolve, reject) => {
+        console.log(config)
         request(config, (err, ret, body) => {
+            //console.log(ret)
             if (!err && ret.statusCode === 200) {
-                resolve(JSON.parse(body))
+                // console.log(qs.parse(unescape(body)))
+                resolve(body)
             } else {
                 reject(err)
             }
