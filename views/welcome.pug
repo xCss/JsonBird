@@ -60,6 +60,11 @@ block content
                             td https://bird.ioliu.cn/v1
                             td GET/POST
                         tr
+                            td 远程代理v2 <br>
+                                <code>支持自定义header</code>
+                            td https://bird.ioliu.cn/v2
+                            td GET/POST
+                        tr
                             td 笑话
                             td https://bird.ioliu.cn/joke
                             td GET/POST
@@ -84,7 +89,9 @@ block content
     
     footer#footer
         div.inner
-            div.copyright &copy; 2016  
+            div.copyright &copy; 
+                script.
+                    document.write(`2016 - ${(new Date()).getFullYear()} `)  
                 a(href='https://ioliu.cn',target="_blank") 云淡风轻 
 
 
