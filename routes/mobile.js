@@ -1,8 +1,9 @@
-var express = require('express');
-var request = require('superagent');
-var router = express.Router();
-var base = 'http://apis.juhe.cn/mobile/get?key=9f719ab7014f2cbdc7b394edf70d0f76';
-var cookie = { 'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/54.0.2840.71 Safari/537.36' };
+const express = require('express');
+const request = require('superagent');
+const utils = require('../utils/utils');
+const router = express.Router();
+const base = 'http://jshmgsdmfb.market.alicloudapi.com/shouji/query';
+const APPCODE = 'c8c963a57cd7452a962e53653f03d2f6';
 router.get('/', function(req, res, next) {
     getMobile(req, res, next);
 });
@@ -10,66 +11,39 @@ router.post('/', function(req, res, next) {
     getMobile(req, res, next);
 });
 
-function getMobile(req, res, next) {
-    var type = req.query.type || req.body.type || 'json';
-    var phone = req.query.phone || req.body.phone;
-    var callback = req.query.callback || req.body.callback;
-    var url = base + '&phone=' + phone + '&dtype=' + type;
-    var output = {
+let getMobile = (req, res, next) => {
+    let params = utils.convert(req,res,next,base);
+    let config = params[0];
+    let protocol = params[1];
+    let host = params[2];
+    let cb = params[3];
+    let _params = params[4];
+    let output = {
         data: {},
         status: {
-            code: 200,
-            message: ''
+            code: -1,
+            message: 'phone number is empty.'
         }
     };
-    if(!phone){
-        output['status']={
-            code:-1,
-            message:'phone number is empty.'
-        };
-        if (callback) {
-            res.jsonp(output);
-        } else {
-            res.json(output);
-        }
-        return;
-    }
-    request.get(url).set(cookie).end(function(err, response) {
-        var body = {};
-        if (response && response.text) {
-            body = response.text;
-        } else if (response && response.body) {
-            body = response.body;
-        }
-        if (type !== 'xml') {
-            if (typeof body === 'string') {
-                try {
-                    body = JSON.parse(body);
-                } catch (e) {
-                    output.status = {
-                        code: -1
-                    };
+    if(_params['shouji']){
+        config['headers']['Authorization'] = `APPCODE ${APPCODE}`;
+        res.send(config)
+        utils.createServer(config).then(ret => {
+            console.log(1)
+            cb && res.jsonp(ret) || res.send(ret);
+        }).catch(ex => {
+            console.log(ex)
+            output = {
+                status: {
+                    code: -2,
+                    message: Object.keys(ex).length>0 ? ex : 'unknow error, please checked your phone number' 
                 }
             }
-            output.data = (body.result && body.result.data ? body.result.data : body.result) || {};
-            if (!err && response.statusCode === 200 && body.error_code === 0) {
-                //
-            } else {
-                output.status = {
-                    code: -1,
-                    message: err || body.reason || 'Something bad happend.'
-                };
-            }
-            if (callback) {
-                res.jsonp(output);
-            } else {
-                res.json(output);
-            }
-        } else {
-            res.header('content-type', 'text/xml; charset=utf-8');
-             res.send(body);
-        }
-    });
+            cb && res.jsonp(output) || res.send(output);
+        });
+    }else{
+        cb && res.jsonp(output) || res.send(output);
+    }
 }
 
 module.exports = router;

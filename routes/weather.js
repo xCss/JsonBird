@@ -1,64 +1,49 @@
-var express = require('express');
-var request = require('superagent');
-var router = express.Router();
-var base = 'http://op.juhe.cn/onebox/weather/query?key=e0540a109f5a73e9df2981cdeb9d106f';
-var cookie = { 'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/54.0.2840.71 Safari/537.36' };
+let express = require('express');
+let request = require('superagent');
+let utils = require('../utils/utils');
+let router = express.Router();
+let base = 'http://op.juhe.cn/onebox/weather/query';
+let key = 'e0540a109f5a73e9df2981cdeb9d106f';
+let cookie = { 'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/54.0.2840.71 Safari/537.36' };
 router.get('/*', function(req, res, next) {
-    getMobile(req, res, next);
+    getWeather(req, res, next);
 });
 router.post('/*', function(req, res, next) {
-    getMobile(req, res, next);
+    getWeather(req, res, next);
 });
 
-function getMobile(req, res, next) {
-    var city = req.query.city || req.body.city;
-    city = !!city ? encodeURIComponent(city) : '';
-    var type = (req.query.type || req.body.type) === 'xml' ? 'xml' : '';
-    var callback = req.query.callback || req.body.callback;
-    var url = base + '&cityname=' + city + '&dtype=' + type;
-    var output = {
+let getWeather = (req, res, next) => {
+    let params = utils.convert(req,res,next,base);
+    let config = params[0];
+    let protocol = params[1];
+    let host = params[2];
+    let cb = params[3];
+    let _params = params[4];
+    let output = {
         data: {},
         status: {
-            code: 200,
-            message: ''
+            code: -1,
+            message: ' city name is empty.'
         }
     };
-    request.get(url).set(cookie).end(function(err, response) {
-        var body = {};
-        if (response && response.text) {
-            body = response.text;
-        } else if (response && response.body) {
-            body = response.body;
-        }
-        if (type !== 'xml') {
-            if (typeof body === 'string') {
-                try {
-                    body = JSON.parse(body);
-                } catch (e) {
-                    output.status = {
-                        code: -1
-                    };
+    if(_params['cityname']){
+        config['uri'] = `${config['uri']}&key=${key}`;
+        config['gzip'] = '';
+        utils.createServer(config).then(ret => {
+            cb && res.jsonp(ret) || res.send(ret);
+        }).catch(ex => {
+            output = {
+                status: {
+                    code: -2,
+                    message: Object.keys(ex).length>0 ? ex : 'unknow error, please checked your city name' 
                 }
             }
-            output.data = (body.result && body.result.data ? body.result.data : body.result) || {};
-            if (!err && response.statusCode === 200 && body.error_code === 0) {
-                //
-            } else {
-                output.status = {
-                    code: -1,
-                    message: err || body.reason || 'Something bad happend.'
-                };
-            }
-            if (callback) {
-                return res.jsonp(output);
-            } else {
-                return res.json(output);
-            }
-        } else {
-            res.header('content-type', 'text/xml; charset=utf-8');
-            return res.send(body);
-        }
-    });
+            console.log(`cb:${cb}`)
+            cb && res.jsonp(output) || res.json(output);
+        });
+    }else{
+        cb && res.jsonp(output) || res.json(output);
+    }
 }
 
 module.exports = router;

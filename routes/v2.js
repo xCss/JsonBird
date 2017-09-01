@@ -3,115 +3,44 @@ const request = require('request');
 const router = express.Router();
 const disabledIP = require('../utils/disabledIP').list;
 const qs = require('qs');
+const utils = require('../utils/utils');
 
 router.get('/*', function(req, res, next) {
-    // let link = req.query.url || '';
-    // let cb = req.query.cb || '';
-    // getJSON(req, res, next);
     convert(req, res, next)
 });
 
 router.post('/*', function(req, res, next) {
-    // getJSON(req, res, next);
     convert(req, res, next)
 });
 
 const convert = (req, res, next) => {
-    let host = req.hostname;
-    let protocol = req.protocol;
-    let method = req.method.toUpperCase();
-    let ip = req.headers['x-real-ip'] ? req.headers['x-real-ip'] : req.ip.replace(/::ffff:/, '');
-    let _params = method === 'GET' ? req.query : req.body;
-    let cb = _params.callback;
-    let headers = req.headers;
-    let config = {
-        method: method,
-        gzip: true
-    };
-    let params = {};
-    for (let i in _params) {
-        let temp = _params[i];
-        if (i === 'url') {
-            let o = temp.split('?');
-            let uri = o[0]
-            config['uri'] = uri;
-            //headers['origin'] = uri;
-            headers['host'] = uri.replace(/^(http|https):\/\//g, '').split('/')[0];
-            if (o.length > 1) {
-                o[1].split('&').forEach(item => {
-                    let k = item.split('=');
-                    params[k[0]] = encodeURI(k[1]);
-                })
-            }
-        } else {
-            params[i] = temp;
-        }
-    }
-    if (method === 'POST') config['json'] = params;
-    else config.uri = `${config.uri}?${qs.stringify(params)}`;
-    config['headers'] = headers;
+    let params = utils.convert(req,res,next);
+    let config = params[0];
+    let protocol = params[1];
+    let host = params[2];
+    let cb = params[3];
     let output = {
-        data: {
-            IP: ip,
-            Info: 'Please Set URL Like This: ' + protocol + '://' + host + '/v1/?url=http[s]://YourWantProxyUrl.Com'
-        },
+        data: {},
         status: {
-            code: 200,
-            message: ''
+            code: -1,
+            message: 'Please Set URL Like This: ' + protocol + '://' + host + '/v2/?url=http[s]://YourWantProxyUrl.Com'
         }
     };
-    // res.send(config);
-    // return;
-
-    
-    if (config.uri) {
-        createServer(config).then(ret => {
+    if(config.uri){
+        utils.createServer(config).then(ret => {
             cb && res.jsonp(ret) || res.send(ret);
         }).catch(ex => {
             output = {
                 status: {
-                    code: -1,
-                    message: ex || 'unknow error, please checked your link'
+                    code: -2,
+                    message: Object.keys(ex).length>0 ? ex : 'unknow error, please checked your link' 
                 }
             }
             cb && res.jsonp(output) || res.send(output);
-        })
-    } else {
-        cb && res.jsonp(output) || res.send(output)
+        });
+    }else{
+        cb && res.jsonp(output) || res.send(output);
     }
-
-    // res.send(config)
-    // return;
-
-    // var options = {
-    //     uri: 'https://www.googleapis.com/urlshortener/v1/url',
-    //     method: 'get',
-    //     json: { "longUrl": "http://www.google.com/" }
-    // };
-    // console.log(config)
-    // createServer(config).then(ret => {
-    //     console.log(ret)
-    // }).catch(ex => {
-    //     console.log(ex)
-    // })
-
-    // switch(method){
-    //     case 'GET':
-    //         let originalUrl = req.originalUrl;
-    //         originalUrl = originalUrl.replace(/\/v1\?/,'').replace('?','&');
-
-    //         break;
-    // }
-    // if (link) {
-    //     let
-    //     switch (method) {
-    //         case 'GET':
-    //             link +=
-    //     }
-
-    // }
-    //console.log(req.headers)
-
 }
 
 const createServer = (config) => {
