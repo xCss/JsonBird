@@ -3,7 +3,7 @@ const request = require('superagent');
 const utils = require('../utils/utils');
 const router = express.Router();
 const base = 'http://jshmgsdmfb.market.alicloudapi.com/shouji/query';
-const APPCODE = 'c8c963a57cd7452a962e53653f03d2f6';
+const APPCODE = '5db8c4dbb31b424ab673cec87fb6770e';
 router.get('/', function(req, res, next) {
     getMobile(req, res, next);
 });
@@ -22,17 +22,25 @@ let getMobile = (req, res, next) => {
         data: {},
         status: {
             code: -1,
-            message: 'phone number is empty.'
+            message: '请确定你的请求方式像这样：/mobile?shouji=13800138000'
         }
     };
     if(_params['shouji']){
-        config['headers']['Authorization'] = `APPCODE ${APPCODE}`;
-        res.send(config)
+        config['headers'] =  {
+            "Host":"jshmgsdmfb.market.alicloudapi.com",
+            "X-Ca-Timestamp":Date.now(),
+            "gateway_channel":"http",
+            "X-Ca-Request-Mode":"debug",
+            "X-Ca-Key":"24605515",
+            "X-Ca-Stage":"RELEASE",
+            "Content-Type":"application/json; charset=utf-8",
+            "Authorization":`APPCODE ${APPCODE}`
+        }
+        //config['gzip'] = null;
+        //res.send(config)
         utils.createServer(config).then(ret => {
-            console.log(1)
             cb && res.jsonp(ret) || res.send(ret);
         }).catch(ex => {
-            console.log(ex)
             output = {
                 status: {
                     code: -2,

@@ -8,8 +8,7 @@ const qs = require('qs');
 const createServer = (config) => {
     return new Promise((resolve, reject) => {
         request(config, (err, ret, body) => {
-            console.log(config)
-            if (!err && ret.statusCode === 200) {
+            if (!err) {
                 resolve(body)
             } else {
                 reject(err)
@@ -43,7 +42,7 @@ const convert = (req,res,next,url) => {
         if (i === 'url') {
             let o = temp.split('?');
             let uri = o[0]
-            config['uri'] = uri;
+            config['url'] = uri;
             headers['host'] = uri.replace(/^(http|https):\/\//g, '').split('/')[0];
             if (o.length > 1) {
                 o[1].split('&').forEach(item => {
@@ -56,7 +55,7 @@ const convert = (req,res,next,url) => {
         }
     }
     if (method === 'POST') config['json'] = params;
-    else config['uri'] = config['uri'] ? `${config['uri']}?${qs.stringify(params)}` : (url?`${url}?${qs.stringify(params)}`:null) ;
+    else config['url'] = config['url'] ? `${config['url']}?${qs.stringify(params)}` : (url?`${url}?${qs.stringify(params)}`:null) ;
     config['headers'] = headers;
     return [config,protocol,host,cb,params]
 }

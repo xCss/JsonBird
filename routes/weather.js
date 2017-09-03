@@ -1,10 +1,10 @@
-let express = require('express');
-let request = require('superagent');
-let utils = require('../utils/utils');
-let router = express.Router();
-let base = 'http://op.juhe.cn/onebox/weather/query';
-let key = 'e0540a109f5a73e9df2981cdeb9d106f';
-let cookie = { 'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/54.0.2840.71 Safari/537.36' };
+const express = require('express');
+const request = require('superagent');
+const utils = require('../utils/utils');
+const router = express.Router();
+const base = 'http://jisutqybmf.market.alicloudapi.com/weather/query';
+const APPCODE = '5db8c4dbb31b424ab673cec87fb6770e';
+
 router.get('/*', function(req, res, next) {
     getWeather(req, res, next);
 });
@@ -23,12 +23,21 @@ let getWeather = (req, res, next) => {
         data: {},
         status: {
             code: -1,
-            message: ' city name is empty.'
+            message: '请确定你的请求方式像这样：/weather?city=番禺'
         }
     };
-    if(_params['cityname']){
-        config['uri'] = `${config['uri']}&key=${key}`;
-        config['gzip'] = '';
+    if(_params['city']){
+        config['headers'] =  {
+            "Host":"jisutqybmf.market.alicloudapi.com",
+            "X-Ca-Timestamp":Date.now(),
+            "gateway_channel":"http",
+            "X-Ca-Request-Mode":"debug",
+            "X-Ca-Key":"24605515",
+            "X-Ca-Stage":"RELEASE",
+            "Content-Type":"application/json; charset=utf-8",
+            "Authorization":`APPCODE ${APPCODE}`
+        }
+        //config['gzip'] = '';
         utils.createServer(config).then(ret => {
             cb && res.jsonp(ret) || res.send(ret);
         }).catch(ex => {

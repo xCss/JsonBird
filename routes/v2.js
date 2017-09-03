@@ -26,7 +26,7 @@ const convert = (req, res, next) => {
             message: 'Please Set URL Like This: ' + protocol + '://' + host + '/v2/?url=http[s]://YourWantProxyUrl.Com'
         }
     };
-    if(config.uri){
+    if(config.url){
         utils.createServer(config).then(ret => {
             cb && res.jsonp(ret) || res.send(ret);
         }).catch(ex => {
