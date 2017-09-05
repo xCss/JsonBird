@@ -14,8 +14,6 @@ let options = {
             'Host': 'music.163.com',
             'Cookie': 'appver=2.0.2;',
             'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/33.0.1750.152 Safari/537.36',
-            'X-Real-IP': '127.0.0.1',
-            'x-from-src': '127.0.0.1'
         }
     }
     // const requestServer = (config) => {
@@ -33,6 +31,7 @@ let options = {
     // }
 
 const requestServer = (config) => {
+    //console.log(config)
     return new Promise((resolve, reject) => {
         superagent
             .post(`http://music.163.com${config.path}`)
