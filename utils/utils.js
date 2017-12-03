@@ -6,6 +6,7 @@ const qs = require('qs');
  * @return {Object} Promise
  */
 const createServer = (config) => {
+    //console.log(config)
     return new Promise((resolve, reject) => {
         request(config, (err, ret, body) => {
             if (!err) {
@@ -28,8 +29,10 @@ const convert = (req,res,next,url) => {
     let host = req.hostname;
     let protocol = req.protocol;
     let method = req.method.toUpperCase();
+    //console.log(method)
     let ip = req.headers['x-real-ip'] ? req.headers['x-real-ip'] : req.ip.replace(/::ffff:/, '');
     let _params = method === 'GET' ? req.query : req.body;
+    _params['url'] = req.body.url || req.query.url;
     let cb = _params.callback;
     let headers = req.headers;
     let config = {
@@ -50,13 +53,27 @@ const convert = (req,res,next,url) => {
                     params[k[0]] = encodeURI(k[1]);
                 })
             }
+        }else if(i=='headers'){
+            let _t = temp || '{}'
+            let _chs = eval(`(${_t})`)
+            for(let ch in _chs){
+                headers[ch] = _chs[ch]
+            }
         } else {
             params[i] = temp;
         }
     }
-    if (method === 'POST') config['json'] = params;
+    let _hs = headers
+    let hs = {}
+    for(let _h in _hs){
+        let h = _hs[_h]
+        if(/(content-length)/.test(_h)) continue
+        else hs[_h] = _hs[_h]
+    }
+    //console.log(hs)
+    if (method === 'POST') config['form'] = params;
     else config['url'] = config['url'] ? `${config['url']}?${qs.stringify(params)}` : (url?`${url}?${qs.stringify(params)}`:null) ;
-    config['headers'] = headers;
+    config['headers'] = hs;
     return [config,protocol,host,cb,params]
 }
 
