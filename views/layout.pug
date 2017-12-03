@@ -17,6 +17,21 @@ html
     script(src="/static/js/skel.min.js")
     script(src="/static/js/util.js")
     script(src="/static/js/main.js")
+    script(src="//cdn1.lncld.net/static/js/3.0.4/av-min.js")
+    script(src="//unpkg.com/valine@latest/dist/Valine.min.js")
+    style.
+      .v input,.v button{
+        height:auto;
+        box-shadow:none;
+        display:inline-block;
+        color:#233333;
+      }
+      .v input{
+        padding:10px 5px !important;
+      }
+      .v input:focus,.v textarea:focus{
+        box-shadow:none;
+      }
 
   body
     block content

@@ -62,7 +62,8 @@ block content
                         tr
                             td 远程代理v2 <br>
                                 <code>支持自定义header</code>
-                            td https://bird.ioliu.cn/v2
+                            td https://bird.ioliu.cn/v2 <br>
+                                <code><a href="https://github.com/xCss/JsonBird/wiki/%E8%87%AA%E5%AE%9A%E4%B9%89Headers">自定义header请求设置</a></code>
                             td GET/POST
                         tr
                             td 笑话
@@ -84,7 +85,7 @@ block content
                             td 网易云音乐<br>(歌曲/歌单)
                             td https://bird.ioliu.cn/netease
                             td GET
-
+            div.comment
 
     
     footer#footer
@@ -97,6 +98,14 @@ block content
 
 
     script.
+        var valine = new Valine();
+        valine.init({
+            el: '.comment',
+            appId: 'z3bnu4iiAfsfAAUxAKaIjNO2-gzGzoHsz',
+            appKey: '9mssBF0PqBl9bUM9dOQShCQk',
+            placeholder: 'ヾﾉ≧∀≦)o来啊，快活啊!'
+        })
+
         window.onload = function(){
             //- baidu Analytics
             if(!/^http:\/\/localhost/.test(location.href)){
