@@ -32,7 +32,8 @@ const convert = (req,res,next,url) => {
     //console.log(method)
     let ip = req.headers['x-real-ip'] ? req.headers['x-real-ip'] : req.ip.replace(/::ffff:/, '');
     let _params = method === 'GET' ? req.query : req.body;
-    _params['url'] = req.body.url || req.query.url;
+    let _url = req.body.url || req.query.url || '';
+    if(_url) _params['url'] = _url;
     let cb = _params.callback;
     let headers = req.headers;
     let config = {
