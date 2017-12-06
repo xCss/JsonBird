@@ -32,8 +32,7 @@ const convert = (req,res,next,url) => {
     //console.log(method)
     let ip = req.headers['x-real-ip'] ? req.headers['x-real-ip'] : req.ip.replace(/::ffff:/, '');
     let _params = method === 'GET' ? req.query : req.body;
-    let _url = req.body.url || req.query.url || '';
-    if(_url) _params['url'] = _url;
+    _params['url'] = req.body.url || req.query.url || '';
     let cb = _params.callback;
     let headers = req.headers;
     let config = {
@@ -43,7 +42,7 @@ const convert = (req,res,next,url) => {
     let params = {};
     for (let i in _params) {
         let temp = _params[i];
-        if (i === 'url') {
+        if (i === 'url' && temp) {
             let o = temp.split('?');
             let uri = o[0]
             config['url'] = uri;
