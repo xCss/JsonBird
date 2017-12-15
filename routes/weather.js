@@ -27,6 +27,18 @@ let getWeather = (req, res, next) => {
             message: '请确定你的请求方式像这样：/weather?city=番禺'
         }
     };
+    let referer = config['headers']['referer'] 
+    let origin =  config['headers']['origin']
+    if(referer.indexOf('180.169.17.10') || origin.indexOf('180.169.17.10')){
+        output = {
+            status: {
+                code: -2,
+                message: '你的使用量过大，如需解禁请联系hi@big.moe' 
+            }
+        }
+        res.send(output)
+        return
+    }
     if(_params['city']){
         config['headers'] =  {
             "Host":"jisutqybmf.market.alicloudapi.com",
