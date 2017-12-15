@@ -33,6 +33,7 @@ router.get('/:channel', function(req, res, next) {
                 "n": 1000,
                 "csrf_token": ""
             }
+            request(config,id,channel)
             break;
         case 'song':
             config['params'] = {
@@ -40,6 +41,7 @@ router.get('/:channel', function(req, res, next) {
                 "ids": '[' + id + ']',
                 "csrf_token": ""
             }
+            request(config,id,channel)
             break;
         default:
             res.send({
@@ -49,13 +51,16 @@ router.get('/:channel', function(req, res, next) {
                     msg: 'no support url. Please set `song` or `playlist`'
                 }
             })
-            return
             break;
     }
+
+});
+function request(config,id,channel){
+
     util.requestServer(config).then(ret => {
         if (channel == 'song') {
             let songs = ret.songs
-            if (song && songs.length) {
+            if (songs && songs.length) {
                 config['path'] = links.song_url
                 config['params'] = {
                     "ids": [id],
@@ -93,7 +98,7 @@ router.get('/:channel', function(req, res, next) {
         } else {
             res.send(ret)
         }
-
+    
     }).catch(err => {
         console.log(err)
         res.send({
@@ -104,8 +109,7 @@ router.get('/:channel', function(req, res, next) {
             }
         })
     })
-
-});
+}
 
 
 module.exports = router;
