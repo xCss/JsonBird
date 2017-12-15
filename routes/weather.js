@@ -14,6 +14,7 @@ router.post('/*', function(req, res, next) {
 
 let getWeather = (req, res, next) => {
     let params = utils.convert(req,res,next,base);
+    console.log(params);
     let config = params[0];
     let protocol = params[1];
     let host = params[2];
