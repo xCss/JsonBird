@@ -3,7 +3,7 @@ const request = require('superagent');
 const utils = require('../utils/utils');
 const router = express.Router();
 const base = 'http://jisutqybmf.market.alicloudapi.com/weather/query';
-const APPCODE = '5db8c4dbb31b424ab673cec87fb6770e';
+const APPCODE =  process.env.APPCODE ;
 
 router.get('/*', function(req, res, next) {
     getWeather(req, res, next);
@@ -14,12 +14,12 @@ router.post('/*', function(req, res, next) {
 
 let getWeather = (req, res, next) => {
     let params = utils.convert(req,res,next,base);
-    console.log(params);
     let config = params[0];
     let protocol = params[1];
     let host = params[2];
     let cb = params[3];
     let _params = params[4];
+    console.log(_params)
     let output = {
         data: {},
         status: {

@@ -29,7 +29,6 @@ const convert = (req,res,next,url) => {
     let host = req.hostname;
     let protocol = req.protocol;
     let method = req.method.toUpperCase();
-    //console.log(method)
     let ip = req.headers['x-real-ip'] ? req.headers['x-real-ip'] : req.ip.replace(/::ffff:/, '');
     let _params = method === 'GET' ? req.query : req.body;
     _params['url'] = req.body.url || req.query.url || '';
