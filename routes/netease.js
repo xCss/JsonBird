@@ -17,7 +17,7 @@ router.get('/:channel', function(req, res, next) {
 
     // console.log(req)
     let config = {
-        path: links[channel],
+        path: links[channel] || '/weapi/v3/song/detail',
         params: {
             "ids": [id],
             "br": 999000,
@@ -54,9 +54,8 @@ router.get('/:channel', function(req, res, next) {
     }
     util.requestServer(config).then(ret => {
         if (channel == 'song') {
-
             let songs = ret.songs
-            if (songs.length) {
+            if (song && songs.length) {
                 config['path'] = links.song_url
                 config['params'] = {
                     "ids": [id],
