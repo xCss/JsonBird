@@ -14,10 +14,9 @@ router.get('/:channel', function(req, res, next) {
     const id = req.query.id
     const br = req.query.br || 999000
     const channel = req.params['channel']
-
     // console.log(req)
     let config = {
-        path: links[channel] || '/weapi/v3/song/detail',
+        path: links[channel],
         params: {
             "ids": [id],
             "br": 999000,
@@ -50,6 +49,7 @@ router.get('/:channel', function(req, res, next) {
                     msg: 'no support url. Please set `song` or `playlist`'
                 }
             })
+            return
             break;
     }
     util.requestServer(config).then(ret => {
