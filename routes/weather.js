@@ -32,7 +32,7 @@ let getWeather = (req, res, next) => {
         output = {
             status: {
                 code: -2,
-                message: '你的使用量过大，如需解禁请联系hi@big.moe' 
+                message: '很抱歉，由于您的使用量过大，现已停止您的数据请求，如需商务合作请联系hi@big.moe' 
             }
         }
         cb && res.jsonp(output) || res.send(output);
