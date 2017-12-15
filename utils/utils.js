@@ -35,6 +35,7 @@ const convert = (req,res,next,url) => {
     _params['url'] = req.body.url || req.query.url || '';
     let cb = _params.callback;
     let headers = req.headers;
+    //console.log(req.headers.referer || req.headers.referrer)
     let config = {
         method: method,
         gzip: true
