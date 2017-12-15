@@ -28,7 +28,7 @@ let getWeather = (req, res, next) => {
     };
     let referer = config['headers']['referer'] 
     let origin =  config['headers']['origin']
-    if(referer.indexOf('180.169.17.10')>-1 || origin.indexOf('180.169.17.10')>-1){
+    if((referer && referer.indexOf('180.169.17.10')>-1) || (origin && origin.indexOf('180.169.17.10')>-1)){
         output = {
             status: {
                 code: -2,
