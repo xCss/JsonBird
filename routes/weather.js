@@ -19,7 +19,7 @@ let getWeather = (req, res, next) => {
     let host = params[2];
     let cb = params[3];
     let _params = params[4];
-    console.log(config)
+    console.log(config['headers'])
     let output = {
         data: {},
         status: {
