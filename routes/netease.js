@@ -11,6 +11,10 @@ const links = {
 
 /* GET users listing. */
 router.get('/:channel', function(req, res, next) {
+    request(req,res,next)
+});
+function request(req,res,next){
+
     const id = req.query.id
     const br = req.query.br || 999000
     const channel = req.params['channel']
@@ -33,7 +37,6 @@ router.get('/:channel', function(req, res, next) {
                 "n": 1000,
                 "csrf_token": ""
             }
-            request(config,id,br,channel,res)
             break;
         case 'song':
             config['params'] = {
@@ -41,7 +44,6 @@ router.get('/:channel', function(req, res, next) {
                 "ids": '[' + id + ']',
                 "csrf_token": ""
             }
-            request(config,id,br,channel,res)
             break;
         default:
             res.send({
@@ -51,12 +53,9 @@ router.get('/:channel', function(req, res, next) {
                     msg: 'no support url. Please set `song` or `playlist`'
                 }
             })
+            return;
             break;
     }
-
-});
-function request(config,id,br,channel,res){
-
     util.requestServer(config).then(ret => {
         if (channel == 'song') {
             let songs = ret.songs
