@@ -35,7 +35,7 @@ let getWeather = (req, res, next) => {
                 message: '你的使用量过大，如需解禁请联系hi@big.moe' 
             }
         }
-        res.send(output)
+        cb && res.jsonp(output) || res.send(output);
         return
     }
     if(_params['city']){
