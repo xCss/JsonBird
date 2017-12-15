@@ -33,7 +33,7 @@ router.get('/:channel', function(req, res, next) {
                 "n": 1000,
                 "csrf_token": ""
             }
-            request(config,id,channel)
+            request(config,id,br,channel,res)
             break;
         case 'song':
             config['params'] = {
@@ -41,7 +41,7 @@ router.get('/:channel', function(req, res, next) {
                 "ids": '[' + id + ']',
                 "csrf_token": ""
             }
-            request(config,id,channel)
+            request(config,id,br,channel,res)
             break;
         default:
             res.send({
@@ -55,7 +55,7 @@ router.get('/:channel', function(req, res, next) {
     }
 
 });
-function request(config,id,channel){
+function request(config,id,br,channel,res){
 
     util.requestServer(config).then(ret => {
         if (channel == 'song') {
