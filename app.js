@@ -5,7 +5,7 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-var ga = require('universal-analytics');
+var ga = require('nodalytics');
 //Welcome Page
 var welcome = require('./routes/welcome');
 //日志输出
@@ -55,30 +55,27 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(cookieParser());
-var visitor = ga('UA-61934506-2');
-app.use(function(req,res,next){
-    var path = req.path;
-    var ip = req.ip;
-    var ua = req['headers']['user-agent'];
-    var dr = req['headers']['referer'];
-    let dh = req.query.url || req.params.url || '';
-
-    let params = {
-        dp:req.path,
-        dh:dh,
-        uip:ip,
-        ua:ua,
-        dr:dr
-    }
-    if(path.indexOf('/static/') == -1){
-        visitor.pageview(params).send();
-    }
-    next()
-});
+// var visitor = ga('UA-61934506-2');
 // app.use(function(req,res,next){
-//     console.log(req['headers'])
+//     var path = req.path;
+//     var ip = req.ip;
+//     var ua = req['headers']['user-agent'];
+//     var dr = req['headers']['referer'];
+//     let dh = req.query.url || req.params.url || '';
+
+//     let params = {
+//         dp:req.path,
+//         dh:dh,
+//         uip:ip,
+//         ua:ua,
+//         dr:dr
+//     }
+//     if(path.indexOf('/static/') == -1){
+//         visitor.pageview(params).send();
+//     }
 //     next()
-// })
+// });
+app.use(ga('UA-61934506-2'))
 //静态文件访问路径
 app.use('/static', express.static(path.join(__dirname, 'static')));
 app.use(favicon(__dirname + '/static/images/favicon.ico'));

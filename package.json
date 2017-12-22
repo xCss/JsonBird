@@ -39,11 +39,11 @@
     "js-base64": "^2.1.9",
     "lodash": "^4.17.4",
     "morgan": "~1.7.0",
+    "nodalytics": "^1.1.0",
     "pug": "^2.0.0-beta6",
     "querystring": "^0.2.0",
     "request": "^2.81.0",
     "serve-favicon": "~2.3.0",
-    "superagent": "^2.3.0",
-    "universal-analytics": "^0.4.16"
+    "superagent": "^2.3.0"
   }
 }
