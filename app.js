@@ -55,7 +55,26 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(cookieParser());
-app.use(ga.middleware("UA-61934506-2", {cookieName: '__utmnodejs'}));
+var visitor = ga('UA-61934506-2');
+app.use(function(req,res,next){
+    var path = req.path;
+    var ip = req.ip;
+    var ua = req['headers']['user-agent'];
+    var dr = req['headers']['referer'];
+    let dh = req.query.url || req.params.url || '';
+
+    let params = {
+        dp:req.path,
+        dh:dh,
+        uip:ip,
+        ua:ua,
+        dr:dr
+    }
+    if(path.indexOf('/static/')>-1){
+        visitor.pageview(params).send();
+    }
+    next()
+});
 // app.use(function(req,res,next){
 //     console.log(req['headers'])
 //     next()
