@@ -70,7 +70,7 @@ app.use(function(req,res,next){
         ua:ua,
         dr:dr
     }
-    if(path.indexOf('/static/')>-1){
+    if(path.indexOf('/static/') == -1){
         visitor.pageview(params).send();
     }
     next()
