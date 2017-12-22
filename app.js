@@ -5,6 +5,7 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var ga = require('node-ga');
 //Welcome Page
 var welcome = require('./routes/welcome');
 //日志输出
@@ -54,7 +55,9 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(cookieParser());
-
+app.use(ga('UA-61934506-2', {
+    safe: true
+}));
 //静态文件访问路径
 app.use('/static', express.static(path.join(__dirname, 'static')));
 app.use(favicon(__dirname + '/static/images/favicon.ico'));
