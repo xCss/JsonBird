@@ -71,7 +71,6 @@ app.use(function(req,res,next){
         dr:dr
     }
     if(path.indexOf('/static/') == -1){
-        console.log(params)
         visitor.pageview(params).send();
     }
     next()
