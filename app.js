@@ -60,7 +60,7 @@ app.use(function(req,res,next){
     var path = req.path;
     var ip = req.ip;
     var ua = req['headers']['user-agent'];
-    var dr = req['headers']['referer'];
+    var dr = req.get('Referrer') || req['headers']['referer'] || '/';
     let dh = req.query.url || req.params.url || '';
 
     let params = {
