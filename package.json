@@ -44,6 +44,7 @@
     "querystring": "^0.2.0",
     "request": "^2.81.0",
     "serve-favicon": "~2.3.0",
-    "superagent": "^2.3.0"
+    "superagent": "^2.3.0",
+    "universal-analytics": "^0.4.16"
   }
 }
