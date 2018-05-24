@@ -28,7 +28,7 @@ $ npm start
 
 ## 快速开始
  1. https://bird.ioliu.cn/v1?url=http[s]://YouWantProxyJSONUrls.com&[?]params1=val1&params2=val2[&callback=fn]
- 2. [详细使用方法请点此](https://github.com/xCss/JsonBird/wiki)
+ 2. [详细使用方法请点此](https://github.com/xCss/JsonBird/wiki) 
 
 ## 我们能做到
 1. :sparkles: 让不支持跨域的远程数据接口支持跨域
